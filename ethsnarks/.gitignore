@@ -1,0 +1,17 @@
+build/
+bin/
+.keys/
+*.pyc
+*.swp
+*.swo
+htmlcov/
+depends/Makefile
+*.pc
+src/Makefile
+__pycache__
+.coverage
+.coverage.*
+/node_modules
+package-lock.json
+lextab.py
+yacctab.py

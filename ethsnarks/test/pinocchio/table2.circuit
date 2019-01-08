@@ -1,0 +1,5 @@
+total 3
+input 0
+input 1
+output 2
+table 2 <3 6 9 12> in <0 1> out <2>

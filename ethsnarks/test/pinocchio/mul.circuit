@@ -1,0 +1,5 @@
+total 2
+input 0
+input 1
+output 2
+mul in 2 <0 1> out 1 <2>

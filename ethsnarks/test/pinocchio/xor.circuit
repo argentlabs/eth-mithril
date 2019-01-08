@@ -1,0 +1,5 @@
+total 3
+input 0
+input 1
+output 2
+xor in 2 <0 1> out 1 <2>

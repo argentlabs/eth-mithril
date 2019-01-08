@@ -1,0 +1,4 @@
+total 2
+input 0
+output 1
+const-mul-neg-ffff in 1 <0> out 1 <1>

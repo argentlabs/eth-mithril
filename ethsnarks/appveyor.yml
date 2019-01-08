@@ -1,0 +1,17 @@
+os: Visual Studio 2015
+
+# Boost is already installed on AppVeyor.
+environment:
+  BOOST_ROOT: C:\Libraries\boost_1_67_0
+  BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14.0
+
+# libfqfft 
+install:
+  - C:\cygwin\bin\git submodule update --init --recursive
+
+before_build:
+  - md build
+  - cd build
+  - cmake -G "Visual Studio 14 2015 Win64" -DOPENSSL_ROOT_DIR=C:\OpenSSL-Win64 --DOPENSSL_LIBRARIES=C:\OpenSSL-Win64\lib -DOPENSSL_INCLUDE_DIR=C:\OpenSSL-Win64\include ..
+  - cmake --build . --config Release
+#  - ctest
