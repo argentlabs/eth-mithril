@@ -29,4 +29,4 @@ python-test:
 	make -C python test
 
 solidity-test:
-	# make -C solidity test
+	make -C solidity test

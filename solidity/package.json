@@ -1,0 +1,26 @@
+{
+  "name": "apt-solidity",
+  "version": "0.1.0",
+  "description": "Mixer contract for Argent Private Transactions (APT)",
+  "main": "truffle.js",
+  "repository": "https://github.com/argentlabs/apt",
+  "author": "olivier@argent.xyz",
+  "license": "ISC",
+  "devDependencies": {
+    "bn-chai": "^1.0.1",
+    "chai": "^4.2.0",
+    "ffi": "node-ffi/node-ffi",
+    "ganache-cli": "^6.1.8",
+    "ref": "^1.3.5",
+    "ref-array": "^1.2.0",
+    "solhint": "^1.4.0",
+    "solidity-coverage": "^0.5.11"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "test": "truffle test",
+    "testrpc": "ganache-cli",
+    "coverage": "truffle-coverage",
+    "lint": "solhint contracts/**/*.sol"
+  }
+}

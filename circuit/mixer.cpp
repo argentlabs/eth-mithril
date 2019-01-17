@@ -35,8 +35,8 @@ class mod_mixer : public GadgetT
 
     // public inputs
     const VariableT root_var;
-    const VariableT nullifier_var;
     const VariableT wallet_address_var;
+    const VariableT nullifier_var;
 
     // public constants
     const VariableArrayT m_IVs; // merkle tree's IVs
