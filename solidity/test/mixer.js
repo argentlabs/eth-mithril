@@ -19,6 +19,8 @@ const { proof_to_flat, vk_to_flat } = require("../utils");
 
 const { mixer_prove, mixer_verify } = require("./helpers/libmixer");
 
+const SKIP_SLOW_TESTS = true;
+
 contract("Mixer", function([
   depositer1,
   depositer2,
@@ -43,8 +45,7 @@ contract("Mixer", function([
     const receipt = await this.mixer.send(AMOUNT, { from: _depositer });
     const leaf_index = receipt.logs.filter(l => l.event == "LeafAdded")[0].args
       ._leafIndex;
-    // const tree_depth = (await this.mixer.treeDepth()).toNumber();
-    // const leaf_address = leafIndex.toString(2).padStart(tree_depth, "0").split("").reverse().join(""); // (6)_10 = (110)_2 becomes "011 0...(24x)...0"
+
     return { nullifier_secret, leaf_index };
   }
 
@@ -78,7 +79,11 @@ contract("Mixer", function([
       path_neighbours.map(h => h.toString(10))
     ];
     const proof_json = mixer_prove(...args);
-    assert.notEqual(proof_json, null);
+    assert.notEqual(
+      proof_json,
+      null,
+      "Failed to build valid proof (invalid proof inputs)"
+    );
 
     return { proof_json, nullifier, merkle_root };
   }
@@ -159,59 +164,61 @@ contract("Mixer", function([
       assert.isTrue(is_nullifier_spent);
     });
 
-    // it("deposits 3 times then withdraws 3 times", async () => {
-    //   depositers = [depositer1, depositer2, depositer3];
-    //   withdrawers = [withdrawer1, withdrawer2, withdrawer3];
-    //   commitments = [];
+    it("deposits 3 times then withdraws 3 times", async () => {
+      if (SKIP_SLOW_TESTS) return;
 
-    //   for (let i = 0; i < depositers.length; i++) {
-    //     const mixerBeforeD = toBN(
-    //       await web3.eth.getBalance(this.mixer.address)
-    //     );
-    //     // Send the commitment and fund it
-    //     commitments.push(await deposit(depositers[i], withdrawers[i]));
-    //     const mixerAfterD = toBN(await web3.eth.getBalance(this.mixer.address));
-    //     expect(mixerAfterD.sub(mixerBeforeD)).to.eq.BN(AMOUNT);
-    //   }
+      depositers = [depositer1, depositer2, depositer3];
+      withdrawers = [withdrawer1, withdrawer2, withdrawer3];
+      commitments = [];
 
-    //   for (let i = 0; i < depositers.length; i++) {
-    //     const { nullifier_secret, leaf_index } = commitments[i];
-    //     // Compute and verify the proof
-    //     const { proof_json, nullifier, merkle_root } = await computeProof(
-    //       nullifier_secret,
-    //       leaf_index,
-    //       withdrawers[i]
-    //     );
-    //     await verifyProof(proof_json, nullifier, merkle_root, withdrawers[i]);
+      for (let i = 0; i < depositers.length; i++) {
+        const mixerBeforeD = toBN(
+          await web3.eth.getBalance(this.mixer.address)
+        );
+        // Send the commitment and fund it
+        commitments.push(await deposit(depositers[i], withdrawers[i]));
+        const mixerAfterD = toBN(await web3.eth.getBalance(this.mixer.address));
+        expect(mixerAfterD.sub(mixerBeforeD)).to.eq.BN(AMOUNT);
+      }
 
-    //     // Verify nullifier doesn't exist
-    //     let is_nullifier_spent = await this.mixer.isSpent(nullifier);
-    //     assert.isFalse(is_nullifier_spent);
+      for (let i = 0; i < depositers.length; i++) {
+        const { nullifier_secret, leaf_index } = commitments[i];
+        // Compute and verify the proof
+        const { proof_json, nullifier, merkle_root } = await computeProof(
+          nullifier_secret,
+          leaf_index,
+          withdrawers[i]
+        );
+        await verifyProof(proof_json, nullifier, merkle_root, withdrawers[i]);
 
-    //     // Perform the withdrawal
-    //     const withdrawerBeforeW = toBN(
-    //       await web3.eth.getBalance(withdrawers[i])
-    //     );
-    //     const mixerBeforeW = toBN(
-    //       await web3.eth.getBalance(this.mixer.address)
-    //     );
-    //     const proof = JSON.parse(proof_json);
-    //     await this.mixer.withdraw(
-    //       withdrawers[i],
-    //       nullifier,
-    //       proof_to_flat(proof)
-    //     );
-    //     const withdrawerAfterW = toBN(
-    //       await web3.eth.getBalance(withdrawers[i])
-    //     );
-    //     const mixerAfterW = toBN(await web3.eth.getBalance(this.mixer.address));
-    //     expect(withdrawerAfterW.sub(withdrawerBeforeW)).to.eq.BN(AMOUNT);
-    //     expect(mixerBeforeW.sub(mixerAfterW)).to.eq.BN(AMOUNT);
+        // Verify nullifier doesn't exist
+        let is_nullifier_spent = await this.mixer.isSpent(nullifier);
+        assert.isFalse(is_nullifier_spent);
 
-    //     // Verify nullifier exists
-    //     is_nullifier_spent = await this.mixer.isSpent(nullifier);
-    //     assert.isTrue(is_nullifier_spent);
-    //   }
-    // });
+        // Perform the withdrawal
+        const withdrawerBeforeW = toBN(
+          await web3.eth.getBalance(withdrawers[i])
+        );
+        const mixerBeforeW = toBN(
+          await web3.eth.getBalance(this.mixer.address)
+        );
+        const proof = JSON.parse(proof_json);
+        await this.mixer.withdraw(
+          withdrawers[i],
+          nullifier,
+          proof_to_flat(proof)
+        );
+        const withdrawerAfterW = toBN(
+          await web3.eth.getBalance(withdrawers[i])
+        );
+        const mixerAfterW = toBN(await web3.eth.getBalance(this.mixer.address));
+        expect(withdrawerAfterW.sub(withdrawerBeforeW)).to.eq.BN(AMOUNT);
+        expect(mixerBeforeW.sub(mixerAfterW)).to.eq.BN(AMOUNT);
+
+        // Verify nullifier exists
+        is_nullifier_spent = await this.mixer.isSpent(nullifier);
+        assert.isTrue(is_nullifier_spent);
+      }
+    });
   });
 });

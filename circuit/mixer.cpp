@@ -1,5 +1,5 @@
 /*    
-
+    Mixer library used to generate Proof of Deposit
 */
 
 #include "mixer.hpp"
@@ -8,6 +8,11 @@
 #include "stubs.hpp"
 #include "utils.hpp"
 
+// handmade gadgets
+#include "gadgets/sha256_ethereum.hpp"
+#include "gadgets/sha256_eth_fields.hpp"
+
+// ethsnarks gadgets
 #include "gadgets/longsightl.cpp"
 #include "gadgets/longsightl_constants.cpp"
 #include "gadgets/merkle_tree.cpp"
@@ -30,7 +35,9 @@ namespace ethsnarks
 class mod_mixer : public GadgetT
 {
   public:
-    typedef LongsightL12p5_MP_gadget HashT;
+    typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
+    typedef Sha256EthFields<FieldT> Sha256HashT; // SHA256 - for commitment
+    // typedef LongsightL12p5_MP_gadget Sha256HashT; // MiMC - for commitment
     const size_t tree_depth = MIXER_TREE_DEPTH;
 
     // public inputs
@@ -52,8 +59,8 @@ class mod_mixer : public GadgetT
 
     // logic gadgets
     HashT nullifier_hash;
-    HashT leaf_hash;
-
+    // HashT leaf_hash;
+    Sha256HashT leaf_hash;
     merkle_path_authenticator<HashT> m_authenticator;
 
     mod_mixer(
@@ -81,7 +88,8 @@ class mod_mixer : public GadgetT
 
                                                 // logic gadgets
                                                 nullifier_hash(in_pb, nullifier_hash_IV, {nullifier_secret_var, nullifier_secret_var}, FMT(annotation_prefix, ".spend_hash")),
-                                                leaf_hash(in_pb, leaf_hash_IV, {nullifier_secret_var, wallet_address_var}, FMT(annotation_prefix, ".leaf_hash")),
+                                                // leaf_hash(in_pb, leaf_hash_IV, {nullifier_secret_var, wallet_address_var}, FMT(annotation_prefix, ".leaf_hash")),
+                                                leaf_hash(in_pb, nullifier_secret_var, wallet_address_var),
                                                 m_authenticator(in_pb, tree_depth, address_bits, m_IVs, leaf_hash.result(), root_var, path_var, FMT(annotation_prefix, ".authenticator"))
     {
         in_pb.set_input_sizes(3);
@@ -180,7 +188,7 @@ char *mixer_prove(
     ProtoboardT pb;
     ethsnarks::mod_mixer mod(pb, "module");
     mod.generate_r1cs_constraints();
-    std::cout << "Num constraints for Argent Mixer:" << pb.num_constraints() << std::endl;
+    std::cout << "Number of constraints for Argent Mixer: " << pb.num_constraints() << std::endl;
 
     mod.generate_r1cs_witness(arg_root, arg_wallet_address, arg_nullifier, arg_nullifier_secret, address_bits, arg_path);
 

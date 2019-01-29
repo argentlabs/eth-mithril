@@ -63,11 +63,14 @@ contract Mixer
         pure 
         returns (uint256)
     {
-        uint256[10] memory round_constants;
-        LongsightL.constantsL12p5(round_constants);
+        // uint256[10] memory round_constants;
+        // LongsightL.constantsL12p5(round_constants);
 
-        // TODO: use sha256 instead (more secure probably)
-        return LongsightL.longsightL12p5_MP([nullifier_secret, uint256(wallet_address)], 0, round_constants);
+        // return LongsightL.longsightL12p5_MP([nullifier_secret, uint256(wallet_address)], 0, round_constants);
+        bytes32 digest = sha256(abi.encodePacked(nullifier_secret, uint256(wallet_address)));
+        uint256 mask = uint256(-1) >> 4; // clear the first 4 bits to make sure we stay within the prime field
+        return uint256(digest) & mask;
+
     }
 
     // should not be used in production otherwise nullifier_secret would be shared with node!
@@ -79,7 +82,6 @@ contract Mixer
         uint256[10] memory round_constants;
         LongsightL.constantsL12p5(round_constants);
 
-        // TODO: use sha256 instead (more secure probably)
         return LongsightL.longsightL12p5_MP([nullifier_secret, nullifier_secret], 0, round_constants);
     }
 
