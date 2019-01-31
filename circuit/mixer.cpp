@@ -212,3 +212,8 @@ bool mixer_verify(const char *vk_json, const char *proof_json)
 {
     return ethsnarks::stub_verify(vk_json, proof_json);
 }
+
+int test_me(int a, int b)
+{
+    return a + b;
+}

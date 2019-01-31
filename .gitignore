@@ -1,4 +1,6 @@
 .build
+.build-ios
 bin
 .keys
 tmp
+.DS_Store
