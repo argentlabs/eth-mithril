@@ -51,7 +51,7 @@ class ViewController: UIViewController {
             let abiData = try? JSONSerialization.data(withJSONObject: noFallbackAbi, options: []),
             let mixer = try? web3.eth.Contract(json: abiData, abiKey: nil, address: mixerAddress) else { return }
 
-        let nullifier_secret = BigUInt(123457001)
+        let nullifier_secret = BigUInt(1234570012)
         var leaf: BigUInt!
         var nullifier: BigUInt!
         var leaf_address: String!

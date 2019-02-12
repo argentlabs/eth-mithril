@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(argent-mixer C CXX)
 
 if (IOS_BUILD)
-    set(CMAKE_INSTALL_PREFIX  ../ios/iOSProver/iOSProver-lib)
+    set(CMAKE_INSTALL_PREFIX  ../ios/iOSProver/depends)
     set(PKG_CONFIG_EXECUTABLE /usr/local/bin/pkg-config)
     set(OPENSSL_INCLUDE_DIR /usr/local/include)
     set(OPENSSL_CRYPTO_LIBRARY /usr/local/opt/openssl/lib/libcrypto.dylib)

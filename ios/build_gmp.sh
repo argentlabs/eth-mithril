@@ -86,7 +86,7 @@ clean() {
     
     
 GMP_VERSION=6.1.2
-LIB_PATH=iOSProver/iOSProver-lib/lib
+LIB_PATH=iOSProver/depends/lib
 
 wget https://gmplib.org/download/gmp/gmp-${GMP_VERSION}.tar.lz
 lzip -d gmp-${GMP_VERSION}.tar.lz
