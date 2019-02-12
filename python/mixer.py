@@ -90,5 +90,6 @@ class Mixer(object):
 
         vk_cstr = ctypes.c_char_p(self._vk.to_json().encode('ascii'))
         proof_cstr = ctypes.c_char_p(proof.to_json().encode('ascii'))
-
+        # print("VK:", self._vk.to_json().encode('ascii'))
+        # print("PF:", proof.to_json().encode('ascii'))
         return self._verify(vk_cstr, proof_cstr)

@@ -98,7 +98,7 @@ library Verifier
         returns (bool)
     {
         require( ((vk_gammaABC.length / 2) - 1) == proof_inputs.length );
-
+        
         // Compute the linear combination vk_x
         uint256[3] memory mul_input;
         uint256[4] memory add_input;
@@ -120,14 +120,14 @@ library Verifier
                 success := staticcall(sub(gas, 2000), 7, mul_input, 0x80, add(add_input, 0x40), 0x60)
             }
             require(success);
-
+            
             assembly {
                 // ECADD
                 success := staticcall(sub(gas, 2000), 6, add_input, 0xc0, add_input, 0x60)
             }
             require(success);
         }
-
+        
         uint[24] memory input = [
             // (proof.A, proof.B)
             in_proof[0], in_proof[1],                           // proof.A   (G1)

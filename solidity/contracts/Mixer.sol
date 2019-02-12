@@ -117,7 +117,7 @@ contract Mixer
         return Verifier.verify(vk, gammaABC, proof, snark_input);
     }
 
-
+    
     function withdraw(
         address payable in_withdraw_address,
         uint256 in_nullifier,
@@ -127,6 +127,7 @@ contract Mixer
     {
         require(!nullifiers[in_nullifier], "Nullifier used");
         require(verifyProof(getRoot(), in_withdraw_address, in_nullifier, proof), "Proof verification failed");
+        // bool b = (verifyProof(getRoot(), in_withdraw_address, in_nullifier, proof));//, "Proof verification failed");
 
         nullifiers[in_nullifier] = true;
 

@@ -1,0 +1,47 @@
+PODS:
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - CryptoSwift (0.13.1)
+  - PromiseKit/CorePromise (6.8.2)
+  - secp256k1.swift (0.1.4)
+  - SipHash (1.2.2)
+  - Web3 (0.3.1):
+    - Web3/Core (= 0.3.1)
+    - Web3/HTTPExtension (= 0.3.1)
+  - Web3/ContractABI (0.3.1):
+    - Web3/Core
+  - Web3/Core (0.3.1):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.8)
+    - secp256k1.swift (~> 0.1)
+  - Web3/HTTPExtension (0.3.1):
+    - Web3/Core
+  - Web3/PromiseKit (0.3.1):
+    - PromiseKit/CorePromise (~> 6.0)
+    - Web3/Core
+
+DEPENDENCIES:
+  - Web3
+  - Web3/ContractABI
+  - Web3/PromiseKit
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - BigInt
+    - CryptoSwift
+    - PromiseKit
+    - secp256k1.swift
+    - SipHash
+    - Web3
+
+SPEC CHECKSUMS:
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  CryptoSwift: ff68c35a53e03177d31aaa2c1e8b3e010aeed6cb
+  PromiseKit: 8200c4555a5b433ac26f5143093cb792ee2c3426
+  secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  Web3: e9be7ef88585e252df50abc28538d6e4691c786e
+
+PODFILE CHECKSUM: 4005617416816cd0969c805e1e6e333e3f1069e5
+
+COCOAPODS: 1.5.3

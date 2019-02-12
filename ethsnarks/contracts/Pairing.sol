@@ -1,6 +1,6 @@
 // This code is taken from https://github.com/JacobEberhardt/ZoKrates
 
-pragma solidity ^0.4.24;
+pragma solidity ^0.5;
 
 library Pairing {
     struct G1Point {
@@ -30,7 +30,7 @@ library Pairing {
     }
 
     /// @return the negation of p, i.e. p.add(p.negate()) should be zero.
-    function negate(G1Point p) internal pure returns (G1Point) {
+    function negate(G1Point memory p) internal pure returns (G1Point memory) {
         // The prime q in the base field F_q for G1
         uint q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
         if (p.X == 0 && p.Y == 0)
@@ -39,8 +39,8 @@ library Pairing {
     }
 
     /// @return the sum of two points of G1
-    function pointAdd(G1Point p1, G1Point p2)
-        internal view returns (G1Point r)
+    function pointAdd(G1Point memory p1, G1Point memory p2)
+        internal view returns (G1Point memory r)
     {
         uint[4] memory input;
         input[0] = p1.X;
@@ -56,8 +56,8 @@ library Pairing {
 
     /// @return the product of a point on G1 and a scalar, i.e.
     /// p == p.mul(1) and p.add(p) == p.mul(2) for all points p.
-    function pointMul(G1Point p, uint s)
-        internal view returns (G1Point r)
+    function pointMul(G1Point memory p, uint s)
+        internal view returns (G1Point memory r)
     {
         uint[3] memory input;
         input[0] = p.X;
@@ -74,7 +74,7 @@ library Pairing {
     /// e(p1[0], p2[0]) *  .... * e(p1[n], p2[n]) == 1
     /// For example pairing([P1(), P1().negate()], [P2(), P2()]) should
     /// return true.
-    function pairing(G1Point[] p1, G2Point[] p2)
+    function pairing(G1Point[] memory p1, G2Point[] memory p2)
         internal view returns (bool)
     {
         require(p1.length == p2.length);
@@ -100,7 +100,7 @@ library Pairing {
     }
 
     /// Convenience method for a pairing check for two pairs.
-    function pairingProd2(G1Point a1, G2Point a2, G1Point b1, G2Point b2)
+    function pairingProd2(G1Point memory a1, G2Point memory a2, G1Point memory b1, G2Point memory b2)
         internal view returns (bool)
     {
         G1Point[] memory p1 = new G1Point[](2);
@@ -113,9 +113,9 @@ library Pairing {
     }
     /// Convenience method for a pairing check for three pairs.
     function pairingProd3(
-            G1Point a1, G2Point a2,
-            G1Point b1, G2Point b2,
-            G1Point c1, G2Point c2
+            G1Point memory a1, G2Point memory a2,
+            G1Point memory b1, G2Point memory b2,
+            G1Point memory c1, G2Point memory c2
     )
         internal view returns (bool)
     {
@@ -132,10 +132,10 @@ library Pairing {
 
     /// Convenience method for a pairing check for four pairs.
     function pairingProd4(
-            G1Point a1, G2Point a2,
-            G1Point b1, G2Point b2,
-            G1Point c1, G2Point c2,
-            G1Point d1, G2Point d2
+            G1Point memory a1, G2Point memory a2,
+            G1Point memory b1, G2Point memory b2,
+            G1Point memory c1, G2Point memory c2,
+            G1Point memory d1, G2Point memory d2
     )
         internal view returns (bool)
     {

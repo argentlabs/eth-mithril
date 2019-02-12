@@ -26,8 +26,6 @@ extern "C"
 
     bool mixer_verify(const char *vk_json, const char *proof_json);
 
-    int test_me(int a, int b);
-
     size_t mixer_tree_depth(void);
 
 #ifdef __cplusplus

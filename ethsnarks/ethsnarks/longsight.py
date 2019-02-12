@@ -33,7 +33,7 @@ from .field import SNARK_SCALAR_FIELD
 
 
 def random_element():
-    return randint(1, SNARK_SCALAR_FIELD-1)
+    randint(1, SNARK_SCALAR_FIELD-1)
 
 
 def int_to_big_endian(lnum):
@@ -81,7 +81,8 @@ def _constants_cxx_format(name, constants_list):
     """
     Convert constants into a C++ function which populates a vector with them
     """
-    output = "template<typename FieldT>\nvoid %s_constants_fill( std::vector<FieldT> &round_constants )\n{\n" % (name,)
+    output = "template<typename FieldT>\nvoid %s_constants_fill( std::vector<FieldT> &round_constants )\n{\n" % (
+        name,)
     output += "\tround_constants.resize(%d);\n" % (len(constants_list),)
     for i, constant in enumerate(constants_list):
         output += "\tround_constants[%d] = FieldT(\"%d\");\n" % (i, constant)

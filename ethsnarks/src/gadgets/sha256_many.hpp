@@ -6,15 +6,12 @@
 
 #include "ethsnarks.hpp"
 
+#include <libsnark/gadgetlib1/gadgets/hashes/hash_io.hpp>				   // digest_variable
+#include <libsnark/gadgetlib1/gadgets/hashes/sha256/sha256_components.hpp> // SHA256_default_IV
+#include <libsnark/gadgetlib1/gadgets/hashes/sha256/sha256_gadget.hpp>	 // sha256_compression_function_gadget
 
-#include <libsnark/gadgetlib1/gadgets/hashes/hash_io.hpp>                   // digest_variable
-#include <libsnark/gadgetlib1/gadgets/hashes/sha256/sha256_components.hpp>  // SHA256_default_IV
-#include <libsnark/gadgetlib1/gadgets/hashes/sha256/sha256_gadget.hpp>      // sha256_compression_function_gadget
-
-
-namespace ethsnarks {
-
-
+namespace ethsnarks
+{
 
 /**
 * This gadget hashes an arbitrary number of bits, in a way which is compatible
@@ -24,7 +21,7 @@ namespace ethsnarks {
 */
 class sha256_many : public GadgetT
 {
-public:
+  public:
 	typedef libsnark::sha256_compression_function_gadget<FieldT> HashT;
 	typedef libsnark::digest_variable<FieldT> DigestT;
 
@@ -33,21 +30,19 @@ public:
 	std::vector<DigestT> m_outputs;
 
 	sha256_many(
-		ProtoboardT& in_pb,
-		const VariableArrayT& in_bits,
+		ProtoboardT &in_pb,
+		const VariableArrayT &in_bits,
 		const std::string &annotation_prefix);
 
-	const DigestT& result() const;
+	const DigestT &result() const;
 
 	void generate_r1cs_constraints();
 
 	void generate_r1cs_witness();
 };
 
-
 // namespace
-}
-
+} // namespace ethsnarks
 
 // ETHSNARKS_SHA256_MANY_HPP_
 #endif

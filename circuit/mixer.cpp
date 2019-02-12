@@ -151,6 +151,28 @@ char *mixer_prove(
     const char *in_address, // [LSB...MSB] with regard to bits of index
     const char **in_path)
 {
+    // std::cout << "ENTERING mixer_prove" << std::endl;
+    // std::cout << "pk_file: " << pk_file << std::endl;
+    // std::cout << "in_root: " << in_root << std::endl;
+    // std::cout << "in_wallet_address: " << in_wallet_address << std::endl;
+    // std::cout << "in_nullifier: " << in_nullifier << std::endl;
+    // std::cout << "in_nullifier_secret: " << in_nullifier_secret << std::endl;
+    // std::cout << "in_address: " << in_address << std::endl;
+    // std::cout << "in_path: " << std::endl
+    //           << "[";
+    // for (size_t j = 0; in_path[j] != nullptr; j++)
+    // {
+    //     std::cout << " \"" << in_path[j];
+    //     if (in_path[j + 1] == nullptr)
+    //     {
+    //         std::cout << "\"]" << std::endl;
+    //     }
+    //     else
+    //     {
+    //         std::cout << "\"," << std::endl;
+    //     }
+    // }
+
     ppT::init_public_params();
 
     FieldT arg_root(in_root);
@@ -211,9 +233,4 @@ int mixer_genkeys(const char *pk_file, const char *vk_file)
 bool mixer_verify(const char *vk_json, const char *proof_json)
 {
     return ethsnarks::stub_verify(vk_json, proof_json);
-}
-
-int test_me(int a, int b)
-{
-    return a + b;
 }

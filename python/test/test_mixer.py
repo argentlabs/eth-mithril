@@ -36,7 +36,7 @@ class TestMixer(unittest.TestCase):
         nullifier_hash_IV = 0
         nullifier_hash = LongsightL12p5_MP(
             [nullifier_secret, nullifier_secret], nullifier_hash_IV)
-        leaf_hash_IV = 0
+        # leaf_hash_IV = 0
         # leaf_hash = LongsightL12p5_MP(
         # [nullifier_secret, wallet_address], leaf_hash_IV)
         leaf_hash = int(get_sha256_hash(
