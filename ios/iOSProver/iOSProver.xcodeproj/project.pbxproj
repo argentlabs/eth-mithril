@@ -15,9 +15,25 @@
 		0D19E1C22203181A00108366 /* libmixer.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D19E1BF2203181A00108366 /* libmixer.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0D19E1C722033ADC00108366 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19E1C622033ADC00108366 /* libc++.tbd */; };
 		0D19E1C92203634100108366 /* Mixer.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D19E1C82203634100108366 /* Mixer.json */; };
+		0D449FF02212EF8300738362 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FEF2212EF8300738362 /* RestClient.swift */; };
+		0D449FF222134A6400738362 /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF122134A6400738362 /* Relayer.swift */; };
+		0D449FF422134CAB00738362 /* MixerRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF322134CAB00738362 /* MixerRelayer.swift */; };
+		0D449FF62214577100738362 /* TransactionWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF52214577100738362 /* TransactionWatcher.swift */; };
+		0D449FF822156BE800738362 /* MixerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF722156BE800738362 /* MixerManager.swift */; };
+		0D449FFA2215719B00738362 /* MixerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF92215719B00738362 /* MixerFactory.swift */; };
+		0D449FFC2215C64E00738362 /* EventFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FFB2215C64E00738362 /* EventFetcher.swift */; };
+		0D525880221B40ED00937BBF /* FetchedResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52587F221B40ED00937BBF /* FetchedResultTableViewController.swift */; };
+		0D525882221B41CB00937BBF /* CommitmentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D525881221B41CB00937BBF /* CommitmentTableViewController.swift */; };
+		0D525885221B425900937BBF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D525883221B425900937BBF /* Model.xcdatamodeld */; };
+		0D525888221B465000937BBF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D525887221B465000937BBF /* CoreDataManager.swift */; };
+		0D52588A221B55D400937BBF /* Commitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D525889221B55D400937BBF /* Commitment.swift */; };
+		0D52588C221C28A000937BBF /* CommitmentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52588B221C28A000937BBF /* CommitmentUpdater.swift */; };
 		0D78D90C2208E34A00D48167 /* mixer.pk.raw in Resources */ = {isa = PBXBuildFile; fileRef = 0D973E612208DDDE0004E481 /* mixer.pk.raw */; };
+		0DA689DA221710DB00001AC4 /* Prover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689D9221710DB00001AC4 /* Prover.swift */; };
+		0DA689DC221AC87700001AC4 /* mixer.vk.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DA689DB221AC87700001AC4 /* mixer.vk.json */; };
+		0DA689E5221B325400001AC4 /* CommitmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */; };
+		0DA689E7221B34F600001AC4 /* AddCommitmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */; };
 		0DD694322202FC3C00EB7C63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD694312202FC3C00EB7C63 /* AppDelegate.swift */; };
-		0DD694342202FC3C00EB7C63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD694332202FC3C00EB7C63 /* ViewController.swift */; };
 		0DD694372202FC3C00EB7C63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694352202FC3C00EB7C63 /* Main.storyboard */; };
 		0DD694392202FC3D00EB7C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694382202FC3D00EB7C63 /* Assets.xcassets */; };
 		0DD6943C2202FC3D00EB7C63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD6943A2202FC3D00EB7C63 /* LaunchScreen.storyboard */; };
@@ -47,11 +63,27 @@
 		0D19E1BE2203181A00108366 /* libgmpxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmpxx.dylib; path = depends/lib/libgmpxx.dylib; sourceTree = "<group>"; };
 		0D19E1BF2203181A00108366 /* libmixer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmixer.dylib; path = depends/lib/libmixer.dylib; sourceTree = "<group>"; };
 		0D19E1C622033ADC00108366 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		0D19E1C82203634100108366 /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Mixer.json; path = ../../../solidity/build/contracts/Mixer.json; sourceTree = "<group>"; };
-		0D973E612208DDDE0004E481 /* mixer.pk.raw */ = {isa = PBXFileReference; lastKnownFileType = file; name = mixer.pk.raw; path = depends/data/mixer.pk.raw; sourceTree = SOURCE_ROOT; };
+		0D19E1C82203634100108366 /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Mixer.json; sourceTree = "<group>"; };
+		0D449FEF2212EF8300738362 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		0D449FF122134A6400738362 /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
+		0D449FF322134CAB00738362 /* MixerRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerRelayer.swift; sourceTree = "<group>"; };
+		0D449FF52214577100738362 /* TransactionWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionWatcher.swift; sourceTree = "<group>"; };
+		0D449FF722156BE800738362 /* MixerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerManager.swift; sourceTree = "<group>"; };
+		0D449FF92215719B00738362 /* MixerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerFactory.swift; sourceTree = "<group>"; };
+		0D449FFB2215C64E00738362 /* EventFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFetcher.swift; sourceTree = "<group>"; };
+		0D52587F221B40ED00937BBF /* FetchedResultTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchedResultTableViewController.swift; sourceTree = "<group>"; };
+		0D525881221B41CB00937BBF /* CommitmentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentTableViewController.swift; sourceTree = "<group>"; };
+		0D525884221B425900937BBF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0D525887221B465000937BBF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		0D525889221B55D400937BBF /* Commitment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commitment.swift; sourceTree = "<group>"; };
+		0D52588B221C28A000937BBF /* CommitmentUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentUpdater.swift; sourceTree = "<group>"; };
+		0D973E612208DDDE0004E481 /* mixer.pk.raw */ = {isa = PBXFileReference; lastKnownFileType = file; name = mixer.pk.raw; path = iOSProver/Data/mixer.pk.raw; sourceTree = SOURCE_ROOT; };
+		0DA689D9221710DB00001AC4 /* Prover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prover.swift; sourceTree = "<group>"; };
+		0DA689DB221AC87700001AC4 /* mixer.vk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mixer.vk.json; path = iOSProver/Data/mixer.vk.json; sourceTree = SOURCE_ROOT; };
+		0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentTableViewCell.swift; sourceTree = "<group>"; };
+		0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommitmentViewController.swift; sourceTree = "<group>"; };
 		0DD6942E2202FC3C00EB7C63 /* iOSProver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD694312202FC3C00EB7C63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0DD694332202FC3C00EB7C63 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0DD694362202FC3C00EB7C63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0DD694382202FC3D00EB7C63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0DD6943B2202FC3D00EB7C63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,6 +131,54 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0D525886221B463B00937BBF /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0D525883221B425900937BBF /* Model.xcdatamodeld */,
+				0D525889221B55D400937BBF /* Commitment.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		0DA689E1221B305200001AC4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0D525886221B463B00937BBF /* CoreData */,
+				0D52588B221C28A000937BBF /* CommitmentUpdater.swift */,
+				0D449FF722156BE800738362 /* MixerManager.swift */,
+				0D449FF92215719B00738362 /* MixerFactory.swift */,
+				0D449FF322134CAB00738362 /* MixerRelayer.swift */,
+				0D449FF122134A6400738362 /* Relayer.swift */,
+				0DA689D9221710DB00001AC4 /* Prover.swift */,
+				0D449FFB2215C64E00738362 /* EventFetcher.swift */,
+				0D449FF52214577100738362 /* TransactionWatcher.swift */,
+				0D449FEF2212EF8300738362 /* RestClient.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0DA689E2221B308B00001AC4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0D19E1C82203634100108366 /* Mixer.json */,
+				0D973E612208DDDE0004E481 /* mixer.pk.raw */,
+				0DA689DB221AC87700001AC4 /* mixer.vk.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		0DA689E3221B31E100001AC4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0DD694352202FC3C00EB7C63 /* Main.storyboard */,
+				0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */,
+				0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */,
+				0D525881221B41CB00937BBF /* CommitmentTableViewController.swift */,
+				0D52587F221B40ED00937BBF /* FetchedResultTableViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0DD694252202FC3C00EB7C63 = {
 			isa = PBXGroup;
 			children = (
@@ -124,14 +204,14 @@
 			isa = PBXGroup;
 			children = (
 				0DD694312202FC3C00EB7C63 /* AppDelegate.swift */,
-				0DD694332202FC3C00EB7C63 /* ViewController.swift */,
-				0DD694352202FC3C00EB7C63 /* Main.storyboard */,
+				0D525887221B465000937BBF /* CoreDataManager.swift */,
+				0DA689E3221B31E100001AC4 /* View */,
+				0DA689E1221B305200001AC4 /* Model */,
 				0DD694382202FC3D00EB7C63 /* Assets.xcassets */,
 				0DD6943A2202FC3D00EB7C63 /* LaunchScreen.storyboard */,
 				0DD6943D2202FC3D00EB7C63 /* Info.plist */,
 				0DD694432202FC4D00EB7C63 /* iOSProver-Bridging-Header.h */,
-				0D19E1C82203634100108366 /* Mixer.json */,
-				0D973E612208DDDE0004E481 /* mixer.pk.raw */,
+				0DA689E2221B308B00001AC4 /* Data */,
 			);
 			path = iOSProver;
 			sourceTree = "<group>";
@@ -199,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DD6943C2202FC3D00EB7C63 /* LaunchScreen.storyboard in Resources */,
+				0DA689DC221AC87700001AC4 /* mixer.vk.json in Resources */,
 				0DD694392202FC3D00EB7C63 /* Assets.xcassets in Resources */,
 				0D19E1C92203634100108366 /* Mixer.json in Resources */,
 				0D78D90C2208E34A00D48167 /* mixer.pk.raw in Resources */,
@@ -223,7 +304,11 @@
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/Web3/Web3.framework",
+				"${BUILT_PRODUCTS_DIR}/keccak.c/keccak.framework",
+				"${BUILT_PRODUCTS_DIR}/scrypt.c/scrypt.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+				"${BUILT_PRODUCTS_DIR}/web3swift.pod/web3swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -234,7 +319,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/keccak.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -270,8 +358,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DD694342202FC3C00EB7C63 /* ViewController.swift in Sources */,
+				0D449FFC2215C64E00738362 /* EventFetcher.swift in Sources */,
+				0D449FF822156BE800738362 /* MixerManager.swift in Sources */,
+				0D525882221B41CB00937BBF /* CommitmentTableViewController.swift in Sources */,
+				0D525880221B40ED00937BBF /* FetchedResultTableViewController.swift in Sources */,
+				0DA689E5221B325400001AC4 /* CommitmentTableViewCell.swift in Sources */,
+				0D449FFA2215719B00738362 /* MixerFactory.swift in Sources */,
+				0D525888221B465000937BBF /* CoreDataManager.swift in Sources */,
+				0DA689DA221710DB00001AC4 /* Prover.swift in Sources */,
+				0D449FF222134A6400738362 /* Relayer.swift in Sources */,
+				0D525885221B425900937BBF /* Model.xcdatamodeld in Sources */,
+				0D52588C221C28A000937BBF /* CommitmentUpdater.swift in Sources */,
+				0D449FF02212EF8300738362 /* RestClient.swift in Sources */,
+				0DA689E7221B34F600001AC4 /* AddCommitmentViewController.swift in Sources */,
+				0D52588A221B55D400937BBF /* Commitment.swift in Sources */,
+				0D449FF422134CAB00738362 /* MixerRelayer.swift in Sources */,
 				0DD694322202FC3C00EB7C63 /* AppDelegate.swift in Sources */,
+				0D449FF62214577100738362 /* TransactionWatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +549,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4EV59R3V5B;
+				GCC_OPTIMIZATION_LEVEL = s;
 				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/depends/include";
 				INFOPLIST_FILE = iOSProver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,6 +587,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0D525883221B425900937BBF /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0D525884221B425900937BBF /* Model.xcdatamodel */,
+			);
+			currentVersion = 0D525884221B425900937BBF /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0DD694262202FC3C00EB7C63 /* Project object */;
 }

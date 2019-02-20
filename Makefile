@@ -32,7 +32,7 @@ python-test:
 solidity-test:
 	make -C solidity test
 solidity-deploy:
-	make -C solidity deploy
+	make -C solidity deploy-rinkeby
 
 ios-clean:
 	rm -rf $(IOSBUILDPATH)

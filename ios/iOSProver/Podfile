@@ -9,6 +9,7 @@ target 'iOSProver' do
   pod 'Web3'
   pod 'Web3/PromiseKit'
   pod 'Web3/ContractABI'
+  pod 'web3swift.pod' # event fetch
 end
 
 post_install do |installer|

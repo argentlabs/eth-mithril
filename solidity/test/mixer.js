@@ -9,7 +9,7 @@ const { expect } = chai;
 const { BN, toBN } = web3.utils;
 chai.use(bnChai(BN));
 
-const AMOUNT = web3.utils.toWei("1", "ether");
+const AMOUNT = web3.utils.toWei("0.01", "ether");
 
 const path = require("path");
 const VERIFYING_KEY_PATH = path.resolve("../.keys/mixer.vk.json");
@@ -167,7 +167,7 @@ contract("Mixer", function([
     it("deposits 3 times then withdraws 3 times", async () => {
       if (SKIP_SLOW_TESTS) return;
 
-      depositers = [depositer1, depositer2, depositer3];
+      depositers = [depositer1, depositer1, depositer3];
       withdrawers = [withdrawer1, withdrawer2, withdrawer3];
       commitments = [];
 

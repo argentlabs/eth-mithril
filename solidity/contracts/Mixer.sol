@@ -9,16 +9,17 @@ contract Mixer
 {
     using MerkleTree for MerkleTree.Data;
 
-    uint constant public AMOUNT = 1 ether;
+    uint constant public AMOUNT = 0.01 ether;
 
     uint256[14] vk;
     uint256[] gammaABC;
 
     mapping (uint256 => bool) public nullifiers;
-    mapping (address => uint256) public pendingDeposits;
+    mapping (address => uint256[]) public pendingDeposits;
 
     MerkleTree.Data internal tree;
 
+    event CommitmentAdded(address indexed _fundingWallet, uint256 _leaf);
     event LeafAdded(uint256 _leaf, uint256 _leafIndex);
 
     constructor(uint256[14] memory in_vk, uint256[] memory in_gammaABC)
@@ -42,17 +43,20 @@ contract Mixer
     function commit(uint256 leaf, address fundingWallet)
         public
     {
-        pendingDeposits[fundingWallet] = leaf;
+        require(leaf > 0, "null leaf");
+        pendingDeposits[fundingWallet].push(leaf);
+        emit CommitmentAdded(fundingWallet, leaf);
     }
 
     /*
     * Used by the funding wallet to fund a previously saved commitment
     */
     function () external payable {
-        require(msg.value == AMOUNT, "invalid deposit value");
-        uint256 leaf = pendingDeposits[msg.sender];
-        require(leaf > 0, "commitment must be sent first");
-        delete pendingDeposits[msg.sender];
+        require(msg.value == AMOUNT, "wrong value");
+        uint256[] storage leaves = pendingDeposits[msg.sender];
+        require(leaves.length > 0, "commitment must be sent first");
+        uint256 leaf = leaves[leaves.length - 1];
+        leaves.length--;
         (, uint256 leafIndex) = tree.insert(leaf);
         emit LeafAdded(leaf, leafIndex);
     }

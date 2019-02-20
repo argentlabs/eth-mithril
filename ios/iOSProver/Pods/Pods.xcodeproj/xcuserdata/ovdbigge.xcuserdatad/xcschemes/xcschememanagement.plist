@@ -34,7 +34,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>keccak.c.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>scrypt.c.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>secp256k1.c.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>secp256k1.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>web3swift.pod.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

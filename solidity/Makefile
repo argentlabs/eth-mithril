@@ -8,3 +8,6 @@ test: node_modules
 .PHONY: deploy
 deploy: node_modules
 	truffle migrate
+
+deploy-rinkeby: node_modules
+	truffle migrate --network localrinkeby
