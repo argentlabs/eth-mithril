@@ -1,8 +1,10 @@
 BUILDPATH = .build
-IOSBUILDPATH= .build-ios
+IOSBUILDPATH = .build-ios
 KEYPATH = .keys
+BUILD_IOS = make -C $(IOSBUILDPATH) && make -C $(IOSBUILDPATH) install
+IOSINSTALLPATH = ios/iOSProver/depends/lib/libmixer.dylib
 
-all: clean build test ios-build
+all: clean build test ios-build-universal
 
 build: release
 	make -C $(BUILDPATH)
@@ -36,7 +38,17 @@ solidity-deploy:
 
 ios-clean:
 	rm -rf $(IOSBUILDPATH)
-ios-release: ios-clean
+ios-simulator: ios-clean
 	mkdir -p $(IOSBUILDPATH) && cd $(IOSBUILDPATH) && cmake -DCMAKE_TOOLCHAIN_FILE=../ios/ios.toolchain.cmake -DIOS_PLATFORM=SIMULATOR64 -DENABLE_VISIBILITY=1 -DIOS_BUILD=1 -DCMAKE_BUILD_TYPE=Release ../circuit/
-ios-build: ios-release
-	make -C $(IOSBUILDPATH) && make -C $(IOSBUILDPATH) install
+ios-device: ios-clean
+	mkdir -p $(IOSBUILDPATH) && cd $(IOSBUILDPATH) && cmake -DCMAKE_TOOLCHAIN_FILE=../ios/ios.toolchain.cmake -DIOS_PLATFORM=OS64 -DENABLE_BITCODE=0 -DENABLE_VISIBILITY=1 -DIOS_BUILD=1 -DCMAKE_BUILD_TYPE=Release ../circuit/
+ios-build-device: ios-device
+	$(BUILD_IOS)
+ios-build-simulator: ios-simulator
+	$(BUILD_IOS)
+ios-build-universal: ios-build-device
+	mv $(IOSINSTALLPATH) $(IOSINSTALLPATH).device
+	$(MAKE) ios-build-simulator
+	mv $(IOSINSTALLPATH) $(IOSINSTALLPATH).simulator
+	lipo -create -output $(IOSINSTALLPATH) $(IOSINSTALLPATH).{device,simulator}
+	rm $(IOSINSTALLPATH).*

@@ -5,6 +5,7 @@ build_for_ios() {
     # clean
     generate_64bit_headers
     build_for_architecture iphoneos arm64 arm-apple-darwin
+    build_for_architecture iphoneos arm64e arm-apple-darwin
     build_for_architecture iphonesimulator x86_64 x86_64-apple-darwin
     create_universal_library
 }
@@ -55,10 +56,10 @@ build_for_architecture() {
 }
 create_universal_library() {
     lipo -create -output libgmp.dylib \
-    build/{arm64,x86_64}/lib/libgmp.dylib
+    build/{arm64,arm64e,x86_64}/lib/libgmp.dylib
     # build/{armv7,arm64,i386,x86_64}/lib/libgmp.dylib
     lipo -create -output libgmpxx.dylib \
-    build/{arm64,x86_64}/lib/libgmpxx.dylib
+    build/{arm64,arm64e,x86_64}/lib/libgmpxx.dylib
     # build/{armv7,arm64,i386,x86_64}/lib/libgmpxx.dylib
     update_dylib_names
     update_dylib_references
@@ -70,6 +71,7 @@ update_dylib_names() {
 update_dylib_references() {
     # update_dylib_reference_for_architecture armv7
     update_dylib_reference_for_architecture arm64
+    update_dylib_reference_for_architecture arm64e
     # update_dylib_reference_for_architecture i386
     update_dylib_reference_for_architecture x86_64
 }
