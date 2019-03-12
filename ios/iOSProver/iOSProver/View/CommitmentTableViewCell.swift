@@ -12,6 +12,7 @@ class CommitmentTableViewCell: UITableViewCell {
     
     // MARK: - Public API
     var commitment: Commitment? { didSet { updateUI() } }
+    var onFundButtonTapped: ((String) -> ())?
     
     @IBOutlet weak var originAddressLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var destinationAddressLabel: UILabel! { didSet { updateUI() } }
@@ -27,6 +28,7 @@ class CommitmentTableViewCell: UITableViewCell {
             CommitmentUpdater.shared.requestCommit(for: commitment)
         } else if commitment.fundingTxBlockNumber == nil, let from = commitment.from {
             print("Please send 1 ETH from \(from) to \(MixerManager.shared.mixerAddressStr)")
+            onFundButtonTapped?(from)
         } else {
             print("Requesting withdrawal")
             CommitmentUpdater.shared.requestWithdrawal(for: commitment)
@@ -60,7 +62,7 @@ class CommitmentTableViewCell: UITableViewCell {
             actionButton?.isHidden = false
             actionButton?.setTitle("Retry", for: .normal)
         } else if commitment?.withdrawTxConfirmedAt == nil, commitment?.withdrawRequested != true {
-            statusLabel?.text = "Ready for withdrawal"
+            statusLabel?.text = "Ready for withdrawal (\(commitment?.numSubsequentDeposits ?? 0) subsequent deposits)"
             actionButton?.isHidden = false
             actionButton?.setTitle("Withdraw", for: .normal)
         } else if commitment?.withdrawRequested == true, commitment?.proofComputed != true {

@@ -10,6 +10,7 @@ target 'iOSProver' do
   pod 'Web3/PromiseKit'
   pod 'Web3/ContractABI'
   pod 'web3swift.pod' # event fetch
+  pod 'QRCodeReader.swift'
 end
 
 post_install do |installer|

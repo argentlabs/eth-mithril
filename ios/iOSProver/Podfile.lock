@@ -12,6 +12,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.8.2):
     - PromiseKit/CorePromise
+  - QRCodeReader.swift (10.0.0)
   - scrypt.c (0.1.1)
   - secp256k1.c (0.1.2)
   - secp256k1.swift (0.1.4)
@@ -38,6 +39,7 @@ PODS:
     - secp256k1.c (~> 0.1)
 
 DEPENDENCIES:
+  - QRCodeReader.swift
   - Web3
   - Web3/ContractABI
   - Web3/PromiseKit
@@ -49,6 +51,7 @@ SPEC REPOS:
     - CryptoSwift
     - keccak.c
     - PromiseKit
+    - QRCodeReader.swift
     - scrypt.c
     - secp256k1.c
     - secp256k1.swift
@@ -61,6 +64,7 @@ SPEC CHECKSUMS:
   CryptoSwift: ff68c35a53e03177d31aaa2c1e8b3e010aeed6cb
   keccak.c: 859583afdaccb4e4fcc0f0096064d101580313f4
   PromiseKit: 8200c4555a5b433ac26f5143093cb792ee2c3426
+  QRCodeReader.swift: 74d0378eb0c7807828552b49626bbc8307495aee
   scrypt.c: b42ae06183251329d2b2c620c226fb541a4a3592
   secp256k1.c: db47b726585d80f027423682eb369729e61b3b20
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
@@ -68,6 +72,6 @@ SPEC CHECKSUMS:
   Web3: e9be7ef88585e252df50abc28538d6e4691c786e
   web3swift.pod: 3cb833800c390190b01aaaba1a2b87f0642e2911
 
-PODFILE CHECKSUM: a008d27d51830e9ea19a593a0415c8db8332d8bc
+PODFILE CHECKSUM: a9fe04b955a4522a807098b629e82711a7226e6d
 
 COCOAPODS: 1.5.3

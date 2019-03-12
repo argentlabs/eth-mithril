@@ -194,6 +194,9 @@
                                                                 <constraint firstAttribute="width" secondItem="0vo-PX-8Ui" secondAttribute="height" multiplier="1:1" id="CPN-gg-Igy"/>
                                                             </constraints>
                                                             <state key="normal" image="QRCodeIcon"/>
+                                                            <connections>
+                                                                <action selector="scanQRCode:" destination="B1K-8w-bp2" eventType="touchUpInside" id="sUN-dj-Fk4"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -229,6 +232,9 @@
                                                                 <constraint firstAttribute="width" secondItem="X8s-il-Iva" secondAttribute="height" multiplier="1:1" id="mEK-eA-ZGm"/>
                                                             </constraints>
                                                             <state key="normal" image="QRCodeIcon"/>
+                                                            <connections>
+                                                                <action selector="scanQRCode:" destination="B1K-8w-bp2" eventType="touchUpInside" id="OQ7-g5-mlr"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -264,7 +270,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="destinationAddressField" destination="368-rF-4Nm" id="0v5-yC-hcx"/>
+                        <outlet property="destinationQRCodeButton" destination="X8s-il-Iva" id="pub-Cr-n4z"/>
                         <outlet property="originAddressField" destination="yiX-eH-LaM" id="E24-xs-ZKN"/>
+                        <outlet property="originQRCodeButton" destination="0vo-PX-8Ui" id="B3e-SL-FbX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uU7-bI-Eh2" userLabel="First Responder" sceneMemberID="firstResponder"/>

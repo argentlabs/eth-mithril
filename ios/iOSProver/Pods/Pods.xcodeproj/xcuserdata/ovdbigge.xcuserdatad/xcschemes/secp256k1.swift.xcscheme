@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0DCDA40D9978561D27DECB16B584A060"
+               BlueprintIdentifier = "31B0014048EFE03194A49F2E7D4D12E8"
                BuildableName = "secp256k1.framework"
                BlueprintName = "secp256k1.swift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0DCDA40D9978561D27DECB16B584A060"
+            BlueprintIdentifier = "31B0014048EFE03194A49F2E7D4D12E8"
             BuildableName = "secp256k1.framework"
             BlueprintName = "secp256k1.swift"
             ReferencedContainer = "container:Pods.xcodeproj">

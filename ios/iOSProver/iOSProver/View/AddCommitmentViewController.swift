@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import QRCodeReader
 
 class AddCommitmentViewController: UITableViewController {
     
@@ -22,6 +23,8 @@ class AddCommitmentViewController: UITableViewController {
     @IBOutlet weak var originAddressField: UITextField!
     @IBOutlet weak var destinationAddressField: UITextField!
     
+    @IBOutlet weak var originQRCodeButton: UIButton!
+    @IBOutlet weak var destinationQRCodeButton: UIButton!
     // MARK: - Add Commitment
     
     private func isValidAddress(_ addr: String) -> Bool {
@@ -37,6 +40,36 @@ class AddCommitmentViewController: UITableViewController {
         catch { NSLog("Error saving context after adding commitment: \(error)") }
     }
     
+    // MARK: - QR Code Reader
+    
+    lazy var readerVC: QRCodeReaderViewController = {
+        let builder = QRCodeReaderViewControllerBuilder {
+            $0.reader = QRCodeReader(metadataObjectTypes: [.qr], captureDevicePosition: .back)
+        }
+        
+        return QRCodeReaderViewController(builder: builder)
+    }()
+    
+    @IBAction func scanQRCode(_ sender: UIButton) {
+        if QRCodeReader.isAvailable() {
+            
+            readerVC.completionBlock = { [weak self] (result: QRCodeReaderResult?) in
+                self?.readerVC.stopScanning()
+                self?.dismiss(animated: true)
+                if let address = result?.value {
+                    let components = address.components(separatedBy: ":")
+                    if sender == self?.originQRCodeButton {
+                        self?.originAddressField?.text = components.last
+                    } else {
+                        self?.destinationAddressField?.text = components.last
+                    }
+                }
+            }
+            
+            readerVC.modalPresentationStyle = .formSheet
+            present(readerVC, animated: true)
+        }
+    }
     
     // MARK: - Navigation
     

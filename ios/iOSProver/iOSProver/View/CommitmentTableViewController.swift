@@ -43,6 +43,34 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
         catch { NSLog("CommitmentTableViewController Error: fetchedResultsController failed to performFetch: \(error.localizedDescription)") }
     }
     
+    private func presentFundInfoAlert(usingFunderAddress from: String) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.left
+
+        let messageText = NSMutableAttributedString(
+            string: "Please send 1 ETH from:\n\(from)\nto:\n\(MixerManager.shared.mixerAddressStr).",
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font : UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote),
+                NSAttributedString.Key.foregroundColor : UIColor.black
+            ]
+        )
+        
+        let alert = UIAlertController(
+            title: "Waiting for funds",
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        alert.setValue(messageText, forKey: "attributedMessage")
+
+        let okAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(okAction)
+        alert.preferredAction = okAction
+        
+        self.present(alert, animated: true)
+    }
+    
     // MARK: - Table View Data Source & Delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,6 +85,7 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.commitmentCell, for: indexPath)
         if let commitmentCell = cell as? CommitmentTableViewCell, let commitment = fetchedResultsController?.object(at: indexPath) {
             commitmentCell.commitment = commitment
+            commitmentCell.onFundButtonTapped = self.presentFundInfoAlert
         }
         return cell
     }

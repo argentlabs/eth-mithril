@@ -33,7 +33,7 @@ from .field import SNARK_SCALAR_FIELD
 
 
 def random_element():
-    randint(1, SNARK_SCALAR_FIELD-1)
+    return randint(1, SNARK_SCALAR_FIELD-1)
 
 
 def int_to_big_endian(lnum):
