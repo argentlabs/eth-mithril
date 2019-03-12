@@ -66,7 +66,7 @@ class EventFetcher {
                     return constr.paramVal.isEqualTo(event.decodedResult[constr.paramName] as AnyObject)
                 } != false
             }
-            // print("fetched from block:\(startBlock) to block:\(lastBlockNumber!), found:\(filtered.count)")
+//             print("fetched from block:\(startBlock) to block:\(lastBlockNumber!), found:\(filtered.count)")
             
             if filtered.isEmpty, let pollPeriod = pollingPeriod {
                 after(seconds: pollPeriod).done {
@@ -74,7 +74,7 @@ class EventFetcher {
                                 name: name,
                                 abiData: abiData,
                                 contractAddress: contractAddress,
-                                startBlock: lastBlockNumber,
+                                startBlock: lastBlockNumber.advanced(by: 1),
                                 pollingPeriod: pollingPeriod,
                                 filters: filters,
                                 web3Instance: web3,

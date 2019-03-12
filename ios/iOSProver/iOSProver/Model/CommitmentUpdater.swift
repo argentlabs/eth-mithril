@@ -62,6 +62,8 @@ class CommitmentUpdater: NSObject {
             commit(commitment)
         } else if commitment.fundingTxBlockNumber == nil {
             watchFundingEvent(for: commitment)
+        } else if commitment.withdrawTxConfirmedAt == nil, !commitment.withdrawRequested {
+            watchAllFundingEvents(afterFundingOf: commitment)
         } else if commitment.withdrawTxConfirmedAt == nil, commitment.withdrawRequested {
             withdraw(commitment)
         }
@@ -125,6 +127,22 @@ class CommitmentUpdater: NSObject {
                     }
                 }
             }
+    }
+    
+    private func watchAllFundingEvents(afterFundingOf commitment: Commitment) {
+        
+        guard let startBlock = (commitment.lastFundingTxBlockNumber ?? commitment.fundingTxBlockNumber)?.uint64Value.advanced(by: 1)
+        else { return }
+        
+        MixerManager.shared.watchAllFundingEvents(startBlock: startBlock) { [weak self] (result, error) in
+                if let blockNum = result?.blockNumber, let numDeposits = result?.numDeposits {
+                    self?.contextDo { [weak self] in
+                        commitment.numSubsequentDeposits += Int64(numDeposits)
+                        commitment.lastFundingTxBlockNumber = NSNumber(value: blockNum)
+                        self?.handle(commitment)
+                    }
+                }
+        }
     }
     
     private func withdraw(_ commitment: Commitment) {

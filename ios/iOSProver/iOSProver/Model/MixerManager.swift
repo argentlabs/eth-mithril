@@ -23,7 +23,7 @@ class MixerManager {
     
     let mixerAddressStr  = "0x78c85Fdc92A93EE75566688f97e9e532d573C853"
     private let rpcPath = "https://rinkeby.infura.io/v3/91ffab09868d430f9ce744c78d7ff427" // "http://127.0.0.1:8545"
-    private let relayerEndpoint = "http://localhost:8080"
+    private let relayerEndpoint = "http://192.168.0.11:8080" // "http://localhost:8080"
     private lazy var web3 = Web3(rpcURL: rpcPath)
     private lazy var mixer = MixerFactory.mixer(web3: web3, mixerAddressStr: mixerAddressStr)
     private lazy var mixerRelayer = mixer != nil ? MixerRelayer(web3: web3, endPoint: relayerEndpoint, mixer: mixer!) : nil
@@ -111,11 +111,41 @@ class MixerManager {
                 let last = result.last,
                 let leafIdx = last.decodedResult["_leafIndex"] as? BigUInt,
                 let blockStr = last.eventLog?.blockNumber.description,
-                let block = UInt64(hexString: String(blockStr.dropFirst(2)))
+                let block = UInt64(blockStr)
             else {
                 throw MixerError.unexpectedDataReceived("Could not parse funding event result")
             }
             commitmentWasFunded((block, leafIdx), nil)
+        }.catch { error in
+            commitmentWasFunded(nil, error)
+        }
+    }
+    
+    func watchAllFundingEvents(startBlock: UInt64 = 3_861_629,
+                               commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, numDeposits: Int)?, _ error: Error?) -> ()) {
+        guard let abiData = MixerFactory.abiData else {
+            commitmentWasFunded(nil, MixerError.invalidParams("Invalid ABI"))
+            return
+        }
+        
+        firstly { [weak self] () -> Promise<[EventParserResult]> in
+            guard let this = self else { throw MixerError.internalError("self is nil") }
+            return EventFetcher.fetchEventsPromise(
+                rpcPath: this.rpcPath,
+                name: "LeafAdded",
+                abiData: abiData,
+                contractAddress: this.mixerAddressStr,
+                startBlock: startBlock,
+                pollingPeriod: 5)
+        }.done { result in
+           
+            guard
+                let blockStr = result.last?.eventLog?.blockNumber.description,
+                let block = UInt64(blockStr)
+            else {
+                throw MixerError.unexpectedDataReceived("Could not parse funding event result")
+            }
+            commitmentWasFunded((block, result.count), nil)
         }.catch { error in
             commitmentWasFunded(nil, error)
         }
