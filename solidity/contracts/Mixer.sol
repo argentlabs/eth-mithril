@@ -41,17 +41,16 @@ contract Mixer
     * Save a commitment (leaf) that needs to be funded later on
     */
     function commit(uint256 leaf, address fundingWallet)
-        public
+        public 
+        payable
     {
         require(leaf > 0, "null leaf");
         pendingDeposits[fundingWallet].push(leaf);
         emit CommitmentAdded(fundingWallet, leaf);
+        if (msg.value > 0) fundCommitment();
     }
 
-    /*
-    * Used by the funding wallet to fund a previously saved commitment
-    */
-    function () external payable {
+    function fundCommitment() private {
         require(msg.value == AMOUNT, "wrong value");
         uint256[] storage leaves = pendingDeposits[msg.sender];
         require(leaves.length > 0, "commitment must be sent first");
@@ -59,6 +58,13 @@ contract Mixer
         leaves.length--;
         (, uint256 leafIndex) = tree.insert(leaf);
         emit LeafAdded(leaf, leafIndex);
+    }
+
+    /*
+    * Used by the funding wallet to fund a previously saved commitment
+    */
+    function () external payable {
+        fundCommitment();
     }
 
     // should not be used in production otherwise nullifier_secret would be shared with node!

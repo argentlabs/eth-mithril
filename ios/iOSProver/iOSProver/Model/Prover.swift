@@ -92,7 +92,12 @@ class Prover {
         return Promise { seal in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
-                    let flatProof = try self.buildFlatProof(root: root, fundedAddress: fundedAddress, nullifier: nullifier, nullifierSecret: nullifierSecret, leafIndex: leafIndex, merklePath: merklePath)
+                    let flatProof = try self.buildFlatProof(root: root,
+                                                            fundedAddress: fundedAddress,
+                                                            nullifier: nullifier,
+                                                            nullifierSecret: nullifierSecret,
+                                                            leafIndex: leafIndex,
+                                                            merklePath: merklePath)
                     DispatchQueue.main.async {
                         seal.resolve(flatProof, nil)
                     }
