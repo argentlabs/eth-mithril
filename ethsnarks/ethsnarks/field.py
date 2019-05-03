@@ -123,9 +123,17 @@ class FQ(object):
         self._count('sub')
         return FQ((self.n - on) % self.m, self.m)
 
-    def bits(self):
+    def to_bytes(self, endian='big'):
         nbits = ceil(log2(self.m))
-        return bitstring.BitArray('0b' + bin(self.n)[2:][::-1].ljust(nbits, '0'))
+        nbits += 8 - (nbits % 8)
+        nbytes = nbits // 8
+        return self.n.to_bytes(nbytes, endian)
+
+    def bits(self):
+        # TODO: endian
+        nbits = ceil(log2(self.m))
+        bits = bin(self.n)[2:][::-1].ljust(nbits, '0')
+        return bitstring.BitArray('0b' + bits)
 
     def inv(self):
         self._count('inv')
@@ -163,12 +171,14 @@ class FQ(object):
     def __eq__(self, other):
         if other == 0.:
             other = 0
+        # TODO: verify modulus matches other?
         return self.n == self._other_n(other)
 
     def __ne__(self, other):
         return not self == other
 
     def __neg__(self):
+        self._count('sub')
         return FQ(-self.n, self.m)
 
     def __repr__(self):
@@ -176,10 +186,20 @@ class FQ(object):
 
     @classmethod
     def random(cls, modulus=SNARK_SCALAR_FIELD):
+        if isinstance(modulus, FQ):
+            modulus = modulus.m
         nbytes = ceil(ceil(log2(modulus)) / 8) + 1
         rand_n = int.from_bytes(urandom(nbytes), 'little')
         return FQ(rand_n, modulus)
 
     @classmethod
     def one(self, modulus=SNARK_SCALAR_FIELD):
+        if isinstance(modulus, FQ):
+            modulus = modulus.m
         return FQ(1, modulus)
+
+    @classmethod
+    def zero(self, modulus=SNARK_SCALAR_FIELD):
+        if isinstance(modulus, FQ):
+            modulus = modulus.m
+        return FQ(0, modulus)

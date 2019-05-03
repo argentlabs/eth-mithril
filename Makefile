@@ -4,7 +4,7 @@ KEYPATH = .keys
 BUILD_IOS = make -C $(IOSBUILDPATH) && make -C $(IOSBUILDPATH) install
 IOSINSTALLPATH = ios/iOSProver/depends/lib/libmixer.dylib
 
-all: clean build test ios-build-universal
+all: clean build test ios-build-universal solidity-deploy
 
 build: release
 	make -C $(BUILDPATH)

@@ -1,3 +1,6 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+
 #include "ethsnarks.hpp"
 #include "gadgets/merkle_tree.hpp"
 #include "utils.hpp"
@@ -7,9 +10,9 @@ namespace ethsnarks {
 
 merkle_path_selector::merkle_path_selector(
     ProtoboardT &in_pb,
-    const VariableT in_input,
-    const VariableT in_pathvar,
-    const VariableT in_is_right,
+    const VariableT& in_input,
+    const VariableT& in_pathvar,
+    const VariableT& in_is_right,
     const std::string &in_annotation_prefix
 ) :
     GadgetT(in_pb, in_annotation_prefix),
@@ -35,7 +38,7 @@ void merkle_path_selector::generate_r1cs_constraints()
     this->pb.add_r1cs_constraint(ConstraintT(m_is_right, m_pathvar, m_left_b),
         FMT(this->annotation_prefix, "is_right * pathvar = left_b"));
 
-    this->pb.add_r1cs_constraint(ConstraintT(1, m_left_a + m_left_b, m_left),
+    this->pb.add_r1cs_constraint(ConstraintT(m_left_a + m_left_b, 1, m_left),
         FMT(this->annotation_prefix, "1 * left_a + left_b = left"));
 
     this->pb.add_r1cs_constraint(ConstraintT(m_is_right, m_input, m_right_a),
@@ -44,11 +47,11 @@ void merkle_path_selector::generate_r1cs_constraints()
     this->pb.add_r1cs_constraint(ConstraintT(1 - m_is_right, m_pathvar, m_right_b),
         FMT(this->annotation_prefix, "1-is_right * pathvar = right_b"));
 
-    this->pb.add_r1cs_constraint(ConstraintT(1, m_right_a + m_right_b, m_right),
+    this->pb.add_r1cs_constraint(ConstraintT(m_right_a + m_right_b, 1, m_right),
         FMT(this->annotation_prefix, "1 * right_a + right_b = right"));
 }
 
-void merkle_path_selector::generate_r1cs_witness()
+void merkle_path_selector::generate_r1cs_witness() const
 {
     this->pb.val(m_left_a) = (FieldT::one() - this->pb.val(m_is_right)) * this->pb.val(m_input);
     this->pb.val(m_left_b) = this->pb.val(m_is_right) * this->pb.val(m_pathvar);
@@ -70,6 +73,8 @@ const VariableT& merkle_path_selector::right() const {
 
 const VariableArrayT merkle_tree_IVs (ProtoboardT &in_pb)
 {
+    // TODO: replace with auto-generated constants
+    // or remove the merkle tree IVs entirely...
     auto x = make_var_array(in_pb, 29, "IVs");
     std::vector<FieldT> level_IVs = {
         FieldT("149674538925118052205057075966660054952481571156186698930522557832224430770"),

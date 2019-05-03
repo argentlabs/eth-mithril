@@ -1,10 +1,10 @@
-pragma solidity ^0.5;
+pragma solidity ^0.5.0;
 
-import "./LongsightL.sol";
+import "./MiMC.sol";
 
 library MerkleTree
 {
-    // ceil(log2(2<<28))
+    // ceil(log2(1<<29))
     uint constant public TREE_DEPTH = 29;
 
 
@@ -59,12 +59,16 @@ library MerkleTree
     }
 
 
-    function hashImpl (uint256 left, uint256 right, uint256[10] memory C, uint256 IV)
+    function hashImpl (uint256 left, uint256 right, uint256 IV)
         internal 
         pure 
         returns (uint256)
     {
-        return LongsightL.longsightL12p5_MP([left, right], IV, C);
+        uint256[] memory x = new uint256[](2);
+        x[0] = left;
+        x[1] = right;
+
+        return MiMC.Hash(x, IV);
     }
 
 
@@ -74,8 +78,6 @@ library MerkleTree
     {
         require(leaf != 0);
 
-        uint256[10] memory C;
-        LongsightL.constantsL12p5(C);
 
         uint256[29] memory IVs;
         fillLevelIVs(IVs);
@@ -86,7 +88,7 @@ library MerkleTree
 
         self.nodes[0][offset] = leaf;
 
-        new_root = updateTree(self, C, IVs);
+        new_root = updateTree(self, IVs);
 
         self.cur = offset + 1;
     }
@@ -100,9 +102,6 @@ library MerkleTree
         pure 
         returns (uint256 merkleRoot)
     {
-        uint256[10] memory C;
-        LongsightL.constantsL12p5(C);
-
         uint256[29] memory IVs;
         fillLevelIVs(IVs);
 
@@ -110,9 +109,9 @@ library MerkleTree
 
         for (uint depth = 0; depth < TREE_DEPTH; depth++) {
             if (address_bits[depth]) {
-                merkleRoot = hashImpl(in_path[depth], merkleRoot, C, IVs[depth]);
+                merkleRoot = hashImpl(in_path[depth], merkleRoot, IVs[depth]);
             } else {
-                merkleRoot = hashImpl(merkleRoot, in_path[depth], C, IVs[depth]);
+                merkleRoot = hashImpl(merkleRoot, in_path[depth], IVs[depth]);
             }
         }
     }
@@ -162,14 +161,14 @@ library MerkleTree
                 sha256(
                     abi.encodePacked(
                         uint16(depth),
-                        uint240(offset)))) % LongsightL.getScalarField();
+                        uint240(offset)))) % MiMC.getScalarField();
         }
 
         return leaf;
     }
 
 
-    function updateTree(Data storage self, uint256[10] memory C, uint256[29] memory IVs)
+    function updateTree(Data storage self, uint256[29] memory IVs)
         internal returns(uint256 root)
     {
         uint currentIndex = self.cur;
@@ -194,7 +193,7 @@ library MerkleTree
                 leaf2 = self.nodes[depth][currentIndex];
             }
 
-            self.nodes[depth+1][nextIndex] = hashImpl(leaf1, leaf2, C, IVs[depth]);
+            self.nodes[depth+1][nextIndex] = hashImpl(leaf1, leaf2, IVs[depth]);
 
             currentIndex = nextIndex;
         }

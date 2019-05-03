@@ -1,6 +1,6 @@
 // this code is taken from https://github.com/JacobEberhardt/ZoKrates 
 
-pragma solidity ^0.5;
+pragma solidity ^0.5.0;
 
 import "./Pairing.sol";
 

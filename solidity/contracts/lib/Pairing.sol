@@ -1,6 +1,6 @@
 // This code is taken from https://github.com/JacobEberhardt/ZoKrates
 
-pragma solidity ^0.5;
+pragma solidity ^0.5.0;
 
 library Pairing {
     struct G1Point {
@@ -15,7 +15,9 @@ library Pairing {
     }
 
     /// @return the generator of G1
-    function P1() internal pure returns (G1Point memory) {
+    function P1()
+        internal pure returns (G1Point memory)
+    {
         return G1Point(1, 2);
     }
 

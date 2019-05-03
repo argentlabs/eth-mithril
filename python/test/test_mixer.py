@@ -1,8 +1,12 @@
 import unittest
 
-from ethsnarks.longsight import random_element, LongsightL12p5_MP
+# from ethsnarks.longsight import random_element  # , LongsightL12p5_MP
+
+from ethsnarks.mimc import mimc_hash
+from ethsnarks.field import FQ
 from ethsnarks.utils import native_lib_path
-from ethsnarks.merkletree import MerkleTree
+# from ethsnarks.merkletree import MerkleTree
+from ethsnarks.mimc_merkletree import MerkleTree
 from mixer import Mixer
 
 from hashlib import sha256
@@ -29,16 +33,12 @@ class TestMixer(unittest.TestCase):
         n_items = 2 << 28
         tree = MerkleTree(n_items)
         for n in range(0, 2):
-            tree.append(random_element())
+            tree.append(int(FQ.random()))
 
-        wallet_address = random_element()
-        nullifier_secret = random_element()
-        nullifier_hash_IV = 0
-        nullifier_hash = LongsightL12p5_MP(
-            [nullifier_secret, nullifier_secret], nullifier_hash_IV)
-        # leaf_hash_IV = 0
-        # leaf_hash = LongsightL12p5_MP(
-        # [nullifier_secret, wallet_address], leaf_hash_IV)
+        wallet_address = int(FQ.random())
+        nullifier_secret = int(FQ.random())
+        nullifier_hash = mimc_hash(
+            [nullifier_secret, nullifier_secret])
         leaf_hash = int(get_sha256_hash(
             to_hex(nullifier_secret), to_hex(wallet_address)), 16)
 

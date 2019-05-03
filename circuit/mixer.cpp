@@ -13,8 +13,7 @@
 #include "gadgets/sha256_eth_fields.hpp"
 
 // ethsnarks gadgets
-#include "gadgets/longsightl.cpp"
-#include "gadgets/longsightl_constants.cpp"
+#include "gadgets/mimc.hpp"
 #include "gadgets/merkle_tree.cpp"
 
 using ethsnarks::FieldT;
@@ -35,7 +34,8 @@ namespace ethsnarks
 class mod_mixer : public GadgetT
 {
   public:
-    typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
+    typedef MiMC_hash_gadget HashT;
+    // typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
     typedef Sha256EthFields<FieldT> Sha256HashT; // SHA256 - for commitment
     // typedef LongsightL12p5_MP_gadget Sha256HashT; // MiMC - for commitment
     const size_t tree_depth = MIXER_TREE_DEPTH;

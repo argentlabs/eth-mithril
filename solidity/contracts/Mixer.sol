@@ -1,8 +1,8 @@
-pragma solidity ^0.5;
+pragma solidity ^0.5.0;
 
 import "./lib/Verifier.sol";
 import "./lib/MerkleTree.sol";
-import "./lib/LongsightL.sol";
+import "./lib/MiMC.sol";
 
 
 contract Mixer
@@ -73,14 +73,10 @@ contract Mixer
         pure 
         returns (uint256)
     {
-        // uint256[10] memory round_constants;
-        // LongsightL.constantsL12p5(round_constants);
-
-        // return LongsightL.longsightL12p5_MP([nullifier_secret, uint256(wallet_address)], 0, round_constants);
+        // return MiMC.Hash([nullifier_secret, uint256(wallet_address)], 0);
         bytes32 digest = sha256(abi.encodePacked(nullifier_secret, uint256(wallet_address)));
         uint256 mask = uint256(-1) >> 4; // clear the first 4 bits to make sure we stay within the prime field
         return uint256(digest) & mask;
-
     }
 
     // should not be used in production otherwise nullifier_secret would be shared with node!
@@ -89,12 +85,11 @@ contract Mixer
         pure 
         returns (uint256)
     {
-        uint256[10] memory round_constants;
-        LongsightL.constantsL12p5(round_constants);
-
-        return LongsightL.longsightL12p5_MP([nullifier_secret, nullifier_secret], 0, round_constants);
+        uint256[] memory vals = new uint256[](2);
+        vals[0] = nullifier_secret;
+        vals[1] = nullifier_secret;
+        return MiMC.Hash(vals, 0);
     }
-
 
     function getMerklePath(uint256 leafIndex)
         public 

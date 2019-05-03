@@ -14,7 +14,6 @@
 		0D19E1C12203181A00108366 /* libgmpxx.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D19E1BE2203181A00108366 /* libgmpxx.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0D19E1C22203181A00108366 /* libmixer.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D19E1BF2203181A00108366 /* libmixer.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0D19E1C722033ADC00108366 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19E1C622033ADC00108366 /* libc++.tbd */; };
-		0D19E1C92203634100108366 /* Mixer.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D19E1C82203634100108366 /* Mixer.json */; };
 		0D449FF02212EF8300738362 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FEF2212EF8300738362 /* RestClient.swift */; };
 		0D449FF222134A6400738362 /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF122134A6400738362 /* Relayer.swift */; };
 		0D449FF422134CAB00738362 /* MixerRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF322134CAB00738362 /* MixerRelayer.swift */; };
@@ -28,15 +27,16 @@
 		0D525888221B465000937BBF /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D525887221B465000937BBF /* CoreDataManager.swift */; };
 		0D52588A221B55D400937BBF /* Commitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D525889221B55D400937BBF /* Commitment.swift */; };
 		0D52588C221C28A000937BBF /* CommitmentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52588B221C28A000937BBF /* CommitmentUpdater.swift */; };
-		0D78D90C2208E34A00D48167 /* mixer.pk.raw in Resources */ = {isa = PBXBuildFile; fileRef = 0D973E612208DDDE0004E481 /* mixer.pk.raw */; };
 		0DA689DA221710DB00001AC4 /* Prover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689D9221710DB00001AC4 /* Prover.swift */; };
-		0DA689DC221AC87700001AC4 /* mixer.vk.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DA689DB221AC87700001AC4 /* mixer.vk.json */; };
 		0DA689E5221B325400001AC4 /* CommitmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */; };
 		0DA689E7221B34F600001AC4 /* AddCommitmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */; };
 		0DD694322202FC3C00EB7C63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD694312202FC3C00EB7C63 /* AppDelegate.swift */; };
 		0DD694372202FC3C00EB7C63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694352202FC3C00EB7C63 /* Main.storyboard */; };
 		0DD694392202FC3D00EB7C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694382202FC3D00EB7C63 /* Assets.xcassets */; };
 		0DD6943C2202FC3D00EB7C63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD6943A2202FC3D00EB7C63 /* LaunchScreen.storyboard */; };
+		0DD89CCD227C31FF002E62AF /* Mixer.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DD89CCC227C31FF002E62AF /* Mixer.json */; };
+		0DD89CD0227C3249002E62AF /* mixer.vk.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DD89CCE227C3249002E62AF /* mixer.vk.json */; };
+		0DD89CD1227C3249002E62AF /* mixer.pk.raw in Resources */ = {isa = PBXBuildFile; fileRef = 0DD89CCF227C3249002E62AF /* mixer.pk.raw */; };
 		C601375870BBD26F930FE912 /* Pods_iOSProver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77C1CCB978018D8791A08989 /* Pods_iOSProver.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,7 +63,6 @@
 		0D19E1BE2203181A00108366 /* libgmpxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmpxx.dylib; path = depends/lib/libgmpxx.dylib; sourceTree = "<group>"; };
 		0D19E1BF2203181A00108366 /* libmixer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmixer.dylib; path = depends/lib/libmixer.dylib; sourceTree = "<group>"; };
 		0D19E1C622033ADC00108366 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		0D19E1C82203634100108366 /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Mixer.json; sourceTree = "<group>"; };
 		0D449FEF2212EF8300738362 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		0D449FF122134A6400738362 /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		0D449FF322134CAB00738362 /* MixerRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerRelayer.swift; sourceTree = "<group>"; };
@@ -77,9 +76,7 @@
 		0D525887221B465000937BBF /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		0D525889221B55D400937BBF /* Commitment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commitment.swift; sourceTree = "<group>"; };
 		0D52588B221C28A000937BBF /* CommitmentUpdater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentUpdater.swift; sourceTree = "<group>"; };
-		0D973E612208DDDE0004E481 /* mixer.pk.raw */ = {isa = PBXFileReference; lastKnownFileType = file; name = mixer.pk.raw; path = iOSProver/Data/mixer.pk.raw; sourceTree = SOURCE_ROOT; };
 		0DA689D9221710DB00001AC4 /* Prover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prover.swift; sourceTree = "<group>"; };
-		0DA689DB221AC87700001AC4 /* mixer.vk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mixer.vk.json; path = iOSProver/Data/mixer.vk.json; sourceTree = SOURCE_ROOT; };
 		0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentTableViewCell.swift; sourceTree = "<group>"; };
 		0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommitmentViewController.swift; sourceTree = "<group>"; };
 		0DD6942E2202FC3C00EB7C63 /* iOSProver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +86,9 @@
 		0DD6943B2202FC3D00EB7C63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0DD6943D2202FC3D00EB7C63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DD694432202FC4D00EB7C63 /* iOSProver-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSProver-Bridging-Header.h"; sourceTree = "<group>"; };
+		0DD89CCC227C31FF002E62AF /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Mixer.json; path = ../../../../solidity/build/contracts/Mixer.json; sourceTree = "<group>"; };
+		0DD89CCE227C3249002E62AF /* mixer.vk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = mixer.vk.json; path = depends/data/mixer.vk.json; sourceTree = SOURCE_ROOT; };
+		0DD89CCF227C3249002E62AF /* mixer.pk.raw */ = {isa = PBXFileReference; lastKnownFileType = file; name = mixer.pk.raw; path = depends/data/mixer.pk.raw; sourceTree = SOURCE_ROOT; };
 		4069A245B7EC737985D3EDCF /* Pods-iOSProver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProver/Pods-iOSProver.debug.xcconfig"; sourceTree = "<group>"; };
 		77C1CCB978018D8791A08989 /* Pods_iOSProver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSProver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C39F0D807D744E05B1CCE7C4 /* Pods-iOSProver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSProver.release.xcconfig"; path = "Pods/Target Support Files/Pods-iOSProver/Pods-iOSProver.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,9 +160,9 @@
 		0DA689E2221B308B00001AC4 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0D19E1C82203634100108366 /* Mixer.json */,
-				0D973E612208DDDE0004E481 /* mixer.pk.raw */,
-				0DA689DB221AC87700001AC4 /* mixer.vk.json */,
+				0DD89CCC227C31FF002E62AF /* Mixer.json */,
+				0DD89CCF227C3249002E62AF /* mixer.pk.raw */,
+				0DD89CCE227C3249002E62AF /* mixer.vk.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -278,12 +278,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD89CD1227C3249002E62AF /* mixer.pk.raw in Resources */,
 				0DD6943C2202FC3D00EB7C63 /* LaunchScreen.storyboard in Resources */,
-				0DA689DC221AC87700001AC4 /* mixer.vk.json in Resources */,
 				0DD694392202FC3D00EB7C63 /* Assets.xcassets in Resources */,
-				0D19E1C92203634100108366 /* Mixer.json in Resources */,
-				0D78D90C2208E34A00D48167 /* mixer.pk.raw in Resources */,
+				0DD89CCD227C31FF002E62AF /* Mixer.json in Resources */,
 				0DD694372202FC3C00EB7C63 /* Main.storyboard in Resources */,
+				0DD89CD0227C3249002E62AF /* mixer.vk.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

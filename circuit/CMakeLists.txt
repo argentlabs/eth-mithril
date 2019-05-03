@@ -13,9 +13,10 @@ if (IOS_BUILD)
 endif()
 
 add_subdirectory(../ethsnarks ../.build/ethsnarks EXCLUDE_FROM_ALL)
+add_subdirectory(gadgets)
 
 add_library(mixer SHARED mixer.cpp)
-target_link_libraries(mixer ethsnarks_common)
+target_link_libraries(mixer ethsnarks_common SHA3IUF)
 set_property(TARGET mixer PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if (IOS_BUILD)
@@ -25,6 +26,6 @@ if (IOS_BUILD)
     install (FILES ../.keys/mixer.vk.json DESTINATION data)
 else()
     add_executable(mixer_cli mixer_cli.cpp)
-    target_link_libraries(mixer_cli ethsnarks_common)
+    target_link_libraries(mixer_cli ethsnarks_common SHA3IUF)
 endif()
 
