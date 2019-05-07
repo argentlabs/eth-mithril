@@ -1,0 +1,50 @@
+BCSymbolMap Version: 2.0
+_hash
+_keccakf
+_RC
+Apple LLVM version 10.0.0 (clang-1000.11.45.5)
+/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak/SwiftKeccak/sha3tiny/keccak-tiny.c
+/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak
+keccakf
+sha3_512
+sha3_384
+sha3_256
+sha3_224
+shake256
+hash
+setout
+xorin
+shake128
+/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak/SwiftKeccak/keccaktiny/keccak-tiny.c
+keccak_512
+keccak_384
+keccak_256
+keccak_224
+_$S10Foundation4DataVSgWOe
+_$S11SwiftKeccak9keccak256y10Foundation4DataVAEFTm
+_$S11SwiftKeccak9keccak256y10Foundation4DataVSSFTm
+_$SSS11SwiftKeccakE6keccak10Foundation4DataVyFTm
+__swift_FORCE_LOAD_$_swiftDarwin_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftFoundation_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftObjectiveC_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftCoreFoundation_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftDispatch_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftCoreGraphics_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftUIKit_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftCoreImage_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftMetal_$_SwiftKeccak
+__swift_FORCE_LOAD_$_swiftQuartzCore_$_SwiftKeccak
+___swift_reflection_version
+Apple LLVM version 10.0.0 (clang-1000.11.45.1)
+-emit-bc /Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak/SwiftKeccak/Keccak.swift -emit-module-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/SwiftKeccak.swiftmodule -emit-module-doc-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/SwiftKeccak.swiftdoc -serialize-diagnostics-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/SwiftKeccak-master.dia -emit-objc-header-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/SwiftKeccak-Swift.h -emit-dependencies-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/SwiftKeccak-master.d -target arm64-apple-ios10.3 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk -I /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/BuildProductsPath/Release-iphoneos -I SwiftKeccak/keccaktiny -I SwiftKeccak/sha3tiny -F /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/BuildProductsPath/Release-iphoneos -g -import-underlying-module -module-cache-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/ModuleCache.noindex -swift-version 3 -O -serialize-debugging-options -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/SwiftKeccak-generated-files.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/SwiftKeccak-own-target-headers.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/SwiftKeccak-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/SwiftKeccak-project-headers.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/BuildProductsPath/Release-iphoneos/include -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/DerivedSources/arm64 -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/DerivedSources -Xcc -ivfsoverlay -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/unextended-module-overlay.yaml -Xcc -working-directory/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak -parse-as-library -module-name SwiftKeccak -num-threads 12 -o /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/Objects-normal/arm64/Keccak.bc -resource-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift
+<swift-imported-modules>
+Apple Swift version 4.2.1 effective-3.4.1 (swiftlang-1000.11.42 clang-1000.11.45.1)
+/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak/SwiftKeccak/Keccak.swift
+keccak
+Keccak.swift
+/Users/ovdbigge/argent/apttests/ios/iOSProver/Carthage/Checkouts/SwiftKeccak/SwiftKeccak
+keccak256
+sha3Final
+allocate
+<compiler-generated>
+/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SwiftKeccak/vr0.0.4/Build/Intermediates.noindex/ArchiveIntermediates/SwiftKeccak/IntermediateBuildFilesPath/SwiftKeccak.build/Release-iphoneos/SwiftKeccak.build/DerivedSources/SwiftKeccak_vers.c

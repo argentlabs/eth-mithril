@@ -11,8 +11,8 @@ module.exports = {
       host: "localhost",
       port: 8545,
       network_id: 4,
-      gas: 7000000, // Gas limit
-      gasPrice: 30000000000, // 30 GWei
+      gas: 3000000, // Gas limit
+      gasPrice: 32000000000, // 32 GWei
       skipDryRun: true
     }
   },

@@ -1,0 +1,4 @@
+module sha3tiny [system][extern_c] {
+  header "keccak-tiny.h"
+  export *
+}

@@ -26,7 +26,7 @@ class MixerManager {
     private let rpcPath = "https://rinkeby.infura.io/v3/91ffab09868d430f9ce744c78d7ff427" // "http://127.0.0.1:8545"
     private let relayerEndpoint = "http://192.168.0.11:8080" // "http://localhost:8080"
     private lazy var web3 = Web3(rpcURL: rpcPath)
-    private lazy var mixer = MixerFactory.mixer(web3: web3)//, mixerAddressStr: "0x776EF6E400EBc061414Ff5E8F0dA586803820287")
+    private lazy var mixer = MixerFactory.mixer(web3: web3)//, mixerAddressStr: "0x23f186EcA88fE1D16a26F2c12B6C17FF4AD21024")
     private lazy var mixerRelayer = mixer != nil ? MixerRelayer(web3: web3, endPoint: relayerEndpoint, mixer: mixer!) : nil
     private let prover = Prover.shared
     
@@ -42,7 +42,14 @@ class MixerManager {
         }
     }
     
-    func getNullifier(nullifierSecret: BigUInt) -> Promise<BigUInt>  {
+    func getNullifier(nullifierSecret: BigUInt, computeLocally: Bool = true) -> Promise<BigUInt>  {
+        if(computeLocally) {
+            // compute MiMC locally
+            let nullifier = MiMC.hash(in_msgs: [nullifierSecret, nullifierSecret])
+            return Promise { $0.resolve(nullifier, nil) }
+        }
+        
+        // compute MiMC via Infura
         return Promise { seal in
             self.mixer?["makeNullifierHash"]?(nullifierSecret).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)

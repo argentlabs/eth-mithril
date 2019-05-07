@@ -1,0 +1,11 @@
+framework module SwiftKeccak {
+  umbrella header "SwiftKeccak.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftKeccak.Swift {
+    header "SwiftKeccak-Swift.h"
+    requires objc
+}
