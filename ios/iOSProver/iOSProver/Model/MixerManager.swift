@@ -34,7 +34,18 @@ class MixerManager {
 
     // MARK: - Helper functions to compute call parameters
     
-    func getLeaf(nullifierSecret: BigUInt, fundedAddress: EthereumAddress) -> Promise<BigUInt> {
+    func getLeaf(nullifierSecret: BigUInt, fundedAddress: EthereumAddress, computeLocally: Bool = true) -> Promise<BigUInt> {
+        if(computeLocally) {
+            // compute leaf locally
+            let nullifierSecretData = nullifierSecret.solidityData
+            let fundedAddressData = fundedAddress.ethereumValue().ethereumQuantity!.quantity.solidityData
+            let digest = (nullifierSecretData+fundedAddressData).sha256.hex
+            let digestAfterClearingFirst4Bits = "0" + digest.dropFirst()
+            let leaf = BigUInt(hexString: digestAfterClearingFirst4Bits)
+            return Promise { $0.resolve(leaf, nil) }
+        }
+        
+        // compute leaf via Infura (unsafe!)
         return Promise { seal in
             self.mixer?["makeLeafHash"]?(nullifierSecret, fundedAddress).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)
@@ -44,12 +55,12 @@ class MixerManager {
     
     func getNullifier(nullifierSecret: BigUInt, computeLocally: Bool = true) -> Promise<BigUInt>  {
         if(computeLocally) {
-            // compute MiMC locally
+            // compute nullifier locally
             let nullifier = MiMC.hash(in_msgs: [nullifierSecret, nullifierSecret])
             return Promise { $0.resolve(nullifier, nil) }
         }
         
-        // compute MiMC via Infura
+        // compute nullifier via Infura (unsafe!)
         return Promise { seal in
             self.mixer?["makeNullifierHash"]?(nullifierSecret).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)

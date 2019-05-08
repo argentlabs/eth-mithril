@@ -3,9 +3,6 @@
 
 #include "ethsnarks.hpp"
 
-// for debug all of them
-#include <iostream>
-
 namespace ethsnarks
 {
 
@@ -36,7 +33,7 @@ namespace ethsnarks
 */
 class merkle_path_selector : public GadgetT
 {
-  public:
+public:
     const VariableT m_input;
     const VariableT m_pathvar;
     const VariableT m_is_right;
@@ -70,7 +67,7 @@ const VariableArrayT merkle_tree_IVs(ProtoboardT &in_pb);
 template <typename HashT>
 class markle_path_compute : public GadgetT
 {
-  public:
+public:
     const size_t m_depth;
     const VariableArrayT m_address_bits;
     const VariableT m_leaf;
@@ -146,11 +143,6 @@ class markle_path_compute : public GadgetT
             m_selectors[i].generate_r1cs_witness();
             m_hashers[i].generate_r1cs_witness();
         }
-
-        auto t = m_hashers.front().m_ciphers.front().m_rounds.front().result();
-        std::cout << "1st round of 1st MP pass of front hasher=" << std::endl;
-        this->pb.val(t).print();
-        std::cout << "!" << std::endl;
     }
 };
 
@@ -160,7 +152,7 @@ class markle_path_compute : public GadgetT
 template <typename HashT>
 class merkle_path_authenticator : public markle_path_compute<HashT>
 {
-  public:
+public:
     const VariableT m_expected_root;
 
     merkle_path_authenticator(
