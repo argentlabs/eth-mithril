@@ -11,3 +11,5 @@ deploy: node_modules
 
 deploy-rinkeby: node_modules
 	truffle migrate --network localrinkeby
+deploy-ropsten: node_modules
+	truffle migrate --network ropsten

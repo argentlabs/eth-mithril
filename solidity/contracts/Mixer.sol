@@ -9,7 +9,7 @@ contract Mixer
 {
     using MerkleTree for MerkleTree.Data;
 
-    uint constant public AMOUNT = 0.01 ether;
+    uint constant public AMOUNT = 1 ether;
 
     uint256[14] vk;
     uint256[] gammaABC;
@@ -69,8 +69,8 @@ contract Mixer
 
     // should not be used in production otherwise nullifier_secret would be shared with node!
     function makeLeafHash(uint256 nullifier_secret, address wallet_address)
-        public 
-        pure 
+        external
+        pure
         returns (uint256)
     {
         // return MiMC.Hash([nullifier_secret, uint256(wallet_address)], 0);
@@ -81,8 +81,8 @@ contract Mixer
 
     // should not be used in production otherwise nullifier_secret would be shared with node!
     function makeNullifierHash(uint256 nullifier_secret)
-        public 
-        pure 
+        external
+        pure
         returns (uint256)
     {
         uint256[] memory vals = new uint256[](2);
@@ -92,8 +92,8 @@ contract Mixer
     }
 
     function getMerklePath(uint256 leafIndex)
-        public 
-        view 
+        external
+        view
         returns (uint256[29] memory out_path)
     {
         out_path = tree.getMerkleProof(leafIndex);
@@ -130,13 +130,15 @@ contract Mixer
     )
         public
     {
+        uint startGas = gasleft();
         require(!nullifiers[in_nullifier], "Nullifier used");
         require(verifyProof(getRoot(), in_withdraw_address, in_nullifier, proof), "Proof verification failed");
-        // bool b = (verifyProof(getRoot(), in_withdraw_address, in_nullifier, proof));//, "Proof verification failed");
 
         nullifiers[in_nullifier] = true;
 
-        in_withdraw_address.transfer(AMOUNT);
+        uint gasUsed = startGas - gasleft() + 82775;
+        in_withdraw_address.transfer(AMOUNT - gasUsed * tx.gasprice); // leaf withdrawal
+        msg.sender.transfer(gasUsed * tx.gasprice); // relayer refund
     }
 
     function treeDepth() external pure returns (uint256) {

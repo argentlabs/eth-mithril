@@ -9,7 +9,7 @@ const { expect } = chai;
 const { BN, toBN } = web3.utils;
 chai.use(bnChai(BN));
 
-const AMOUNT = web3.utils.toWei("0.01", "ether");
+const AMOUNT = web3.utils.toWei("1", "ether");
 
 const path = require("path");
 const VERIFYING_KEY_PATH = path.resolve("../.keys/mixer.vk.json");
@@ -45,6 +45,7 @@ contract("Mixer", function([
     const receipt = await this.mixer.send(AMOUNT, { from: _depositer });
     const leaf_index = receipt.logs.filter(l => l.event == "LeafAdded")[0].args
       ._leafIndex;
+    console.log(`Funding commitment cost ${receipt.receipt.gasUsed} gas`);
 
     return { nullifier_secret, leaf_index };
   }
@@ -150,13 +151,14 @@ contract("Mixer", function([
       const receipt = await this.mixer.withdraw(
         withdrawer1,
         nullifier,
-        proof_to_flat(proof)
+        proof_to_flat(proof),
+        { from: relayer }
       );
       console.log(`Withdrawing used ${receipt.receipt.gasUsed} gas`);
 
       const withdrawerAfterW = toBN(await web3.eth.getBalance(withdrawer1));
       const mixerAfterW = toBN(await web3.eth.getBalance(this.mixer.address));
-      expect(withdrawerAfterW.sub(withdrawerBeforeW)).to.eq.BN(AMOUNT);
+      expect(withdrawerAfterW).to.be.gt.BN(withdrawerBeforeW);
       expect(mixerBeforeW.sub(mixerAfterW)).to.eq.BN(AMOUNT);
 
       // Verify nullifier exists
@@ -212,7 +214,7 @@ contract("Mixer", function([
           await web3.eth.getBalance(withdrawers[i])
         );
         const mixerAfterW = toBN(await web3.eth.getBalance(this.mixer.address));
-        expect(withdrawerAfterW.sub(withdrawerBeforeW)).to.eq.BN(AMOUNT);
+        expect(withdrawerAfterW).to.be.gt.BN(withdrawerBeforeW);
         expect(mixerBeforeW.sub(mixerAfterW)).to.eq.BN(AMOUNT);
 
         // Verify nullifier exists

@@ -1,3 +1,6 @@
+require("dotenv").config();
+const HDWalletProvider = require("truffle-hdwallet-provider");
+
 module.exports = {
   networks: {
     development: {
@@ -11,6 +14,17 @@ module.exports = {
       host: "localhost",
       port: 8545,
       network_id: 4,
+      gas: 3000000, // Gas limit
+      gasPrice: 32000000000, // 32 GWei
+      skipDryRun: true
+    },
+    ropsten: {
+      provider: () =>
+        new HDWalletProvider(
+          process.env.DEPLOYER_SECRET_KEY,
+          process.env.ROPSTEN_URL
+        ),
+      network_id: "3",
       gas: 3000000, // Gas limit
       gasPrice: 32000000000, // 32 GWei
       skipDryRun: true

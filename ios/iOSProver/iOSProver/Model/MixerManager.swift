@@ -23,10 +23,11 @@ class MixerManager {
     
     var mixerAddressStr: String { return mixer!.address!.hex(eip55: true) }
     
-    private let rpcPath = "https://rinkeby.infura.io/v3/91ffab09868d430f9ce744c78d7ff427" // "http://127.0.0.1:8545"
-    private let relayerEndpoint = "http://192.168.0.11:8080" // "http://localhost:8080"
+    // private let rpcPath = "https://rinkeby.infura.io/v3/91ffab09868d430f9ce744c78d7ff427" // "http://127.0.0.1:8545"
+    private let rpcPath = "https://ropsten.infura.io/v3/9c2c162b995446099dae8923952edd44"
+    private let relayerEndpoint = "https://cloud-test.argent-api.com/v1/signer" // "http://192.168.0.11:8080" // "http://localhost:8080"
     private lazy var web3 = Web3(rpcURL: rpcPath)
-    private lazy var mixer = MixerFactory.mixer(web3: web3)//, mixerAddressStr: "0x23f186EcA88fE1D16a26F2c12B6C17FF4AD21024")
+    private lazy var mixer = MixerFactory.mixer(web3: web3)//, mixerAddressStr: "0x5c97845193549EE16B06e66710C8d9151c6fF526")
     private lazy var mixerRelayer = mixer != nil ? MixerRelayer(web3: web3, endPoint: relayerEndpoint, mixer: mixer!) : nil
     private let prover = Prover.shared
     

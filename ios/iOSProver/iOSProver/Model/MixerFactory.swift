@@ -29,7 +29,7 @@ class MixerFactory {
             let jsonData = try? Data(contentsOf: url),
             let networks = ((try? JSONSerialization.jsonObject(with: jsonData)) as? [String: Any])?["networks"] as? [String: Any]
         else { return nil }
-        return (networks["4"] as? [String: Any])?["address"] as? String
+        return (networks["3"] as? [String: Any])?["address"] as? String
     }
     
     static func mixer(web3: Web3, mixerAddressStr: String? = nil) -> DynamicContract? {
