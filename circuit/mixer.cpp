@@ -23,7 +23,7 @@ using ethsnarks::ProvingKeyT;
 using libff::convert_field_element_to_bit_vector;
 using libsnark::generate_r1cs_equals_const_constraint;
 
-const size_t MIXER_TREE_DEPTH = 29;
+const size_t MIXER_TREE_DEPTH = 15;
 
 namespace ethsnarks
 {
@@ -33,7 +33,7 @@ namespace ethsnarks
 */
 class mod_mixer : public GadgetT
 {
-  public:
+public:
     typedef MiMC_hash_gadget HashT;
     // typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
     typedef Sha256EthFields<FieldT> Sha256HashT; // SHA256 - for commitment

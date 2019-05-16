@@ -27,7 +27,10 @@ def get_sha256_hash(left, right):
 
 class TestMixer(unittest.TestCase):
     def test_make_proof(self):
-        n_items = 2 << 28
+        wrapper = Mixer(NATIVE_LIB_PATH, VK_PATH, PK_PATH)
+        tree_depth = wrapper.tree_depth
+
+        n_items = 2 << (tree_depth - 1)
         tree = MerkleTree(n_items)
         for n in range(0, 2):
             tree.append(int(FQ.random()))
@@ -39,14 +42,6 @@ class TestMixer(unittest.TestCase):
         leaf_hash = int(get_sha256_hash(
             to_hex(nullifier_secret), to_hex(wallet_address)), 16)
 
-        # print('============== PYTHON ===================')
-        # print('Inputs as integers:', [nullifier_secret, wallet_address])
-        # print('Inputs as hex:', [to_hex(nullifier_secret),
-        #                          to_hex(wallet_address)])
-        # print('Output as integer:', leaf_hash)
-        # print('Output as hex:', to_hex(leaf_hash))
-        # print('=========================================')
-
         leaf_idx = tree.append(leaf_hash)
         self.assertEqual(leaf_idx, tree.index(leaf_hash))
 
@@ -55,8 +50,6 @@ class TestMixer(unittest.TestCase):
         self.assertTrue(leaf_proof.verify(tree.root))
 
         # Generate proof
-        wrapper = Mixer(NATIVE_LIB_PATH, VK_PATH, PK_PATH)
-        tree_depth = wrapper.tree_depth
         snark_proof = wrapper.prove(
             tree.root,
             wallet_address,

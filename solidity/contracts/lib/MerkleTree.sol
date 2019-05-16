@@ -4,18 +4,18 @@ import "./MiMC.sol";
 
 library MerkleTree
 {
-    // ceil(log2(1<<29))
-    uint constant public TREE_DEPTH = 29;
+    // ceil(log2(1<<15))
+    uint constant public TREE_DEPTH = 15;
 
 
-    // 2<<28 leaves
-    uint constant public MAX_LEAF_COUNT = 536870912;
+    // 1<<15 leaves
+    uint constant public MAX_LEAF_COUNT = 32768;
 
 
     struct Data
     {
         uint cur;
-        uint256[536870912][30] nodes; // first row = leaves, second row = leaves' parents, etc
+        uint256[32768][16] nodes; // first column = leaves, second column = leaves' parents, etc
     }
 
     function treeDepth() internal pure returns (uint256) {
@@ -23,8 +23,8 @@ library MerkleTree
     }
 
 
-    function fillLevelIVs (uint256[29] memory IVs)
-        internal 
+    function fillLevelIVs (uint256[15] memory IVs)
+        internal
         pure
     {
         IVs[0] = 149674538925118052205057075966660054952481571156186698930522557832224430770;
@@ -42,26 +42,12 @@ library MerkleTree
         IVs[12] = 8245796392944118634696709403074300923517437202166861682117022548371601758802;
         IVs[13] = 16953062784314687781686527153155644849196472783922227794465158787843281909585;
         IVs[14] = 19346880451250915556764413197424554385509847473349107460608536657852472800734;
-        IVs[15] = 14486794857958402714787584825989957493343996287314210390323617462452254101347;
-        IVs[16] = 11127491343750635061768291849689189917973916562037173191089384809465548650641;
-        IVs[17] = 12217916643258751952878742936579902345100885664187835381214622522318889050675;
-        IVs[18] = 722025110834410790007814375535296040832778338853544117497481480537806506496;
-        IVs[19] = 15115624438829798766134408951193645901537753720219896384705782209102859383951;
-        IVs[20] = 11495230981884427516908372448237146604382590904456048258839160861769955046544;
-        IVs[21] = 16867999085723044773810250829569850875786210932876177117428755424200948460050;
-        IVs[22] = 1884116508014449609846749684134533293456072152192763829918284704109129550542;
-        IVs[23] = 14643335163846663204197941112945447472862168442334003800621296569318670799451;
-        IVs[24] = 1933387276732345916104540506251808516402995586485132246682941535467305930334;
-        IVs[25] = 7286414555941977227951257572976885370489143210539802284740420664558593616067;
-        IVs[26] = 16932161189449419608528042274282099409408565503929504242784173714823499212410;
-        IVs[27] = 16562533130736679030886586765487416082772837813468081467237161865787494093536;
-        IVs[28] = 6037428193077828806710267464232314380014232668931818917272972397574634037180;
     }
 
 
     function hashImpl (uint256 left, uint256 right, uint256 IV)
-        internal 
-        pure 
+        internal
+        pure
         returns (uint256)
     {
         uint256[] memory x = new uint256[](2);
@@ -73,13 +59,13 @@ library MerkleTree
 
 
     function insert(Data storage self, uint256 leaf)
-        internal 
+        internal
         returns (uint256 new_root, uint256 offset)
     {
         require(leaf != 0);
 
 
-        uint256[29] memory IVs;
+        uint256[15] memory IVs;
         fillLevelIVs(IVs);
 
         offset = self.cur;
@@ -97,12 +83,12 @@ library MerkleTree
     /**
     * Returns calculated merkle root
     */
-    function verifyPath(uint256 leaf, uint256[29] memory in_path, bool[29] memory address_bits)
+    function verifyPath(uint256 leaf, uint256[15] memory in_path, bool[15] memory address_bits)
         internal 
         pure 
         returns (uint256 merkleRoot)
     {
-        uint256[29] memory IVs;
+        uint256[15] memory IVs;
         fillLevelIVs(IVs);
 
         merkleRoot = leaf;
@@ -117,7 +103,7 @@ library MerkleTree
     }
 
 
-    function verifyPath(Data storage self, uint256 leaf, uint256[29] memory in_path, bool[29] memory address_bits)
+    function verifyPath(Data storage self, uint256 leaf, uint256[15] memory in_path, bool[15] memory address_bits)
         internal 
         view 
         returns (bool)
@@ -127,8 +113,8 @@ library MerkleTree
 
 
     function getLeaf(Data storage self, uint depth, uint offset)
-        internal 
-        view 
+        internal
+        view
         returns (uint256)
     {
         return getUniqueLeaf(depth, offset, self.nodes[depth][offset]);
@@ -136,9 +122,9 @@ library MerkleTree
 
 
     function getMerkleProof(Data storage self, uint index)
-        internal 
-        view 
-        returns (uint256[29] memory proof_path)
+        internal
+        view
+        returns (uint256[15] memory proof_path)
     {
         for (uint depth = 0; depth < TREE_DEPTH; depth++)
         {
@@ -168,18 +154,15 @@ library MerkleTree
     }
 
 
-    function updateTree(Data storage self, uint256[29] memory IVs)
+    function updateTree(Data storage self, uint256[15] memory IVs)
         internal returns(uint256 root)
     {
         uint currentIndex = self.cur;
-
         uint256 leaf1;
-
         uint256 leaf2;
 
         for (uint depth = 0; depth < TREE_DEPTH; depth++)
         {
-            uint nextIndex = uint(currentIndex/2);
 
             if (currentIndex%2 == 0)
             {
@@ -193,6 +176,8 @@ library MerkleTree
                 leaf2 = self.nodes[depth][currentIndex];
             }
 
+            uint nextIndex = uint(currentIndex/2);
+
             self.nodes[depth+1][nextIndex] = hashImpl(leaf1, leaf2, IVs[depth]);
 
             currentIndex = nextIndex;
@@ -203,10 +188,18 @@ library MerkleTree
 
 
     function getRoot (Data storage self)
-        internal 
-        view 
+        internal
+        view
         returns (uint256)
     {
         return self.nodes[TREE_DEPTH][0];
+    }
+
+    function getNextLeafIndex (Data storage self)
+        internal
+        view
+        returns (uint256)
+    {
+        return self.cur;
     }
 }

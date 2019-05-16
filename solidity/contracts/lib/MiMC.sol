@@ -35,7 +35,7 @@ library MiMC
         assembly {
             if lt(round_count, 1) { revert(0, 0) }
 
-            // Initialise round constants, k will be hashed 
+            // Initialise round constants, k will be hashed
             let c := mload(0x40)
             mstore(0x40, add(c, 32))
             mstore(c, in_seed)
@@ -70,6 +70,17 @@ library MiMC
         {
             r = (r + in_x[i] + MiMCpe7(in_x[i], r, in_seed, round_count)) % localQ;
         }
+
+        // uint256 x0 = in_x[0];
+        // uint256 x1 = in_x[1];
+        // uint256 m0 = MiMCpe7(x0, r, in_seed, round_count);
+        // assembly {
+        //     r := addmod(addmod(r, x0, localQ), m0, localQ)
+        // }
+        // uint256 m1 = MiMCpe7(x1, r, in_seed, round_count);
+        // assembly {
+        //     r := addmod(addmod(r, x1, localQ), m1, localQ)
+        // }
         
         return r;
     }
@@ -77,12 +88,12 @@ library MiMC
     function Hash( uint256[] memory in_msgs, uint256 in_key )
         public pure returns (uint256)
     {
-        return MiMCpe7_mp( in_msgs, in_key, uint256(keccak256("mimc")), 91 );
+        return MiMCpe7_mp(in_msgs, in_key, uint256(keccak256("mimc")), 91);
     }
 
     function Hash( uint256[] memory in_msgs )
         public pure returns (uint256)
     {
-        return Hash( in_msgs, 0 );
+        return Hash(in_msgs, 0);
     }
 }

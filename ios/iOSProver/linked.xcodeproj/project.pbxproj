@@ -30,10 +30,10 @@
 		0D86B5F02281D516000358BF /* Mixer.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D86B5EF2281D516000358BF /* Mixer.json */; };
 		0D86B5F22281EFCC000358BF /* Swift-Big-Number-Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86B5F12281EFCC000358BF /* Swift-Big-Number-Core.swift */; };
 		0D86B5F42281F0CF000358BF /* MiMC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86B5F32281F0CF000358BF /* MiMC.swift */; };
-		0D86B5F62281F781000358BF /* SwiftKeccak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D86B5F52281F781000358BF /* SwiftKeccak.framework */; };
 		0DA689DA221710DB00001AC4 /* Prover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689D9221710DB00001AC4 /* Prover.swift */; };
 		0DA689E5221B325400001AC4 /* CommitmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */; };
 		0DA689E7221B34F600001AC4 /* AddCommitmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */; };
+		0DC53481228BF83900500318 /* SwiftKeccak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC53480228BF83900500318 /* SwiftKeccak.framework */; };
 		0DD694322202FC3C00EB7C63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD694312202FC3C00EB7C63 /* AppDelegate.swift */; };
 		0DD694372202FC3C00EB7C63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694352202FC3C00EB7C63 /* Main.storyboard */; };
 		0DD694392202FC3D00EB7C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0DD694382202FC3D00EB7C63 /* Assets.xcassets */; };
@@ -82,10 +82,10 @@
 		0D86B5EF2281D516000358BF /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Mixer.json; path = ../../../../solidity/build/contracts/Mixer.json; sourceTree = "<group>"; };
 		0D86B5F12281EFCC000358BF /* Swift-Big-Number-Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift-Big-Number-Core.swift"; sourceTree = "<group>"; };
 		0D86B5F32281F0CF000358BF /* MiMC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiMC.swift; sourceTree = "<group>"; };
-		0D86B5F52281F781000358BF /* SwiftKeccak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeccak.framework; path = Carthage/Build/iOS/SwiftKeccak.framework; sourceTree = "<group>"; };
 		0DA689D9221710DB00001AC4 /* Prover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prover.swift; sourceTree = "<group>"; };
 		0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitmentTableViewCell.swift; sourceTree = "<group>"; };
 		0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommitmentViewController.swift; sourceTree = "<group>"; };
+		0DC53480228BF83900500318 /* SwiftKeccak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeccak.framework; path = Carthage/Build/iOS/SwiftKeccak.framework; sourceTree = "<group>"; };
 		0DD6942E2202FC3C00EB7C63 /* iOSProver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSProver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DD694312202FC3C00EB7C63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0DD694362202FC3C00EB7C63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 			files = (
 				0D19E1C722033ADC00108366 /* libc++.tbd in Frameworks */,
 				0D19E1B92203180C00108366 /* libgmp.dylib in Frameworks */,
-				0D86B5F62281F781000358BF /* SwiftKeccak.framework in Frameworks */,
+				0DC53481228BF83900500318 /* SwiftKeccak.framework in Frameworks */,
 				0D19E1BA2203180C00108366 /* libgmpxx.dylib in Frameworks */,
 				0D19E1BB2203180C00108366 /* libmixer.dylib in Frameworks */,
 				C601375870BBD26F930FE912 /* Pods_iOSProver.framework in Frameworks */,
@@ -133,7 +133,7 @@
 				0D19E1B62203180C00108366 /* libgmp.dylib */,
 				0D19E1B72203180C00108366 /* libgmpxx.dylib */,
 				0D19E1B82203180C00108366 /* libmixer.dylib */,
-				0D86B5F52281F781000358BF /* SwiftKeccak.framework */,
+				0DC53480228BF83900500318 /* SwiftKeccak.framework */,
 				77C1CCB978018D8791A08989 /* Pods_iOSProver.framework */,
 			);
 			name = Frameworks;
@@ -262,7 +262,7 @@
 				TargetAttributes = {
 					0DD6942D2202FC3C00EB7C63 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};

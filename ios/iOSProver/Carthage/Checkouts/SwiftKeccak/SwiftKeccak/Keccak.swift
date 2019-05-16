@@ -35,21 +35,21 @@ public func sha3Final256(_ string: String) -> Data {
 }
 
 public extension Data {
-    public func keccak() -> Data {
+    func keccak() -> Data {
         return keccak256(self)
     }
 
-    public func sha3Final() -> Data {
+    func sha3Final() -> Data {
         return sha3Final256(self)
     }
 
 }
 
 public extension String {
-    public func keccak() -> Data {
+    func keccak() -> Data {
         return keccak256(self)
     }
-    public func sha3Final() -> Data {
+    func sha3Final() -> Data {
         return sha3Final256(self)
     }
 }

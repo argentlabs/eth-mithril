@@ -8,12 +8,12 @@
   "tvOS" : [
 
   ],
-  "commitish" : "vr0.0.4",
+  "commitish" : "7155e8029adc830ea9f1a6fb41d73ff99a4139e1",
   "iOS" : [
     {
       "name" : "SwiftKeccak",
-      "hash" : "40e48d35094d02956a12fa1bc9dd15c8b7931b3c765653318695ee69d1834c58",
-      "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+      "hash" : "0dd6616755a7c53b40a560ecf90ac5368999e5cef1706f6d3d780c1c587679b3",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }

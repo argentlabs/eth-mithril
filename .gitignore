@@ -5,3 +5,4 @@ bin
 tmp
 .DS_Store
 .vscode/ipch
+solidity/.env

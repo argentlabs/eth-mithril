@@ -30,8 +30,8 @@ contract Mixer
     }
 
     function getRoot()
-        public 
-        view 
+        public
+        view
         returns (uint256)
     {
         return tree.getRoot();
@@ -41,7 +41,7 @@ contract Mixer
     * Save a commitment (leaf) that needs to be funded later on
     */
     function commit(uint256 leaf, address fundingWallet)
-        public 
+        public
         payable
     {
         require(leaf > 0, "null leaf");
@@ -94,24 +94,22 @@ contract Mixer
     function getMerklePath(uint256 leafIndex)
         external
         view
-        returns (uint256[29] memory out_path)
+        returns (uint256[15] memory out_path)
     {
         out_path = tree.getMerkleProof(leafIndex);
     }
 
-
     function isSpent(uint256 nullifier)
-        public 
-        view 
+        public
+        view
         returns (bool)
     {
         return nullifiers[nullifier];
     }
 
-
     function verifyProof(uint256 in_root, address in_wallet_address, uint256 in_nullifier, uint256[8] memory proof)
-        public 
-        view 
+        public
+        view
         returns (bool)
     {
         uint256[] memory snark_input = new uint256[](3);
@@ -122,7 +120,6 @@ contract Mixer
         return Verifier.verify(vk, gammaABC, proof, snark_input);
     }
 
-    
     function withdraw(
         address payable in_withdraw_address,
         uint256 in_nullifier,
@@ -143,5 +140,9 @@ contract Mixer
 
     function treeDepth() external pure returns (uint256) {
         return MerkleTree.treeDepth();
+    }
+
+    function getNextLeafIndex() external view returns (uint256) {
+        return tree.getNextLeafIndex();
     }
 }

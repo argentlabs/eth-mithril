@@ -19,7 +19,9 @@ class Prover {
     }
     
     static let shared = Prover()
-    let pkPath = Bundle.main.path(forResource: "mixer.pk", ofType: "raw")
+    
+    private let mixerTreeDepth = mixer_tree_depth();
+    private let pkPath = Bundle.main.path(forResource: "mixer.pk", ofType: "raw")
     lazy var vk: String? = {
         guard
             let jsonURL = Bundle.main.url(forResource: "mixer.vk", withExtension: "json"),
@@ -46,7 +48,7 @@ class Prover {
         guard let pkPath = pkPath else { throw ProverError.missingProvingKey }
         guard let jsonProof = withArrayOfCStrings(merklePath.map { $0.description }, { (mpath: [UnsafePointer<CChar>?]) -> (String?) in
             var in_path = mpath
-            let leafAddress = String(String(leafIndex, radix: 2).paddingLeft(toLength: 29, withPad: "0").reversed())
+            let leafAddress = String(String(leafIndex, radix: 2).paddingLeft(toLength: mixerTreeDepth, withPad: "0").reversed())
             guard let prf = mixer_prove(pkPath,
                                         root.description,
                                         fundedAddress.ethereumValue().ethereumQuantity!.quantity.description,
@@ -60,7 +62,6 @@ class Prover {
         }
 
         let validProof = try verifyProof(jsonProof: jsonProof)
-        print("validity =",validProof)
         assert(validProof, "local proof verification failed")
         return jsonProof
     }
