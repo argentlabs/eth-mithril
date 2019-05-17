@@ -14,6 +14,7 @@
 		0D19E1C12203181A00108366 /* libgmpxx.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D19E1BE2203181A00108366 /* libgmpxx.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0D19E1C22203181A00108366 /* libmixer.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D19E1BF2203181A00108366 /* libmixer.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		0D19E1C722033ADC00108366 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D19E1C622033ADC00108366 /* libc++.tbd */; };
+		0D37503E228F00F4007D233E /* ShowMixerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D37503D228F00F4007D233E /* ShowMixerViewController.swift */; };
 		0D449FF02212EF8300738362 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FEF2212EF8300738362 /* RestClient.swift */; };
 		0D449FF222134A6400738362 /* Relayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF122134A6400738362 /* Relayer.swift */; };
 		0D449FF422134CAB00738362 /* MixerRelayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D449FF322134CAB00738362 /* MixerRelayer.swift */; };
@@ -66,6 +67,7 @@
 		0D19E1BE2203181A00108366 /* libgmpxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmpxx.dylib; path = depends/lib/libgmpxx.dylib; sourceTree = "<group>"; };
 		0D19E1BF2203181A00108366 /* libmixer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmixer.dylib; path = depends/lib/libmixer.dylib; sourceTree = "<group>"; };
 		0D19E1C622033ADC00108366 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0D37503D228F00F4007D233E /* ShowMixerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMixerViewController.swift; sourceTree = "<group>"; };
 		0D449FEF2212EF8300738362 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		0D449FF122134A6400738362 /* Relayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relayer.swift; sourceTree = "<group>"; };
 		0D449FF322134CAB00738362 /* MixerRelayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixerRelayer.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD694352202FC3C00EB7C63 /* Main.storyboard */,
+				0D37503D228F00F4007D233E /* ShowMixerViewController.swift */,
 				0DA689E6221B34F600001AC4 /* AddCommitmentViewController.swift */,
 				0DA689E4221B325400001AC4 /* CommitmentTableViewCell.swift */,
 				0D525881221B41CB00937BBF /* CommitmentTableViewController.swift */,
@@ -408,6 +411,7 @@
 				0DA689E7221B34F600001AC4 /* AddCommitmentViewController.swift in Sources */,
 				0D52588A221B55D400937BBF /* Commitment.swift in Sources */,
 				0D449FF422134CAB00738362 /* MixerRelayer.swift in Sources */,
+				0D37503E228F00F4007D233E /* ShowMixerViewController.swift in Sources */,
 				0DD694322202FC3C00EB7C63 /* AppDelegate.swift in Sources */,
 				0D449FF62214577100738362 /* TransactionWatcher.swift in Sources */,
 			);

@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let segueToMixerAddress = Notification.Name("SegueToMixerAddress")
+}
+
 class CommitmentTableViewCell: UITableViewCell {
     
     // MARK: - Public API
@@ -80,8 +84,12 @@ class CommitmentTableViewCell: UITableViewCell {
             formatter.dateFormat = "dd-MMM HH:mm:ss"
             statusLabel?.text = "Withdrawn on \(formatter.string(from: withdrawDate))"
         }
-        
-        
+    }
+    
+    // MARK: - View Mixer Address
+    
+    @IBAction func viewMixerAddress(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .segueToMixerAddress, object: nil)
     }
     
 }

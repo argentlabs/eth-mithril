@@ -15,6 +15,7 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
     private struct Storyboard {
         static let rowHeight: CGFloat = 80
         static let commitmentCell = "Commitment Cell"
+        static let showMixerAddressSegue = "Show Mixer Address"
     }
     
     private var fetchedResultsController: NSFetchedResultsController<Commitment>?
@@ -24,6 +25,11 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
         
         tableView.estimatedRowHeight = Storyboard.rowHeight
         tableView.rowHeight = Storyboard.rowHeight
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(segueToGainsLossesDetails(_:)),
+                                               name: .segueToMixerAddress,
+                                               object: nil)
         
         updateUI()
     }
@@ -85,9 +91,23 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.commitmentCell, for: indexPath)
         if let commitmentCell = cell as? CommitmentTableViewCell, let commitment = fetchedResultsController?.object(at: indexPath) {
             commitmentCell.commitment = commitment
-            commitmentCell.onFundButtonTapped = self.presentFundInfoAlert
+//            commitmentCell.onFundButtonTapped = self.presentFundInfoAlert
         }
         return cell
+    }
+    
+    // MARK: - Navigation
+    
+    @objc func segueToGainsLossesDetails(_ notification: Notification) {
+        self.performSegue(withIdentifier: Storyboard.showMixerAddressSegue, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Storyboard.showMixerAddressSegue {
+            if let showMixerVC = segue.destination as? ShowMixerViewController {
+                showMixerVC.mixerAddress = MixerManager.shared.mixerAddressStr
+            }
+        }
     }
     
 }

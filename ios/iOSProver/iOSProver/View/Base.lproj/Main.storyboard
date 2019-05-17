@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zFA-FM-XYk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zFA-FM-XYk">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -100,6 +101,7 @@
                                                             <state key="normal" title="Withdraw"/>
                                                             <connections>
                                                                 <action selector="actionButtonTapped:" destination="L52-Ke-UKD" eventType="touchUpInside" id="9pq-ZN-ZfG"/>
+                                                                <action selector="viewMixerAddress:" destination="L52-Ke-UKD" eventType="touchUpInside" id="gjM-I8-Li9"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -138,6 +140,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="pO5-NH-xoH" kind="presentation" identifier="Show Mixer Address" id="oJQ-Y4-CBV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17I-jC-r3U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -295,7 +300,67 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="trA-e6-AFs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2013.5999999999999" y="124.58770614692655"/>
+            <point key="canvasLocation" x="1983" y="125"/>
+        </scene>
+        <!--Show Mixer View Controller-->
+        <scene sceneID="Act-TU-CSo">
+            <objects>
+                <viewController id="pO5-NH-xoH" customClass="ShowMixerViewController" customModule="iOSProver" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tJw-8X-nMI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNw-et-UOD">
+                                <rect key="frame" x="322" y="44" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="close:" destination="pO5-NH-xoH" eventType="touchUpInside" id="xkY-w5-WEV"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-lC-AbO">
+                                <rect key="frame" x="40" y="263.66666666666669" width="295" height="295.00000000000006"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9gg-lC-AbO" secondAttribute="height" multiplier="1:1" id="87Q-Fc-SaT"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                                         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="K2b-6m-iDP">
+                                <rect key="frame" x="40" y="578.66666666666663" width="295" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please send 1 ETH from your origin address to the Mixer address displayed below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-FS-rDL">
+                                <rect key="frame" x="40" y="209.33333333333334" width="295" height="33.666666666666657"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UNw-et-UOD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RUj-WY-xnB" secondAttribute="leading" symbolic="YES" id="Jir-8T-Nz2"/>
+                            <constraint firstItem="bCb-FS-rDL" firstAttribute="leading" secondItem="9gg-lC-AbO" secondAttribute="leading" id="UGX-XX-S79"/>
+                            <constraint firstItem="UNw-et-UOD" firstAttribute="top" secondItem="RUj-WY-xnB" secondAttribute="top" id="UIj-7r-Ywl"/>
+                            <constraint firstItem="9gg-lC-AbO" firstAttribute="centerY" secondItem="RUj-WY-xnB" secondAttribute="centerY" id="V8Y-cT-ShG"/>
+                            <constraint firstItem="9gg-lC-AbO" firstAttribute="top" secondItem="bCb-FS-rDL" secondAttribute="bottom" constant="20.666666666666686" id="YjW-Yb-NjV"/>
+                            <constraint firstItem="9gg-lC-AbO" firstAttribute="leading" secondItem="RUj-WY-xnB" secondAttribute="leading" constant="40" id="ddd-k4-Kmn"/>
+                            <constraint firstItem="K2b-6m-iDP" firstAttribute="leading" secondItem="9gg-lC-AbO" secondAttribute="leading" id="fSy-du-MuL"/>
+                            <constraint firstItem="9gg-lC-AbO" firstAttribute="centerX" secondItem="RUj-WY-xnB" secondAttribute="centerX" id="haW-ME-kC2"/>
+                            <constraint firstItem="K2b-6m-iDP" firstAttribute="trailing" secondItem="9gg-lC-AbO" secondAttribute="trailing" id="oze-VY-kMa"/>
+                            <constraint firstItem="bCb-FS-rDL" firstAttribute="trailing" secondItem="9gg-lC-AbO" secondAttribute="trailing" id="rxe-C1-0HV"/>
+                            <constraint firstItem="K2b-6m-iDP" firstAttribute="top" secondItem="9gg-lC-AbO" secondAttribute="bottom" constant="20" id="y8z-eW-eH7"/>
+                            <constraint firstItem="RUj-WY-xnB" firstAttribute="trailing" secondItem="UNw-et-UOD" secondAttribute="trailing" constant="16" id="ygd-gJ-Sc2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RUj-WY-xnB"/>
+                    </view>
+                    <connections>
+                        <outlet property="qrCodeImageView" destination="9gg-lC-AbO" id="FTG-90-MIV"/>
+                        <outlet property="qrCodeLabel" destination="K2b-6m-iDP" id="fpA-7v-797"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jxG-TI-ubb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1120.8" y="872.66009852216757"/>
         </scene>
     </scenes>
     <resources>
