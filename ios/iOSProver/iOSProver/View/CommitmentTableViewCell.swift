@@ -30,9 +30,9 @@ class CommitmentTableViewCell: UITableViewCell {
             || (commitment.commitTxBlockNumber != nil && !commitment.commitTxSuccesful) {
             print("Requesting commit")
             CommitmentUpdater.shared.requestCommit(for: commitment)
-        } else if commitment.fundingTxBlockNumber == nil, let from = commitment.from {
-            print("Please send 1 ETH from \(from) to \(MixerManager.shared.mixerAddressStr)")
-            onFundButtonTapped?(from)
+        } else if commitment.fundingTxBlockNumber == nil {
+            print("Show Mixer Address")
+            NotificationCenter.default.post(name: .segueToMixerAddress, object: nil)
         } else {
             print("Requesting withdrawal")
             CommitmentUpdater.shared.requestWithdrawal(for: commitment)
@@ -85,11 +85,4 @@ class CommitmentTableViewCell: UITableViewCell {
             statusLabel?.text = "Withdrawn on \(formatter.string(from: withdrawDate))"
         }
     }
-    
-    // MARK: - View Mixer Address
-    
-    @IBAction func viewMixerAddress(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .segueToMixerAddress, object: nil)
-    }
-    
 }

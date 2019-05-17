@@ -101,7 +101,6 @@
                                                             <state key="normal" title="Withdraw"/>
                                                             <connections>
                                                                 <action selector="actionButtonTapped:" destination="L52-Ke-UKD" eventType="touchUpInside" id="9pq-ZN-ZfG"/>
-                                                                <action selector="viewMixerAddress:" destination="L52-Ke-UKD" eventType="touchUpInside" id="gjM-I8-Li9"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -329,8 +328,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please send 1 ETH from your origin address to the Mixer address displayed below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-FS-rDL">
-                                <rect key="frame" x="40" y="209.33333333333334" width="295" height="33.666666666666657"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-FS-rDL">
+                                <rect key="frame" x="40" y="192.66666666666666" width="295" height="50.333333333333343"/>
+                                <string key="text">Please send 1 ETH from your origin address to the Mixer address displayed below. The transaction needs a gas limit of 1,000,000 to succeed.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
