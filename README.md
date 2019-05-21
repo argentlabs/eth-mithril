@@ -12,7 +12,7 @@ This project is based on previous work on trustless Ethereum Mixers by [@barryWh
 
 1. Build and run the Xcode project in `./ios/iOSProver/iOSProver.xcworkspace`
 2. In the app, tap the "+" button in the upper-right corner. Enter the origin address (the address from which you want to send value) and the destination address (the address that will receive the value transfer). Tap "Commit". Your intention to perform a private transfer gets sent to the relayer which posts it to the Mixer contract on your behalf. An entry gets inserted into the app's table to represent your commitment.
-3. Send 1 ETH from the origin address to the Mixer address. You can see the Mixer address by tapping the "Fund" button next to your commitment in the app's table.
+3. Send 1 ETH from the origin address to the Mixer address, using a gas limit of 1,000,000. You can see the Mixer address by tapping the "Fund" button next to your commitment in the app's table.
 4. When your transfer gets mined, it will be detected by the client and the "Fund" button will change into a "Withdraw" button. You can see how many other people have transferred a note to the Mixer since you funded your commitment. Wait for a few commitments to be added to the Mixer by others in order to increase your anonymity set. When you're satisfied that you have waited long enough, tap "Withdraw" to generate a Zero-Knowledge proof that you previously sent a commitment to the Mixer (without revealing which commitment it was). The proof gets send to the relayer which posts it to the Mixer contract. The Mixer contract validates the proof, sends 1 ETH to the destination address (minus the gas cost paid by the relayer) and marks the commitment as "withdrawn".
 
 # Technical details
