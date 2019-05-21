@@ -6,7 +6,7 @@ Users can deposit notes of 1 ETH into a Mixer smart contract and withdraw them l
 
 Relayers are used to post transactions to the blockchain so that the recipient of a private transfer can withdraw a private note from the Mixer without needing any prior ether.
 
-This project is based on previous work on trusless Ethereum Mixers by [@barryWhiteHat](https://github.com/barryWhiteHat/miximus) and [@HarryR](https://github.com/HarryR/ethsnarks-miximus).
+This project is based on previous work on trustless Ethereum Mixers by [@barryWhiteHat](https://github.com/barryWhiteHat/miximus) and [@HarryR](https://github.com/HarryR/ethsnarks-miximus).
 
 # Perform a private transfer on iOS (on ropsten)
 
