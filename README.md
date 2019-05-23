@@ -1,25 +1,25 @@
-# Argent Private Transfers
+# Mithril: an Open-Source Mixer for Mobile-friendly private transfers on Ethereum
 
 This project allows the private transfer of value from one Ethereum account to another, via an iOS client.
 
-Users can deposit notes of 1 ETH into a Mixer smart contract and withdraw them later to a different account by only providing a Zero-Knowledge proof (zkSNARK) that they previously deposited a note into the Mixer, without revealing from which account that note was sent.
+Users can deposit notes of 1 ETH into a mixer smart contract and withdraw them later to a different account by only providing a Zero-Knowledge proof (zkSNARK) that they previously deposited a note into the mixer, without revealing from which account that note was sent.
 
-Relayers are used to post transactions to the blockchain so that the recipient of a private transfer can withdraw a private note from the Mixer without needing any prior ether.
+Relayers are used to post transactions to the blockchain so that the recipient of a private transfer can withdraw a private note from the mixer without needing any prior ether.
 
-This project is based on previous work on trustless Ethereum Mixers by [@barryWhiteHat](https://github.com/barryWhiteHat/miximus) and [@HarryR](https://github.com/HarryR/ethsnarks-miximus).
+This project is based on previous work on trustless Ethereum mixers by [@barryWhiteHat](https://github.com/barryWhiteHat/miximus) and [@HarryR](https://github.com/HarryR/ethsnarks-miximus).
 
 # Perform a private transfer on iOS (on ropsten)
 
 1. Build and run the Xcode project in `./ios/iOSProver/iOSProver.xcworkspace`
-2. In the app, tap the "+" button in the upper-right corner. Enter the origin address (the address from which you want to send value) and the destination address (the address that will receive the value transfer). Tap "Commit". Your intention to perform a private transfer gets sent to the relayer which posts it to the Mixer contract on your behalf. An entry gets inserted into the app's table to represent your commitment.
-3. Send 1 ETH from the origin address to the Mixer address, using a gas limit of 1,000,000. You can see the Mixer address by tapping the "Fund" button next to your commitment in the app's table.
-4. When your transfer gets mined, it will be detected by the client and the "Fund" button will change into a "Withdraw" button. You can see how many other people have transferred a note to the Mixer since you funded your commitment. Wait for a few commitments to be added to the Mixer by others in order to increase your anonymity set. When you're satisfied that you have waited long enough, tap "Withdraw" to generate a Zero-Knowledge proof that you previously sent a commitment to the Mixer (without revealing which commitment it was). The proof gets send to the relayer which posts it to the Mixer contract. The Mixer contract validates the proof, sends 1 ETH to the destination address (minus the gas cost paid by the relayer) and marks the commitment as "withdrawn".
+2. In the app, tap the "+" button in the upper-right corner. Enter the origin address (the address from which you want to send value) and the destination address (the address that will receive the value transfer). Tap "Commit". Your intention to perform a private transfer gets sent to the relayer which posts it to the mixer contract on your behalf. An entry gets inserted into the app's table to represent your commitment.
+3. Send 1 ETH from the origin address to the mixer address, using a gas limit of 1,000,000. You can see the mixer address by tapping the "Fund" button next to your commitment in the app's table.
+4. When your transfer gets mined, it will be detected by the client and the "Fund" button will change into a "Withdraw" button. You can see how many other people have transferred a note to the mixer since you funded your commitment. Wait for a few commitments to be added to the mixer by others in order to increase your anonymity set. When you're satisfied that you have waited long enough, tap "Withdraw" to generate a Zero-Knowledge proof that you previously sent a commitment to the mixer (without revealing which commitment it was). The proof gets send to the relayer which posts it to the mixer contract. The mixer contract validates the proof, sends 1 ETH to the destination address (minus the gas cost paid by the relayer) and marks the commitment as "withdrawn".
 
 # Technical details
 
 ## Deposit
 
-The iOS client forms a commitment by computing the sha256 hash of a randomly generated secret and the destination address. When this commitment is sent to the Mixer contract (along with 1 ETH), it is added as the leaf of a merkle tree:
+The iOS client forms a commitment by computing the sha256 hash of a randomly generated secret and the destination address. When this commitment is sent to the mixer contract (along with 1 ETH), it is added as the leaf of a merkle tree:
 
 ```
 leaf_hash = sha256(secret, destination_address)
@@ -27,7 +27,7 @@ leaf_hash = sha256(secret, destination_address)
 
 ## Withdrawal
 
-To withdraw the commitment, the client must prove to the Mixer that it knows the secret behind one of the leaves added to the merkle tree, without revealing that secret. More precisely, it proves that it knows (1) a merkle path from a certain leaf to the root of the merkle tree and (2) the preimage of that leaf:
+To withdraw the commitment, the client must prove to the mixer that it knows the secret behind one of the leaves added to the merkle tree, without revealing that secret. More precisely, it proves that it knows (1) a merkle path from a certain leaf to the root of the merkle tree and (2) the pre-image of that leaf:
 
 ```
 (1) merkle_root = merkle_verify(leaf_hash, leaf_index, merkle_path)
