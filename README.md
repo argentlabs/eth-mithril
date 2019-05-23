@@ -8,7 +8,9 @@ Relayers are used to post transactions to the blockchain so that the recipient o
 
 This project is based on previous work on trustless Ethereum mixers by [@barryWhiteHat](https://github.com/barryWhiteHat/miximus) and [@HarryR](https://github.com/HarryR/ethsnarks-miximus).
 
-# Perform a private transfer on iOS (on ropsten)
+# Perform a private transfer on iOS
+
+⚠️ Please note that Mithril is in alpha state and may contain bugs that result in the loss of your funds. Use at your own risk. ⚠️
 
 1. Build and run the Xcode project in `./ios/iOSProver/iOSProver.xcworkspace`
 2. In the app, tap the "+" button in the upper-right corner. Enter the origin address (the address from which you want to send value) and the destination address (the address that will receive the value transfer). Tap "Commit". Your intention to perform a private transfer gets sent to the relayer which posts it to the mixer contract on your behalf. An entry gets inserted into the app's table to represent your commitment.
