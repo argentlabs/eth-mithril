@@ -36,7 +36,7 @@ To withdraw the commitment, the client must prove to the mixer that it knows the
 (2) leaf_hash = sha256(secret, destination_address)
 ```
 
-In the above constaints, `merkle_root`, and `destination_address` are public inputs that can be read by anyone at the time of withdrawal, whereas `leaf_index`, `merkle_path` and `secret` are private inputs that are not sent to the contract.
+In the above constraints, `merkle_root`, and `destination_address` are public inputs that can be read by anyone at the time of withdrawal, whereas `leaf_index`, `merkle_path` and `secret` are private inputs that are not sent to the contract.
 
 In order to prevent double spending, the client must also provide a so-called "nullifier" as public input, which will be stored by the contract to mark the commitment as "withdrawn". The nullifier is computed as the hash of the secret:
 
