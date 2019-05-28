@@ -48,7 +48,7 @@ Equations (1), (2) and (3) make up the constraints of the zkSNARK circuit.
 
 ## MiMC Hashing
 
-In order to minimize the number of constraints in the zkSNARK circuit and as a result minimize the proving time, equations (1) and (3) use a special type of hash function known as [MiMC](https://eprint.iacr.org/2016/492), that have _Minimal Multiplicative Complexity_. In contrast, because the security properties of this type of hashing function are still being studied, we chose to use the highly reliable sha256 hash method to compute the commitment leaf in equation (2). This is because if MiMC turns out not to be pre-image resistant and we use MiMC instead of sha256 in (2), an attacker could come up with an arbitrary merkle path and withdraw any deposit. Using MiMC in (2) protects us against that as long as the hash function `x -> MiMC(x, R)`, where `R` is a fixed constant, is pre-image resistant.
+In order to minimize the number of constraints in the zkSNARK circuit and as a result minimize the proving time, equations (1) and (3) use a special type of hash function known as [MiMC](https://eprint.iacr.org/2016/492), that have _Minimal Multiplicative Complexity_. In contrast, because the security properties of this type of hashing function are still being studied, we chose to use the highly reliable sha256 hash method to compute the commitment leaf in equation (2). This is because if MiMC turns out not to be pre-image resistant and we use MiMC instead of sha256 in (2), an attacker could come up with an arbitrary merkle path and withdraw any deposit. Using sha256 in (2) protects us against that as long as the hash function `x -> MiMC(x, R)`, where `R` is a fixed constant, is pre-image resistant.
 
 # Build
 
