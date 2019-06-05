@@ -1,0 +1,4 @@
+module CMixer {
+  header "Headers/mixer.hpp"
+  export *
+}

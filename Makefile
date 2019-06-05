@@ -2,9 +2,9 @@ BUILDPATH = .build
 IOSBUILDPATH = .build-ios
 KEYPATH = .keys
 BUILD_IOS = make -C $(IOSBUILDPATH) && make -C $(IOSBUILDPATH) install
-IOSINSTALLPATH = ios/iOSProver/depends/lib/libmixer.dylib
+IOSINSTALLPATH = ios/Hopper/depends/lib
 
-all: clean build test ios-build-universal solidity-deploy
+all: clean build test ios-build-device solidity-deploy
 
 build: release
 	make -C $(BUILDPATH)
@@ -47,8 +47,17 @@ ios-build-device: ios-device
 ios-build-simulator: ios-simulator
 	$(BUILD_IOS)
 ios-build-universal: ios-build-device
-	mv $(IOSINSTALLPATH) $(IOSINSTALLPATH).device
+	mv $(IOSINSTALLPATH)/libmixer.a $(IOSINSTALLPATH)/libmixer.a.device
+	mv $(IOSINSTALLPATH)/libff.a $(IOSINSTALLPATH)/libff.a.device
+	mv $(IOSINSTALLPATH)/libethsnarks_common.a $(IOSINSTALLPATH)/libethsnarks_common.a.device
+	mv $(IOSINSTALLPATH)/libSHA3IUF.a $(IOSINSTALLPATH)/libSHA3IUF.a.device
 	$(MAKE) ios-build-simulator
-	mv $(IOSINSTALLPATH) $(IOSINSTALLPATH).simulator
-	lipo -create -output $(IOSINSTALLPATH) $(IOSINSTALLPATH).{device,simulator}
-	rm $(IOSINSTALLPATH).*
+	mv $(IOSINSTALLPATH)/libmixer.a $(IOSINSTALLPATH)/libmixer.a.simulator
+	mv $(IOSINSTALLPATH)/libff.a $(IOSINSTALLPATH)/libff.a.simulator
+	mv $(IOSINSTALLPATH)/libethsnarks_common.a $(IOSINSTALLPATH)/libethsnarks_common.a.simulator
+	mv $(IOSINSTALLPATH)/libSHA3IUF.a $(IOSINSTALLPATH)/libSHA3IUF.a.simulator
+	lipo -create -output $(IOSINSTALLPATH)/libmixer.a $(IOSINSTALLPATH)/libmixer.a.{device,simulator}
+	lipo -create -output $(IOSINSTALLPATH)/libff.a $(IOSINSTALLPATH)/libff.a.{device,simulator}
+	lipo -create -output $(IOSINSTALLPATH)/libethsnarks_common.a $(IOSINSTALLPATH)/libethsnarks_common.a.{device,simulator}
+	lipo -create -output $(IOSINSTALLPATH)/libSHA3IUF.a $(IOSINSTALLPATH)/libSHA3IUF.a.{device,simulator}
+	# rm $(IOSINSTALLPATH)/lib*.a.*

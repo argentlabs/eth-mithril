@@ -1,8 +1,4 @@
 build_for_ios() {
-    # generate_32bit_headers
-    # build_for_architecture iphoneos armv7 arm-apple-darwin
-    # build_for_architecture iphonesimulator i386 i386-apple-darwin
-    # clean
     generate_64bit_headers
     build_for_architecture iphoneos arm64 arm-apple-darwin
     build_for_architecture iphoneos arm64e arm-apple-darwin
@@ -55,32 +51,10 @@ build_for_architecture() {
     xcrun -sdk $PLATFORM make -j 16 install
 }
 create_universal_library() {
-    lipo -create -output libgmp.dylib \
-    build/{arm64,arm64e,x86_64}/lib/libgmp.dylib
-    # build/{armv7,arm64,i386,x86_64}/lib/libgmp.dylib
-    lipo -create -output libgmpxx.dylib \
-    build/{arm64,arm64e,x86_64}/lib/libgmpxx.dylib
-    # build/{armv7,arm64,i386,x86_64}/lib/libgmpxx.dylib
-    update_dylib_names
-    update_dylib_references
-}
-update_dylib_names() {
-    install_name_tool -id "@rpath/libgmp.dylib" libgmp.dylib
-    install_name_tool -id "@rpath/libgmpxx.dylib" libgmpxx.dylib
-}
-update_dylib_references() {
-    # update_dylib_reference_for_architecture armv7
-    update_dylib_reference_for_architecture arm64
-    update_dylib_reference_for_architecture arm64e
-    # update_dylib_reference_for_architecture i386
-    update_dylib_reference_for_architecture x86_64
-}
-update_dylib_reference_for_architecture() {
-    ARCH=$1
-    install_name_tool -change \
-    "$(pwd)/build/$ARCH/lib/libgmp.10.dylib" \
-    "@rpath/libgmp.dylib" \
-    libgmpxx.dylib
+    lipo -create -output libgmp.a \
+    build/{arm64,arm64e,x86_64}/lib/libgmp.a
+    lipo -create -output libgmpxx.a \
+    build/{arm64,arm64e,x86_64}/lib/libgmpxx.a
 }
 clean() {
     make distclean
@@ -88,7 +62,7 @@ clean() {
     
     
 GMP_VERSION=6.1.2
-LIB_PATH=iOSProver/depends/lib
+LIB_PATH=Hopper/depends/lib
 
 wget https://gmplib.org/download/gmp/gmp-${GMP_VERSION}.tar.lz
 lzip -d gmp-${GMP_VERSION}.tar.lz
@@ -100,5 +74,5 @@ build_for_ios
 cd ..
 
 mkdir -p ${LIB_PATH}
-mv gmp-${GMP_VERSION}/*.dylib ${LIB_PATH}
+mv gmp-${GMP_VERSION}/*.a ${LIB_PATH}
 rm -r gmp-${GMP_VERSION}

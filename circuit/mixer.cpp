@@ -210,7 +210,7 @@ char *mixer_prove(
     ProtoboardT pb;
     ethsnarks::mod_mixer mod(pb, "module");
     mod.generate_r1cs_constraints();
-    std::cout << "Number of constraints for Argent Mixer: " << pb.num_constraints() << std::endl;
+    std::cout << "Number of constraints for Hopper: " << pb.num_constraints() << std::endl;
 
     mod.generate_r1cs_witness(arg_root, arg_wallet_address, arg_nullifier, arg_nullifier_secret, address_bits, arg_path);
 
