@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "10.0.0",
+  "iOS" : [
+    {
+      "name" : "QRCodeReader",
+      "hash" : "0564d22fb8e58393a39a2b5a3a492c860f712ac2fc5a94e7776ce4031a38782a",
+      "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+    }
+  ]
+}

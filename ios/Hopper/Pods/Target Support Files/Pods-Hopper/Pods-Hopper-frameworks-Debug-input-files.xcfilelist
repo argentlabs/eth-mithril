@@ -1,0 +1,8 @@
+${PODS_ROOT}/Target Support Files/Pods-Hopper/Pods-Hopper-frameworks.sh
+${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework
+${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework
+${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework
+${BUILT_PRODUCTS_DIR}/keccak.c/keccak.framework
+${BUILT_PRODUCTS_DIR}/scrypt.c/scrypt.framework
+${BUILT_PRODUCTS_DIR}/secp256k1.c/secp256k1.framework
+${BUILT_PRODUCTS_DIR}/web3swift.pod/web3swift.framework

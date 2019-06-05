@@ -1,0 +1,94 @@
+BCSymbolMap Version: 2.0
+_globalinit_024_DC5A97F08E5F6563338C9D0C6A11986_func2
+_$S7SipHash0A6HasherV6appendyySWFTf4xn_n
+_globalinit_024_DC5A97F08E5F6563338C9D0C6A11986_token2
+_$S7SipHash0A6HasherV3keys6UInt64V_AFtvpZ
+_symbolic $S7SipHash0A8HashableP
+_$S7SipHash0A8Hashable_pMF
+_$S7SipHash0A8HashableWR
+__swift_FORCE_LOAD_$_swiftDarwin_$_SipHash
+__swift_FORCE_LOAD_$_swiftCoreGraphics_$_SipHash
+__swift_FORCE_LOAD_$_swiftCoreFoundation_$_SipHash
+__swift_FORCE_LOAD_$_swiftDispatch_$_SipHash
+__swift_FORCE_LOAD_$_swiftObjectiveC_$_SipHash
+___swift_reflection_version
+Apple LLVM version 10.0.0 (clang-1000.11.45.1)
+-emit-bc /Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/SipHashable.swift /Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/SipHasher.swift "/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/Primitive Types.swift" /Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/RandomUInt64.swift -emit-module-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/SipHash.swiftmodule -emit-module-doc-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/SipHash.swiftdoc -serialize-diagnostics-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/tvOS-master.dia -emit-objc-header-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/SipHash-Swift.h -emit-dependencies-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/tvOS-master.d -target arm64-apple-tvos9.0 -Xllvm -aarch64-use-tbi -enable-objc-interop -sdk "/Applications/Xcode 10.1.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.1.sdk" -I /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/BuildProductsPath/Release-appletvos -F /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/BuildProductsPath/Release-appletvos -application-extension -g -module-cache-path /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/ModuleCache.noindex -swift-version 4 -O -disable-swift3-objc-inference -serialize-debugging-options -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/swift-overrides.hmap -Xcc -iquote -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/SipHash-generated-files.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/SipHash-own-target-headers.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/SipHash-all-non-framework-target-headers.hmap -Xcc -ivfsoverlay -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/all-product-headers.yaml -Xcc -iquote -Xcc /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/SipHash-project-headers.hmap -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/BuildProductsPath/Release-appletvos/include -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/DerivedSources/arm64 -Xcc -I/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/DerivedSources -Xcc -working-directory/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash -module-name SipHash -num-threads 12 -o /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/SipHashable.bc -o /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/SipHasher.bc -o "/Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/Primitive Types.bc" -o /Users/ovdbigge/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/SipHash/v1.2.2/Build/Intermediates.noindex/ArchiveIntermediates/SipHash-tvOS/IntermediateBuildFilesPath/SipHash.build/Release-appletvos/tvOS.build/Objects-normal/arm64/RandomUInt64.bc -resource-dir "/Applications/Xcode 10.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift"
+<swift-imported-modules>
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash
+Apple Swift version 4.2.1 effective-4.1.50 (swiftlang-1000.11.42 clang-1000.11.45.1)
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/SipHashable.swift
+$S7SipHash0A6HasherV9byteCountSivpfi
+<compiler-generated>
+$S7SipHash0A6HasherV16pendingByteCountSivpfi
+$S7SipHash0A6HasherV12pendingBytess6UInt64Vvpfi
+$S7SipHash0A6HasherV2v3s6UInt64Vvpfi
+$S7SipHash0A6HasherV2v2s6UInt64Vvpfi
+$S7SipHash0A6HasherV2v1s6UInt64Vvpfi
+$S7SipHash0A6HasherV2v0s6UInt64Vvpfi
+append
+SipHashable.swift
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash
+Primitive Types.swift
+init
+hashValue.get
+finalize
+SipHasher.swift
+_finalize
+sipRound
+rotateLeft
+compressWord
+>=
+$S7SipHash0A6HasherV3keys6UInt64V_AFtvau
+_$S7SipHash0A6HasherV3keys6UInt64V_AFtvau
+_$S7SipHash0A6HasherV12compressWordyys6UInt64VF
+_$S7SipHash0A6HasherV9_finalizes6UInt64VyF
+_$S7SipHash0A6HasherVwCP
+___swift_noop_void_return
+___swift_memcpy56_8
+___swift_copy_outline_existential_box_pointer8
+_$S7SipHash0A6HasherVwet
+_$S7SipHash0A6HasherVwst
+_$S7SipHash0A6HasherVWV
+_$S7SipHashMXM
+_$S7SipHash0A6HasherVMf
+_symbolic ____ 7SipHash0A6HasherV
+_symbolic s6UInt64V
+_symbolic Si
+_$S7SipHash0A6HasherVMF
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/SipHasher.swift
+$S7SipHash0A6HasherVMa
+$S7SipHash0A6HasherVwst
+$S7SipHash0A6HasherVwet
+__swift_copy_outline_existential_box_pointer8
+__swift_memcpy56_8
+__swift_noop_void_return
+$S7SipHash0A6HasherVwCP
+count.get
+subscript.get
+withUnsafeMutableBytes
+$SSws5Error_pIgyzo_SwytsAA_pIegyrzo_TR
+$S7SipHash0A6HasherV6appendyySWFySwXEfU_
+copyMemory
+$SSv10copyMemory4from9byteCountySV_SitF
+$Ss5SliceV8distance4from2toSi5IndexQz_AGtFSW_Tgq5
+$Ss6UInt64Vs13BinaryIntegersSz18truncatingIfNeededxqd___tcsACRd__lufCTWs5UInt8V_Tg5
+$Ss17FixedWidthIntegerPsE18truncatingIfNeededxqd___tcs06BinaryC0Rd__lufCqd__s6UInt64VXMTA2FRszsADRd__r__lIetMiyd_Tpq5s5UInt8V_Tg5
+$Ss5UInt8VSzsSz8_lowWordSuvgTW
+$SSlsE20_failEarlyRangeCheck_6boundsy5IndexQz_SNyADGtFSW_Tgq5
+$SSiSLsSL2geoiySbx_xtFZTW
+min
+$SSiSLsSL1loiySbx_xtFZTW
+>
+globalinit_024_DC5A97F08E5F6563338C9D0C6A11986_func2
+randomUInt64
+RandomUInt64.swift
+$Ss6UInt64Vs13BinaryIntegersSz18truncatingIfNeededxqd___tcsACRd__lufCTWs6UInt32V_Tg5
+$Ss17FixedWidthIntegerPsE18truncatingIfNeededxqd___tcs06BinaryC0Rd__lufCqd__s6UInt64VXMTA2FRszsADRd__r__lIetMiyd_Tpq5s6UInt32V_Tg5
+$Ss6UInt32VSzsSz8_lowWordSuvgTW
+_$SxSgSHRzlWOc
+_$SxSgSHRzlWOh
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/Primitive Types.swift
+$SxSgSHRzlWOh
+$SxSgSHRzlWOc
+/Users/ovdbigge/argent/hopper2/ios/Hopper/Carthage/Checkouts/SipHash/SipHash/RandomUInt64.swift

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QRCodeReader_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLx-jM-72O">
+                                <rect key="frame" x="27.5" y="258.5" width="320" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5n-CT-PTt">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="P5n-CT-PTt" secondAttribute="height" multiplier="1:1" id="caB-yF-0Tz"/>
+                                        </constraints>
+                                        <state key="normal" title="Scan In Modal">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="scanInModalAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ipn-cc-fV7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEY-6q-XoF">
+                                        <rect key="frame" x="170" y="0.0" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="GEY-6q-XoF" secondAttribute="height" multiplier="1:1" id="aNx-Af-OB1"/>
+                                        </constraints>
+                                        <state key="normal" title="Scan In Preview">
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="scanInPreviewAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="87h-CK-v4h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="0tw-at-1eY"/>
+                                    <constraint firstAttribute="bottom" secondItem="GEY-6q-XoF" secondAttribute="bottom" id="7pw-9h-iOI"/>
+                                    <constraint firstAttribute="height" constant="150" id="D8n-7o-jZH"/>
+                                    <constraint firstAttribute="bottom" secondItem="P5n-CT-PTt" secondAttribute="bottom" id="DmC-bG-M6d"/>
+                                    <constraint firstItem="P5n-CT-PTt" firstAttribute="leading" secondItem="MLx-jM-72O" secondAttribute="leading" id="HbM-1L-ys2"/>
+                                    <constraint firstItem="GEY-6q-XoF" firstAttribute="top" secondItem="MLx-jM-72O" secondAttribute="top" id="LVD-tP-cMN"/>
+                                    <constraint firstItem="P5n-CT-PTt" firstAttribute="top" secondItem="MLx-jM-72O" secondAttribute="top" id="MSC-L6-cFy"/>
+                                    <constraint firstAttribute="trailing" secondItem="GEY-6q-XoF" secondAttribute="trailing" id="qAj-Jo-ucp"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROG-L6-Gnz" customClass="QRCodeReaderView" customModule="QRCodeReader_swift" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="42.5" width="200" height="200"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ROG-L6-Gnz" secondAttribute="height" multiplier="1:1" id="5Br-7H-vZp"/>
+                                    <constraint firstAttribute="height" constant="200" id="m30-Dq-t2L"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="MLx-jM-72O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TFI-BI-W1n"/>
+                            <constraint firstItem="ROG-L6-Gnz" firstAttribute="centerX" secondItem="MLx-jM-72O" secondAttribute="centerX" id="UgF-Hf-Eb1"/>
+                            <constraint firstItem="MLx-jM-72O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="efo-xp-hOO"/>
+                            <constraint firstItem="MLx-jM-72O" firstAttribute="top" secondItem="ROG-L6-Gnz" secondAttribute="bottom" constant="16" id="mfA-gu-dvY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="previewView" destination="ROG-L6-Gnz" id="AnF-TH-j7l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="428.63568215892059"/>
+        </scene>
+    </scenes>
+</document>

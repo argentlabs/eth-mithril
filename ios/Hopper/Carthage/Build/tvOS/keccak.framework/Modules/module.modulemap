@@ -1,0 +1,6 @@
+framework module keccak {
+  umbrella header "keccak.h"
+
+  export *
+  module * { export * }
+}

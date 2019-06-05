@@ -1,0 +1,19 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "5567a14742c1b9b0bc9a06aff8638658f51f1173",
+  "iOS" : [
+    {
+      "name" : "SwiftKeccak",
+      "hash" : "ccc73b56a73aeffeabaa273de224ab0d8f199d1d8616f31b3e14eb66e8bc9f94",
+      "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+framework module Pods_secp256k1_Example {
+  umbrella header "Pods-secp256k1_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
