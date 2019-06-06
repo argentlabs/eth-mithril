@@ -1,6 +1,8 @@
 # Hopper: an Open-Source Mixer for Mobile-friendly private transfers on Ethereum
 
-This project allows the private transfer of value from one Ethereum account to another, via an iOS client.
+<p align="center"><img src="https://i.imgur.com/SXJfUWH.png" width="280px"/></p>
+
+[Hopper](https://hoppereth.org) allows the private transfer of value from one Ethereum account to another, via an iOS client.
 
 Users can deposit notes of 1 ETH into a mixer smart contract and withdraw them later to a different account by only providing a Zero-Knowledge proof (zkSNARK) that they previously deposited a note into the mixer, without revealing from which account that note was sent.
 
