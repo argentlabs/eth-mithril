@@ -2,21 +2,21 @@
   "Mac" : [
     {
       "name" : "SipHash",
-      "hash" : "2594dbd7c342dd843816de49080463137e02ca36a878a043f834ade6b789cd6b",
+      "hash" : "71e858f6ac8372c5cc254d40f3dee5ba49c6e7033a447ec5d47ecad1ebb6602c",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "watchOS" : [
     {
       "name" : "SipHash",
-      "hash" : "a76379820e15f55bc9abcd75814ed4670d39b588c519447068ac90b90c34b89d",
+      "hash" : "e3e126fe190e96dd908eb0b7f05ff436943cbc5daedf34e1bfd05008cac69050",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "tvOS" : [
     {
       "name" : "SipHash",
-      "hash" : "fa690738e46fe9037b63f114e7516e3f6bb2b15dca1970efbeca701aece465eb",
+      "hash" : "9b37a1512687adda4c212ccfec4e3a42c483fb8127b2ea44a803abdcb2984644",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
@@ -24,7 +24,7 @@
   "iOS" : [
     {
       "name" : "SipHash",
-      "hash" : "abe0b42c97acde17b6d4096439a9510e0fcdcb4dd1711491343dc9c3ec508e65",
+      "hash" : "6e3bd2bd96d4589716a32e77480388b16c57314943bd18afc7ae46b0f754e92d",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ]

@@ -60,4 +60,4 @@ ios-build-universal: ios-build-device
 	lipo -create -output $(IOSINSTALLPATH)/libff.a $(IOSINSTALLPATH)/libff.a.{device,simulator}
 	lipo -create -output $(IOSINSTALLPATH)/libethsnarks_common.a $(IOSINSTALLPATH)/libethsnarks_common.a.{device,simulator}
 	lipo -create -output $(IOSINSTALLPATH)/libSHA3IUF.a $(IOSINSTALLPATH)/libSHA3IUF.a.{device,simulator}
-	# rm $(IOSINSTALLPATH)/lib*.a.*
+	rm $(IOSINSTALLPATH)/lib*.a.*

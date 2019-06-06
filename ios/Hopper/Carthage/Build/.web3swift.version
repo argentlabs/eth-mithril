@@ -1,58 +1,58 @@
 {
   "Mac" : [
     {
-      "name" : "keccak",
-      "hash" : "e1f5651b2a4d18068b417d53927b5df15cac16bf3e33f1b9d412a31314481edd"
+      "name" : "scrypt",
+      "hash" : "69cbf4efba5e198f6d1d82c845aac6e49b88a098381bc9688c38fbfad2cdc7c2"
     },
     {
-      "name" : "scrypt",
-      "hash" : "f8c9232bc3a04ed8b5b915844ccec9f929f9cb3ed3188546504d688c810734bc"
+      "name" : "keccak",
+      "hash" : "97df60d044b0f83e34245749c1350de8179bcf812b98ea577b80bf3f9c469108"
     },
     {
       "name" : "secp256k1",
-      "hash" : "ee958609ccbd78d4931303f99f91ee0bc0b41267a97e2d9ce35408814416cfe9"
+      "hash" : "c64c1b33f1823456771a38f3c73801e13a3bfb32a351f1f096d28719b9b9423f"
     },
     {
       "name" : "web3swift",
-      "hash" : "d98f3a5c3a20d260077b7a68ed48a72002d3e53ba0fb5a86418618f5f36db6c4",
+      "hash" : "81cad070bffaf92db545d49fbe99bf77baadc15a1a79a5eec8f5f5dbe7988b31",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "watchOS" : [
     {
       "name" : "keccak",
-      "hash" : "52b91e9924e8d2b520461bbbef3e1f161ab453a2c156d495c1b93a830a2637ac"
+      "hash" : "e21d4cd44cc36c45f10125b1803aa0788894fb027e7bf408b7aa53c98b74f522"
     },
     {
       "name" : "scrypt",
-      "hash" : "55734626e2a93bb52b015e5fc61c89d6256d13ad3ccf37a547854a8adfbb0815"
+      "hash" : "74efd62f3233fc4b16589cf65107f29d1d6133987bf8176e81c1417505223540"
     },
     {
       "name" : "secp256k1",
-      "hash" : "a10d178df41df4b213504f7d5c8dac87fc375e4c4e0018506f53623a395ed303"
+      "hash" : "0cdceb8b5ff5228d1f6a34e3197505bda4868cc0e893ed42393a6ac01bb1eade"
     },
     {
       "name" : "web3swift",
-      "hash" : "c565b144de327c4efc8f525d0a85485f213bde8b157d23f4e7cb953699277f45",
+      "hash" : "7a1998ba594214daba60e9fc8c8d613577932c2ac96ce4e55fc0d621ccbe8dcc",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "tvOS" : [
     {
       "name" : "keccak",
-      "hash" : "c55ec8eec29c0148df0a0d622ef6f445ab1b147436795ecef64b3059267438df"
+      "hash" : "299bef30ac3b42c7a3cd4fa19556ea95c09157492fe672b058715c9fa5893c77"
     },
     {
       "name" : "scrypt",
-      "hash" : "5b13a27ba71846354f61090671639e801c531268ad298d2c26df63c7fe2da303"
+      "hash" : "049e3ca5c081eb98332bba31a0b211d18969fe6fa6a1865f0cac99d40c9473a6"
     },
     {
       "name" : "secp256k1",
-      "hash" : "1c974d055da1fb5aee5723a106d9781a7ba2865de7a4abe6531e216235945034"
+      "hash" : "e0a56a80fb6476cf85a9319e992a20149b8da1d8143f385118a1a9048c0ed030"
     },
     {
       "name" : "web3swift",
-      "hash" : "98c0870e859e278679717eee912aedca241502ceac92208476c417f279780948",
+      "hash" : "7ac4c94ee81e9040cf93f72c4a1feb8490f3911c6f345c453f752bfd25950d09",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
@@ -60,19 +60,19 @@
   "iOS" : [
     {
       "name" : "keccak",
-      "hash" : "0b640b7fa51eced15caaf9a7f4e51924823192b0f27ed8b3a16d1d82e8157531"
+      "hash" : "1f1e88d0995a3fa5dcd16fceee3911237a69b9d3cafc61da20eea5a897474ae6"
     },
     {
       "name" : "scrypt",
-      "hash" : "7396d6249ebd11d25621b1c8659bd69c6a1d03d77424836ce4cc702061a2e5f9"
+      "hash" : "9e456d28fa1bd5ea0c3baa4453350d5ef4bb3cc9a77ae5a214f2542765a21f84"
     },
     {
       "name" : "secp256k1",
-      "hash" : "74cd7c4eccdedc2bb72814c2ef360fbd5aeb15e8c2c9d2af6c2cbf60fc1974de"
+      "hash" : "ba7b9735939c0b57a1b5762371013fa07cf0aacbfeef27e0a807c8fd5c31fbd2"
     },
     {
       "name" : "web3swift",
-      "hash" : "b9133916b64a8ac509fd163fbfb445e84557e75d50af371dd59623083f46c325",
+      "hash" : "2bf81b25b52eec5169b31627d893e272acf461a461665f7cb6db605711be3d83",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ]

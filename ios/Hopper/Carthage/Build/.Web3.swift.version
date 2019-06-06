@@ -12,7 +12,7 @@
   "iOS" : [
     {
       "name" : "Web3",
-      "hash" : "bad68322c1dbf979b777e0dd91c4d16a8f59cd17334d35ad609e5a791022c268",
+      "hash" : "06725861ddc26f829a5d106614c24a8936f790c806638bbce89a19910845ba58",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ]

@@ -2,21 +2,21 @@
   "Mac" : [
     {
       "name" : "BigInt",
-      "hash" : "c7d0ad14cd05deab34238e0d498e629fc868f0617e8ce9de26fafb97d2a4f0ed",
+      "hash" : "570fe0d707eac44d3cbeda004d397b51c8dc5ae01bb000b772de895f8887381a",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "watchOS" : [
     {
       "name" : "BigInt",
-      "hash" : "b5964332e7b4adaa72336a0f133170d520e2a82bd2b6d5dba5c5bb7e5ef4db7e",
+      "hash" : "8295a19b4e4c0a5697db126662b17c761e5ff5c6c0cd5c34157461457e750e36",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
   "tvOS" : [
     {
       "name" : "BigInt",
-      "hash" : "dd1d0b221f9514dd8a8b569e11bad1e501a583962c77eb05e4114453c1555385",
+      "hash" : "075d3704cab278944cab20fc75f7185f99907d482240500f35082ad9bbc6351a",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ],
@@ -24,7 +24,7 @@
   "iOS" : [
     {
       "name" : "BigInt",
-      "hash" : "ba3c6dcc077a4d247bd751a08482e7e497325a601efa57c8554ace37f9943eb7",
+      "hash" : "f5ac3924454d641f1830d4b76a8c4f30931cf1dc583895e8bfe57d1b2059e81d",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ]

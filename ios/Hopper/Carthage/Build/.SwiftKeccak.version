@@ -12,7 +12,7 @@
   "iOS" : [
     {
       "name" : "SwiftKeccak",
-      "hash" : "ccc73b56a73aeffeabaa273de224ab0d8f199d1d8616f31b3e14eb66e8bc9f94",
+      "hash" : "217f1d3934e9c76d05861b60d08bdfc2e25369d9cc0f3a35a3c31ec3c940063a",
       "swiftToolchainVersion" : "4.2.1 (swiftlang-1000.11.42 clang-1000.11.45.1)"
     }
   ]

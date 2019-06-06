@@ -9,7 +9,7 @@ target 'Hopper' do
   # pod 'Web3'
   # pod 'Web3/PromiseKit'
   # pod 'Web3/ContractABI'
-#  pod 'web3swift.pod' # event fetch
+  # pod 'web3swift.pod'
   # pod 'QRCodeReader.swift'
 end
 
