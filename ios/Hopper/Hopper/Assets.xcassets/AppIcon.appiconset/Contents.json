@@ -3,49 +3,49 @@
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-40.png",
+      "filename" : "icon_20pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-60.png",
+      "filename" : "icon_20pt@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-58.png",
+      "filename" : "icon_29pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-87.png",
+      "filename" : "icon_29pt@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-80.png",
+      "filename" : "icon_40pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-120.png",
+      "filename" : "icon_40pt@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-121.png",
+      "filename" : "icon_60pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "hopper-icon-180.png",
+      "filename" : "icon_60pt@3x.png",
       "scale" : "3x"
     },
     {
@@ -57,7 +57,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "hopper-icon-41.png",
+      "filename" : "icon_20pt@2x-1.png",
       "scale" : "2x"
     },
     {
@@ -69,19 +69,19 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "hopper-icon-59.png",
+      "filename" : "icon_29pt@2x-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "hopper-icon-42.png",
+      "filename" : "icon_20pt@2x-2.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "hopper-icon-81.png",
+      "filename" : "icon_40pt@2x-1.png",
       "scale" : "2x"
     },
     {
@@ -105,7 +105,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "hopper-icon-1024.png",
+      "filename" : "icon.png",
       "scale" : "1x"
     }
   ],
