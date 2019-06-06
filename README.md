@@ -1,5 +1,3 @@
-# Hopper
-
 <p align="center"><img src="https://i.imgur.com/SXJfUWH.png" width="280px"/></p>
 
 [Hopper](https://hoppereth.org) is an Open-Source Mixer for Mobile-friendly private transfers on Ethereum. It allows the private transfer of value from one Ethereum account to another, via an iOS client.
