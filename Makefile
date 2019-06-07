@@ -4,7 +4,7 @@ KEYPATH = .keys
 BUILD_IOS = make -C $(IOSBUILDPATH) && make -C $(IOSBUILDPATH) install
 IOSINSTALLPATH = ios/Hopper/depends/lib
 
-all: clean build test ios-build-device solidity-deploy
+all: clean build test ios-build-universal solidity-deploy-ropsten
 
 build: release
 	make -C $(BUILDPATH)
@@ -33,8 +33,10 @@ python-test:
 
 solidity-test:
 	make -C solidity test
-solidity-deploy:
+solidity-deploy-ropsten:
 	make -C solidity deploy-ropsten
+solidity-deploy-mainnet:
+	make -C solidity deploy-mainnet
 
 ios-clean:
 	rm -rf $(IOSBUILDPATH)
