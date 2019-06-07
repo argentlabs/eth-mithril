@@ -5,11 +5,11 @@ import "./MiMC.sol";
 library MerkleTree
 {
     // ceil(log2(1<<15))
-    uint constant public TREE_DEPTH = 15;
+    uint constant internal TREE_DEPTH = 15;
 
 
     // 1<<15 leaves
-    uint constant public MAX_LEAF_COUNT = 32768;
+    uint constant internal MAX_LEAF_COUNT = 32768;
 
 
     struct Data

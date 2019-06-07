@@ -10,7 +10,7 @@ library Verifier
     using Pairing for Pairing.G2Point;
 
     function scalarField ()
-        public pure returns (uint256)
+        internal pure returns (uint256)
     {
         return 21888242871839275222246405745257275088548364400416034343698204186575808495617;
     }

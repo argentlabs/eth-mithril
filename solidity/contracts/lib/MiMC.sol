@@ -18,12 +18,6 @@ library MiMC
         return 0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001;
     }
 
-    function Encipher( uint256 in_x, uint256 in_k )
-        public pure returns(uint256 out_x)
-    {
-        return MiMCpe7( in_x, in_k, uint256(keccak256("mimc")), 91 );
-    }
-
     /**
     * MiMC-p/p with exponent of 7
     * 
@@ -86,13 +80,13 @@ library MiMC
     }
 
     function Hash( uint256[] memory in_msgs, uint256 in_key )
-        public pure returns (uint256)
+        internal pure returns (uint256)
     {
         return MiMCpe7_mp(in_msgs, in_key, uint256(keccak256("mimc")), 91);
     }
 
     function Hash( uint256[] memory in_msgs )
-        public pure returns (uint256)
+        internal pure returns (uint256)
     {
         return Hash(in_msgs, 0);
     }

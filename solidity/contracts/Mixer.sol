@@ -4,7 +4,6 @@ import "./lib/Verifier.sol";
 import "./lib/MerkleTree.sol";
 import "./lib/MiMC.sol";
 
-
 contract Mixer
 {
     using MerkleTree for MerkleTree.Data;
