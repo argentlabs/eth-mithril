@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zFA-FM-XYk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zFA-FM-XYk">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -130,6 +131,26 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="WHy-sL-JGL">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="KeP-ec-car">
+                            <rect key="frame" x="187.66666666666666" y="22" width="0.0" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmE-nB-iX8">
+                                    <rect key="frame" x="-26" y="-26" width="52" height="52"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="52" id="bag-nG-Qeq"/>
+                                        <constraint firstAttribute="height" constant="52" id="zC8-2n-Ion"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="Hopper"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="gmE-nB-iX8" firstAttribute="centerX" secondItem="KeP-ec-car" secondAttribute="centerX" id="GVH-ZK-noV"/>
+                                <constraint firstItem="gmE-nB-iX8" firstAttribute="centerY" secondItem="KeP-ec-car" secondAttribute="centerY" id="bs2-1Q-b9M"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8Ul-Ut-R4N">
                             <connections>
                                 <segue destination="SBn-a2-uiD" kind="popoverPresentation" popoverAnchorBarButtonItem="8Ul-Ut-R4N" id="X2P-fO-zGR">
@@ -363,6 +384,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Hopper" width="1024" height="1024"/>
         <image name="QRCodeIcon" width="249" height="249"/>
     </resources>
 </document>
