@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Commitment" representedClassName=".Commitment" syncable="YES" codeGenerationType="category">
         <attribute name="commitRequested" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="commitTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
@@ -11,6 +11,7 @@
         <attribute name="fundingTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="lastFundingTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="leafIndex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="network" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numSubsequentDeposits" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="proofComputed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="secret" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +24,6 @@
         <attribute name="withdrawTxSuccesful" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Commitment" positionX="-63" positionY="-18" width="128" height="345"/>
+        <element name="Commitment" positionX="-63" positionY="-18" width="128" height="360"/>
     </elements>
 </model>

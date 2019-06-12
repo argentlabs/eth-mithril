@@ -10,6 +10,9 @@
 		0D07DDCA22A1D98300C19243 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76E59D22A1C41C00266071 /* Main.storyboard */; };
 		0D07DDCB22A1DA2300C19243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D76E58C22A1C28400266071 /* Assets.xcassets */; };
 		0D07DDCD22A1DC7200C19243 /* Mixer.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D07DDCC22A1DC7200C19243 /* Mixer.json */; };
+		0D0A861322AFADC800D4A3C6 /* SelectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A861222AFADC800D4A3C6 /* SelectionTableViewController.swift */; };
+		0D0A861722B022E900D4A3C6 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D0A861622B022E900D4A3C6 /* config.json */; };
+		0D0A861922B0279000D4A3C6 /* ConfigParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A861822B0279000D4A3C6 /* ConfigParser.swift */; };
 		0D5254FB22A7C3E000A4764C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5254FA22A7C3E000A4764C /* libc++.tbd */; };
 		0D55325422A57D29009B208D /* SwiftKeccak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D55325322A57D29009B208D /* SwiftKeccak.framework */; };
 		0D55325B22A588D8009B208D /* BigInt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D55325522A588D8009B208D /* BigInt.framework */; };
@@ -48,6 +51,7 @@
 		0DAC470322A51061006C43C9 /* mixer.vk.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DAC470122A51061006C43C9 /* mixer.vk.json */; };
 		0DAC470422A51061006C43C9 /* mixer.pk.raw in Resources */ = {isa = PBXBuildFile; fileRef = 0DAC470222A51061006C43C9 /* mixer.pk.raw */; };
 		0DB3B1B422A7C27A004C56BA /* libmixer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB3B1B322A7C27A004C56BA /* libmixer.a */; };
+		0DC6A34522B111EB000246D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D76E58E22A1C28400266071 /* LaunchScreen.storyboard */; };
 		0DF5A41322A7E04A006BA134 /* libgmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF5A41122A7E04A006BA134 /* libgmp.a */; };
 		0DF5A41422A7E04A006BA134 /* libgmpxx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DF5A41222A7E04A006BA134 /* libgmpxx.a */; };
 		4EC41C01AFB6ADCF60B51C35 /* Pods_Hopper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B41533D9D71B386E5A5776F /* Pods_Hopper.framework */; };
@@ -69,6 +73,9 @@
 /* Begin PBXFileReference section */
 		09BFEC2674CE16E29D0603CB /* Pods-Hopper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hopper.debug.xcconfig"; path = "Target Support Files/Pods-Hopper/Pods-Hopper.debug.xcconfig"; sourceTree = "<group>"; };
 		0D07DDCC22A1DC7200C19243 /* Mixer.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Mixer.json; path = ../../../../solidity/build/contracts/Mixer.json; sourceTree = "<group>"; };
+		0D0A861222AFADC800D4A3C6 /* SelectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionTableViewController.swift; sourceTree = "<group>"; };
+		0D0A861622B022E900D4A3C6 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
+		0D0A861822B0279000D4A3C6 /* ConfigParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigParser.swift; sourceTree = "<group>"; };
 		0D5254FA22A7C3E000A4764C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		0D55325322A57D29009B208D /* SwiftKeccak.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeccak.framework; path = Carthage/Build/iOS/SwiftKeccak.framework; sourceTree = "<group>"; };
 		0D55325522A588D8009B208D /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
@@ -209,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				0D76E59B22A1C41B00266071 /* AddCommitmentViewController.swift */,
+				0D0A861222AFADC800D4A3C6 /* SelectionTableViewController.swift */,
 				0D76E59C22A1C41B00266071 /* CommitmentTableViewCell.swift */,
 				0D76E59E22A1C41C00266071 /* CommitmentTableViewController.swift */,
 				0D76E59922A1C41B00266071 /* FetchedResultTableViewController.swift */,
@@ -240,6 +248,8 @@
 				0D76E5B322A1C55900266071 /* Relayer.swift */,
 				0D76E5B422A1C55A00266071 /* RestClient.swift */,
 				0D76E5B522A1C55C00266071 /* TransactionWatcher.swift */,
+				0D0A861822B0279000D4A3C6 /* ConfigParser.swift */,
+				0D0A861622B022E900D4A3C6 /* config.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -355,7 +365,9 @@
 				0DAC470322A51061006C43C9 /* mixer.vk.json in Resources */,
 				0D07DDCA22A1D98300C19243 /* Main.storyboard in Resources */,
 				0DAC470422A51061006C43C9 /* mixer.pk.raw in Resources */,
+				0DC6A34522B111EB000246D3 /* LaunchScreen.storyboard in Resources */,
 				0D07DDCB22A1DA2300C19243 /* Assets.xcassets in Resources */,
+				0D0A861722B022E900D4A3C6 /* config.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +446,7 @@
 				0D76E5BB22A1C55C00266071 /* EventFetcher.swift in Sources */,
 				0D76E5B622A1C55C00266071 /* MixerFactory.swift in Sources */,
 				0D76E5A222A1C41C00266071 /* CommitmentTableViewCell.swift in Sources */,
+				0D0A861922B0279000D4A3C6 /* ConfigParser.swift in Sources */,
 				0D76E5A422A1C41C00266071 /* CommitmentTableViewController.swift in Sources */,
 				0D76E5BE22A1C55C00266071 /* RestClient.swift in Sources */,
 				0D76E5CD22A1C8DD00266071 /* Swift-Big-Number-Core.swift in Sources */,
@@ -449,6 +462,7 @@
 				0D76E5B822A1C55C00266071 /* MixerRelayer.swift in Sources */,
 				0D76E5BA22A1C55C00266071 /* MixerManager.swift in Sources */,
 				0D76E58322A1C28300266071 /* AppDelegate.swift in Sources */,
+				0D0A861322AFADC800D4A3C6 /* SelectionTableViewController.swift in Sources */,
 				0D76E5BF22A1C55C00266071 /* TransactionWatcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

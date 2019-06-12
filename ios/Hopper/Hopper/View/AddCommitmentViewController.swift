@@ -14,10 +14,17 @@ class AddCommitmentViewController: UITableViewController {
     
     // MARK: - Constants
     
-    private struct Storyboard {
-        static let commitSegue = "Commit Segue"
+    private struct Constants {
+        static let defaultNetwork = "mainnet"
+        static let networkKey = "AddCommitmentViewController.Network"
     }
     
+    private struct Storyboard {
+        static let selectNetworkSegue = "Select Network"
+        static let selectNetworkCellIdentifier = "Network"
+        static let selectNetworkUnwindSegue = "Unwind Select Network"
+    }
+
     // MARK: - Outlets
     
     @IBOutlet weak var originAddressField: UITextField!
@@ -25,6 +32,27 @@ class AddCommitmentViewController: UITableViewController {
     
     @IBOutlet weak var originQRCodeButton: UIButton!
     @IBOutlet weak var destinationQRCodeButton: UIButton!
+    
+    @IBOutlet weak var networkLabel: UILabel! { didSet { updateUI() } }
+    
+    // MARK: - UpdateUI
+    
+    private func updateUI() {
+        networkLabel?.text = ConfigParser.shared.formattedNetworkName(for: network)
+    }
+    
+    
+    // MARK: - Network
+    
+    var network: String {
+        get {
+            return UserDefaults.standard.string(forKey: Constants.networkKey) ?? Constants.defaultNetwork
+        }
+        set {
+            if newValue != network { UserDefaults.standard.set(newValue, forKey: Constants.networkKey) }
+        }
+    }
+    
     // MARK: - Add Commitment
     
     private func isValidAddress(_ addr: String) -> Bool {
@@ -34,7 +62,10 @@ class AddCommitmentViewController: UITableViewController {
     private func addCommitment() {
         if let origin = originAddressField?.text, isValidAddress(origin),
             let destination = destinationAddressField?.text, isValidAddress(destination) {
-            _ = Commitment.create(withOrigin: origin, destination: destination, in: CoreDataManager.shared.viewContext)
+            _ = Commitment.create(withOrigin: origin,
+                                  destination: destination,
+                                  network: network,
+                                  in: CoreDataManager.shared.viewContext)
         }
         do { try CoreDataManager.shared.viewContext.save() }
         catch { NSLog("Error saving context after adding commitment: \(error)") }
@@ -71,7 +102,7 @@ class AddCommitmentViewController: UITableViewController {
         }
     }
     
-    // MARK: - Navigation
+    // MARK: - Navigation: Commit/Cancel
     
     @IBAction func commit(_ sender: UIBarButtonItem) {
         addCommitment()
@@ -82,13 +113,42 @@ class AddCommitmentViewController: UITableViewController {
         self.presentingViewController?.dismiss(animated: true)
     }
     
+    // MARK: - Navigation: Change Network
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Storyboard.commitSegue {
-
-        } else {
+        if let selectionVC = segue.destination as? SelectionTableViewController {
+            if segue.identifier == Storyboard.selectNetworkSegue {
+                prepare(selectionVC, withSelectedNetwork: Constants.defaultNetwork)
+            }
+        } else if !([Storyboard.selectNetworkUnwindSegue].contains(segue.identifier ?? "")) {
             super.prepare(for: segue, sender: sender)
         }
     }
-
+    
+    private func prepare(_ selectionVC: SelectionTableViewController, withSelectedNetwork selectedNetwork: String?) {
+        selectionVC.cellIdentifier = Storyboard.selectNetworkCellIdentifier
+        selectionVC.options = ConfigParser.shared.sortedDeploymentKeys
+        selectionVC.isOptionPopular = nil
+        selectionVC.selectedOption = network
+        selectionVC.oneSectionPerStartingLetter = false
+        selectionVC.unwindSegueIdentifier = Storyboard.selectNetworkUnwindSegue
+        selectionVC.searchBarPlaceholder = "Search Networks"
+        selectionVC.descriptionForOption = { option in
+            guard let network = option as? String else { return nil }
+            return ConfigParser.shared.formattedNetworkName(for: network)
+        }
+    }
+    
+    @IBAction func changeNetwork(segue: UIStoryboardSegue) {
+        if segue.identifier == Storyboard.selectNetworkUnwindSegue,
+            let selectionVC = segue.source as? SelectionTableViewController {
+            
+            if let selectedNetwork = selectionVC.selectedOption as? String {
+                network = selectedNetwork
+                updateUI()
+            }
+        }
+    }
+    
     
 }

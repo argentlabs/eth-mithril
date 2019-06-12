@@ -23,23 +23,13 @@ class MixerFactory {
         return try? JSONSerialization.data(withJSONObject: noFallbackAbi, options: [])
     }
     
-    static var addressFromJson: String? {
-        guard
-            let url = Bundle.main.url(forResource: abiFilename, withExtension: "json"),
-            let jsonData = try? Data(contentsOf: url),
-            let networks = ((try? JSONSerialization.jsonObject(with: jsonData)) as? [String: Any])?["networks"] as? [String: Any]
-        else { return nil }
-        return (networks["3"] as? [String: Any])?["address"] as? String
-    }
-    
-    static func mixer(web3: Web3, mixerAddressStr: String? = nil) -> DynamicContract? {
+
+    static func mixer(rpcPath: String, mixerAddressStr: String) -> DynamicContract? {
         guard
             let abiData = abiData,
-            let addressStr = mixerAddressStr ?? addressFromJson,
-            let mixerAddress = EthereumAddress(hexString: addressStr),
-            let mixer = try? web3.eth.Contract(json: abiData, abiKey: nil, address: mixerAddress)
+            let mixerAddress = EthereumAddress(hexString: mixerAddressStr),
+            let mixer = try? Web3(rpcURL: rpcPath).eth.Contract(json: abiData, abiKey: nil, address: mixerAddress)
         else { return nil }
-
         return mixer
     }
 }

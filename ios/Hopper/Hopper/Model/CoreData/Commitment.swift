@@ -14,12 +14,14 @@ class Commitment: NSManagedObject {
     
     static func create(withOrigin from: String,
                        destination to: String,
+                       network: String,
                        in context: NSManagedObjectContext) -> Commitment {
         
         let result = Commitment(context: context)
         result.secret = generateSecret()
         result.from = from
         result.to = to
+        result.network = network
         result.createdAt = Date()
         result.commitRequested = true
         return result

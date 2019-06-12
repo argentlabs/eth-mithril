@@ -8,25 +8,50 @@
 
 import Foundation
 
-class Config {
+class ConfigParser {
     
-    static let shared: Config = Config()
+    static let shared: ConfigParser = ConfigParser()
     private init() {}
 
-    static let configFilename = "config"
-    static let abiFilename = "Mixer"
+    let configFilename = "config"
+    let abiFilename = "Mixer"
     
-    static var deployments: [String: Any]? {
+    var deployments: [String: Any] {
         return (deserialized?["deployments"] as? [String: [String: Any]])?.mapValues({ cfg -> [String: Any] in
             var cfg = cfg
-            if cfg["contractAddress"] == nil, let chainId = cfg["chainId"] as? Int {
-                cfg["contractAddress"] = deployedAddressFromAbi(chainId: chainId)
+            if cfg["mixerAddress"] as? String == nil, let chainId = cfg["chainId"] as? Int {
+                cfg["mixerAddress"] = deployedAddressFromAbi(chainId: chainId)
             }
             return cfg
-        })
+        }) ?? [:]
     }
     
-    private static var deserialized: [String: Any]? {
+    var sortedDeploymentKeys: [String] {
+        return deployments.keys.sorted {
+            (deployments[$0] as? [String: Any])?["chainId"] as? Int ?? 0
+            <
+            (deployments[$1] as? [String: Any])?["chainId"] as? Int ?? 0
+        }
+    }
+    
+    func formattedNetworkName(for network: String) -> String {
+        return stringParam(for: network, key: "name") ?? network
+    }
+    func rpcUrl(for network: String) -> String? {
+        return stringParam(for: network, key: "rpcUrl")
+    }
+    func relayerEndpoint(for network: String) -> String? {
+        return stringParam(for: network, key: "relayerEndpoint")
+    }
+    func mixerAddress(for network: String) -> String? {
+        return stringParam(for: network, key: "mixerAddress")
+    }
+    
+    private func stringParam(for network: String, key: String) -> String? {
+        return (deployments[network] as? [String: Any])?[key] as? String
+    }
+    
+     private var deserialized: [String: Any]? {
         guard
             let url = Bundle.main.url(forResource: configFilename, withExtension: "json"),
             let jsonData = try? Data(contentsOf: url)
@@ -35,7 +60,7 @@ class Config {
         return (try? JSONSerialization.jsonObject(with: jsonData)) as? [String: Any]
     }
     
-    private static func deployedAddressFromAbi(chainId: Int) -> String? {
+    private func deployedAddressFromAbi(chainId: Int) -> String? {
         guard
             let url = Bundle.main.url(forResource: abiFilename, withExtension: "json"),
             let jsonData = try? Data(contentsOf: url),

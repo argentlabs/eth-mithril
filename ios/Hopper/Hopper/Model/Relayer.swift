@@ -22,8 +22,8 @@ class Relayer {
         case transactionRevert
     }
 
-    init(web3: Web3, endPoint: String) {
-        self.web3 = web3
+    init(rpcPath: String, endPoint: String) {
+        self.web3 = Web3(rpcURL: rpcPath)
         self.restClient = RestClient(endPoint: endPoint)
     }
     

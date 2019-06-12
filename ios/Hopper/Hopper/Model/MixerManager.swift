@@ -21,21 +21,17 @@ class MixerManager {
     
     static let shared: MixerManager = MixerManager()
     
-    var mixerAddressStr: String { return mixer!.address!.hex(eip55: true) }
-    
-    // private let rpcPath = "https://rinkeby.infura.io/v3/91ffab09868d430f9ce744c78d7ff427" // "http://127.0.0.1:8545"
-    private let rpcPath = "https://ropsten.infura.io/v3/9c2c162b995446099dae8923952edd44"
-    private let relayerEndpoint = "https://cloud-test.argent-api.com/v1/signer" // "http://192.168.0.11:8080" // "http://localhost:8080"
-    private lazy var web3 = Web3(rpcURL: rpcPath)
-    private lazy var mixer = MixerFactory.mixer(web3: web3)//, mixerAddressStr: "0x5c97845193549EE16B06e66710C8d9151c6fF526")
-    private lazy var mixerRelayer = mixer != nil ? MixerRelayer(web3: web3, endPoint: relayerEndpoint, mixer: mixer!) : nil
     private let prover = Prover.shared
     
     private init() {}
 
     // MARK: - Helper functions to compute call parameters
     
-    func getLeaf(nullifierSecret: BigUInt, fundedAddress: EthereumAddress, computeLocally: Bool = true) -> Promise<BigUInt> {
+    func getLeaf(nullifierSecret: BigUInt,
+                 fundedAddress: EthereumAddress,
+                 computeLocally: Bool = true,
+                 rpcPath: String? = nil,
+                 mixerAddressStr: String? = nil) -> Promise<BigUInt> {
         if(computeLocally) {
             // compute leaf locally
             let nullifierSecretData = nullifierSecret.solidityData
@@ -48,13 +44,19 @@ class MixerManager {
         
         // compute leaf via Infura (unsafe!)
         return Promise { seal in
-            self.mixer?["makeLeafHash"]?(nullifierSecret, fundedAddress).call { (result, error) in
+            MixerFactory.mixer(rpcPath: rpcPath!, mixerAddressStr: mixerAddressStr!)?["makeLeafHash"]?(
+                nullifierSecret,
+                fundedAddress
+            ).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)
             }
         }
     }
     
-    func getNullifier(nullifierSecret: BigUInt, computeLocally: Bool = true) -> Promise<BigUInt>  {
+    func getNullifier(nullifierSecret: BigUInt,
+                      computeLocally: Bool = true,
+                      rpcPath: String? = nil,
+                      mixerAddressStr: String? = nil) -> Promise<BigUInt>  {
         if(computeLocally) {
             // compute nullifier locally
             let nullifier = MiMC.hash(in_msgs: [nullifierSecret, nullifierSecret])
@@ -63,32 +65,55 @@ class MixerManager {
         
         // compute nullifier via Infura (unsafe!)
         return Promise { seal in
-            self.mixer?["makeNullifierHash"]?(nullifierSecret).call { (result, error) in
+            MixerFactory.mixer(rpcPath: rpcPath!, mixerAddressStr: mixerAddressStr!)?["makeNullifierHash"]?(
+                nullifierSecret
+            ).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)
             }
         }
     }
     
-    func getMerklePath(leafIndex: BigUInt) -> Promise<[BigUInt]>  {
+    func getMerklePath(leafIndex: BigUInt,
+                       rpcPath: String,
+                       mixerAddressStr: String) -> Promise<[BigUInt]>  {
         return Promise { seal in
-            self.mixer?["getMerklePath"]?(leafIndex).call { (result, error) in
+            MixerFactory.mixer(rpcPath: rpcPath, mixerAddressStr: mixerAddressStr)?["getMerklePath"]?(
+                leafIndex
+            ).call { (result, error) in
                 seal.resolve(result?["out_path"] as? [BigUInt], error)
             }
         }
     }
     
-    func getRoot() -> Promise<BigUInt>  {
+    func getRoot(rpcPath: String,
+                 mixerAddressStr: String) -> Promise<BigUInt>  {
         return Promise { seal in
-            self.mixer?["getRoot"]?().call { (result, error) in
+            MixerFactory.mixer(rpcPath: rpcPath, mixerAddressStr: mixerAddressStr)?["getRoot"]?(
+            ).call { (result, error) in
                 seal.resolve(result?[""] as? BigUInt, error)
             }
         }
     }
     
+    private var mixerRelayers = [String: MixerRelayer]()
+    private func mixerRelayer(for network: String) throws -> MixerRelayer  {
+        if mixerRelayers[network] == nil {
+            guard
+                let rpcUrl = ConfigParser.shared.rpcUrl(for: network),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network),
+                let relayerEndpoint = ConfigParser.shared.relayerEndpoint(for: network),
+                let mixerContract = MixerFactory.mixer(rpcPath: rpcUrl, mixerAddressStr: mixerAddressStr)
+            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
+            mixerRelayers[network] = MixerRelayer(rpcPath: rpcUrl, endPoint: relayerEndpoint, mixerContract: mixerContract)
+        }
+        return mixerRelayers[network]!
+    }
+    
     
     // MARK: - Contract convenience methods
     
-    func commit(fundedAddress: EthereumAddress,
+    func commit(network: String,
+                fundedAddress: EthereumAddress,
                 funderAddress: EthereumAddress,
                 secret: BigUInt,
                 txWasSubmitted: TransactionSubmittedCallback? = nil,
@@ -96,16 +121,18 @@ class MixerManager {
         firstly {
             getLeaf(nullifierSecret: secret, fundedAddress: fundedAddress)
         }.done { [weak self] leaf in
-            self?.mixerRelayer?.commit(leaf: leaf,
-                                       funderAddress: funderAddress,
-                                       txWasSubmitted: txWasSubmitted,
-                                       txWasMined: txWasMined)
+            let mixerRelayer = try self?.mixerRelayer(for: network)
+            mixerRelayer?.commit(leaf: leaf,
+                                funderAddress: funderAddress,
+                                txWasSubmitted: txWasSubmitted,
+                                txWasMined: txWasMined)
         }.catch { error in
             txWasSubmitted?(nil, MixerError.contractCallFailed("getLeaf() failed: \(error.localizedDescription)"))
         }
     }
     
-    func watchFundingEvent(fundedAddress: EthereumAddress,
+    func watchFundingEvent(network: String,
+                           fundedAddress: EthereumAddress,
                            secret: BigUInt,
                            startBlock: UInt64 = 3_861_629,
                            commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, leafIndex: BigUInt)?, _ error: Error?) -> ()) {
@@ -116,13 +143,17 @@ class MixerManager {
 
         firstly {
             getLeaf(nullifierSecret: secret, fundedAddress: fundedAddress)
-        }.then { [weak self] leaf -> Promise<[EventParserResult]> in
-            guard let this = self else { throw MixerError.internalError("self is nil") }
+        }.then { leaf -> Promise<[EventParserResult]> in
+            guard
+                let rpcPath = ConfigParser.shared.rpcUrl(for: network),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network)
+            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
+            
             return EventFetcher.fetchEventsPromise(
-                rpcPath: this.rpcPath,
+                rpcPath: rpcPath,
                 name: "LeafAdded",
                 abiData: abiData,
-                contractAddress: this.mixerAddressStr,
+                contractAddress: mixerAddressStr,
                 startBlock: startBlock,
                 pollingPeriod: 5,
                 filters: ["_leaf": leaf])
@@ -141,24 +172,27 @@ class MixerManager {
         }
     }
     
-    func watchAllFundingEvents(startBlock: UInt64 = 3_861_629,
+    func watchAllFundingEvents(network: String,
+                               startBlock: UInt64 = 3_861_629,
                                commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, numDeposits: Int)?, _ error: Error?) -> ()) {
         guard let abiData = MixerFactory.abiData else {
             commitmentWasFunded(nil, MixerError.invalidParams("Invalid ABI"))
             return
         }
         
-        firstly { [weak self] () -> Promise<[EventParserResult]> in
-            guard let this = self else { throw MixerError.internalError("self is nil") }
+        firstly { () -> Promise<[EventParserResult]> in
+            guard
+                let rpcPath = ConfigParser.shared.rpcUrl(for: network),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network)
+            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
             return EventFetcher.fetchEventsPromise(
-                rpcPath: this.rpcPath,
+                rpcPath: rpcPath,
                 name: "LeafAdded",
                 abiData: abiData,
-                contractAddress: this.mixerAddressStr,
+                contractAddress: mixerAddressStr,
                 startBlock: startBlock,
                 pollingPeriod: 5)
         }.done { result in
-           
             guard
                 let blockStr = result.last?.eventLog?.blockNumber.description,
                 let block = UInt64(blockStr)
@@ -171,7 +205,8 @@ class MixerManager {
         }
     }
     
-    func withdraw(fundedAddress: EthereumAddress,
+    func withdraw(network: String,
+                  fundedAddress: EthereumAddress,
                   funderAddress: EthereumAddress,
                   secret: BigUInt,
                   leafIndex: BigUInt,
@@ -181,8 +216,17 @@ class MixerManager {
         var nullifier: BigUInt!
         var merklePath = [BigUInt]()
         
-        firstly {
-            getMerklePath(leafIndex: leafIndex)
+        guard
+            let rpcPath = ConfigParser.shared.rpcUrl(for: network),
+            let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network),
+            let mixerRelayer = try? mixerRelayer(for: network)
+        else {
+            txWasSubmitted?(nil, MixerError.invalidParams("Invalid network config for \"\(network)\""))
+            return
+        }
+        
+        firstly { () -> Promise<[BigUInt]> in
+            return getMerklePath(leafIndex: leafIndex, rpcPath: rpcPath, mixerAddressStr: mixerAddressStr)
         }.then { [weak self] mpath -> Promise<BigUInt> in
             guard let this = self else { throw MixerError.internalError("self is nil") }
             merklePath = mpath
@@ -190,7 +234,7 @@ class MixerManager {
         }.then { [weak self] null -> Promise<BigUInt> in
             guard let this = self else { throw MixerError.internalError("self is nil") }
             nullifier = null
-            return this.getRoot()
+            return this.getRoot(rpcPath: rpcPath, mixerAddressStr: mixerAddressStr)
         }.then { [weak self] root -> Promise<[BigUInt]> in
             guard let this = self else { throw MixerError.internalError("self is nil") }
             return this.prover.buildFlatProofPromise(root: root,
@@ -199,13 +243,13 @@ class MixerManager {
                                                      nullifierSecret: secret,
                                                      leafIndex: leafIndex,
                                                      merklePath: merklePath)
-        }.done { [weak self] flatProof in
+        }.done { flatProof in
             proofWasComputed?()
-            self?.mixerRelayer?.withdraw(fundedAddress: fundedAddress,
-                                         nullifier: nullifier,
-                                         flatProof: flatProof,
-                                         txWasSubmitted: txWasSubmitted,
-                                         txWasMined: txWasMined)
+            mixerRelayer.withdraw(fundedAddress: fundedAddress,
+                                  nullifier: nullifier,
+                                  flatProof: flatProof,
+                                  txWasSubmitted: txWasSubmitted,
+                                  txWasMined: txWasMined)
         }.catch { error in
             txWasSubmitted?(nil, error)
         }

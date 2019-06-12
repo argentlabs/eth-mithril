@@ -71,6 +71,7 @@ class CommitmentUpdater: NSObject {
     
     private func commit(_ commitment: Commitment) {
         guard
+            let network = commitment.network,
             let from = commitment.from,
             let to = commitment.to,
             let fromAddress = EthereumAddress(hexString: from),
@@ -80,6 +81,7 @@ class CommitmentUpdater: NSObject {
         else { return }
         
         MixerManager.shared.commit(
+            network: network,
             fundedAddress: toAddress,
             funderAddress: fromAddress,
             secret: secret,
@@ -108,6 +110,7 @@ class CommitmentUpdater: NSObject {
     
     private func watchFundingEvent(for commitment: Commitment) {
         guard
+            let network = commitment.network,
             let to = commitment.to,
             let toAddress = EthereumAddress(hexString: to),
             let secretStr = commitment.secret,
@@ -116,6 +119,7 @@ class CommitmentUpdater: NSObject {
         else { return }
         
         MixerManager.shared.watchFundingEvent(
+            network: network,
             fundedAddress: toAddress,
             secret: secret,
             startBlock: commitmentBlock) { [weak self] (result, error) in
@@ -131,10 +135,12 @@ class CommitmentUpdater: NSObject {
     
     private func watchAllFundingEvents(afterFundingOf commitment: Commitment) {
         
-        guard let startBlock = (commitment.lastFundingTxBlockNumber ?? commitment.fundingTxBlockNumber)?.uint64Value.advanced(by: 1)
+        guard
+            let network = commitment.network,
+            let startBlock = (commitment.lastFundingTxBlockNumber ?? commitment.fundingTxBlockNumber)?.uint64Value.advanced(by: 1)
         else { return }
         
-        MixerManager.shared.watchAllFundingEvents(startBlock: startBlock) { [weak self] (result, error) in
+        MixerManager.shared.watchAllFundingEvents(network: network, startBlock: startBlock) { [weak self] (result, error) in
                 if let blockNum = result?.blockNumber, let numDeposits = result?.numDeposits {
                     self?.contextDo { [weak self] in
                         commitment.numSubsequentDeposits += Int64(numDeposits)
@@ -147,6 +153,7 @@ class CommitmentUpdater: NSObject {
     
     private func withdraw(_ commitment: Commitment) {
         guard
+            let network = commitment.network,
             let from = commitment.from,
             let to = commitment.to,
             let fromAddress = EthereumAddress(hexString: from),
@@ -158,6 +165,7 @@ class CommitmentUpdater: NSObject {
         else { return }
         
         MixerManager.shared.withdraw(
+            network: network,
             fundedAddress: toAddress,
             funderAddress: fromAddress,
             secret: secret,
