@@ -133,8 +133,10 @@ contract Mixer
         nullifiers[in_nullifier] = true;
 
         uint gasUsed = startGas - gasleft() + 82775;
-        in_withdraw_address.transfer(AMOUNT - gasUsed * tx.gasprice); // leaf withdrawal
-        msg.sender.transfer(gasUsed * tx.gasprice); // relayer refund
+        uint relayerRefund = gasUsed * tx.gasprice;
+        if(relayerRefund > AMOUNT/20) relayerRefund = AMOUNT/20;
+        in_withdraw_address.transfer(AMOUNT - relayerRefund); // leaf withdrawal
+        msg.sender.transfer(relayerRefund); // relayer refund
     }
 
     function treeDepth() external pure returns (uint256) {
