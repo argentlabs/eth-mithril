@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Commitment Cell" rowHeight="100" id="L52-Ke-UKD" customClass="CommitmentTableViewCell" customModule="Hopper" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Commitment Cell" rowHeight="110" id="L52-Ke-UKD" customClass="CommitmentTableViewCell" customModule="Hopper" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="110"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L52-Ke-UKD" id="n2t-UT-ioU">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.666666666666671"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="109.66666666666667"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="G8c-1t-0Si">
-                                            <rect key="frame" x="20" y="15" width="335" height="70"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="G8c-1t-0Si">
+                                            <rect key="frame" x="20" y="9" width="335" height="91.666666666666671"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="c85-9Y-E0a">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="15.666666666666666"/>
@@ -50,7 +50,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="IkO-ow-ICn">
-                                                    <rect key="frame" x="0.0" y="17.666666666666664" width="335" height="15.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="18.666666666666668" width="335" height="15.666666666666668"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNQ-y9-fgN">
                                                             <rect key="frame" x="0.0" y="0.0" width="16.666666666666668" height="15.666666666666666"/>
@@ -69,19 +69,39 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="jzb-m9-USE">
-                                                    <rect key="frame" x="0.0" y="35.333333333333336" width="335" height="15.666666666666664"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jzb-m9-USE">
+                                                    <rect key="frame" x="0.0" y="37.333333333333336" width="335" height="15.666666666666664"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzV-9d-2P0">
-                                                            <rect key="frame" x="0.0" y="0.0" width="23" height="15.666666666666666"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzV-9d-2P0">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="15.666666666666666"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="23" id="jaB-1M-gdr"/>
+                                                                <constraint firstAttribute="width" constant="35" id="jaB-1M-gdr"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="257" verticalHuggingPriority="251" horizontalCompressionResistancePriority="756" text="Mainnet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-1w-QGl">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="257" verticalHuggingPriority="251" horizontalCompressionResistancePriority="756" text="1 ETH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZk-1w-QGl">
+                                                            <rect key="frame" x="51" y="0.0" width="284" height="15.666666666666666"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="aIH-9W-JKk">
+                                                    <rect key="frame" x="0.0" y="56" width="335" height="15.666666666666671"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-QU-SL7">
+                                                            <rect key="frame" x="0.0" y="0.0" width="23" height="15.666666666666666"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="23" id="al1-aU-PTf"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="257" verticalHuggingPriority="251" horizontalCompressionResistancePriority="756" text="Mainnet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Np0-a0-yKq">
                                                             <rect key="frame" x="51" y="0.0" width="284" height="15.666666666666666"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -90,7 +110,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="P9E-bX-zZI">
-                                                    <rect key="frame" x="0.0" y="53" width="335" height="17"/>
+                                                    <rect key="frame" x="0.0" y="74.666666666666671" width="335" height="17"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="256" horizontalCompressionResistancePriority="756" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ocS-tn-JG1">
                                                             <rect key="frame" x="0.0" y="0.0" width="259" height="17"/>
@@ -138,9 +158,10 @@
                                 <connections>
                                     <outlet property="actionButton" destination="QWG-wH-CSB" id="uI1-5y-s9A"/>
                                     <outlet property="destinationAddressLabel" destination="SCD-zo-m8P" id="J12-Fj-NTY"/>
-                                    <outlet property="networkLabel" destination="EZk-1w-QGl" id="BlT-wx-wcM"/>
+                                    <outlet property="networkLabel" destination="Np0-a0-yKq" id="W60-Rc-moC"/>
                                     <outlet property="originAddressLabel" destination="GbZ-dF-AeF" id="Yh4-3n-K4q"/>
                                     <outlet property="statusLabel" destination="z2Z-6Q-hcU" id="xuR-LR-vI4"/>
+                                    <outlet property="valueLabel" destination="EZk-1w-QGl" id="vnx-64-T8E"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -425,6 +446,7 @@
                         <viewLayoutGuide key="safeArea" id="RUj-WY-xnB"/>
                     </view>
                     <connections>
+                        <outlet property="instructionLabel" destination="bCb-FS-rDL" id="WDL-Z1-0D3"/>
                         <outlet property="qrCodeImageView" destination="9gg-lC-AbO" id="FTG-90-MIV"/>
                         <outlet property="qrCodeLabel" destination="K2b-6m-iDP" id="fpA-7v-797"/>
                     </connections>

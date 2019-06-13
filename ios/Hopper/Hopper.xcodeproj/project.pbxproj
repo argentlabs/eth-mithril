@@ -215,6 +215,7 @@
 		0D76E5A522A1C42B00266071 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0D76E59A22A1C41B00266071 /* ShowMixerViewController.swift */,
 				0D76E59B22A1C41B00266071 /* AddCommitmentViewController.swift */,
 				0D0A861222AFADC800D4A3C6 /* SelectionTableViewController.swift */,
 				0D76E59C22A1C41B00266071 /* CommitmentTableViewCell.swift */,
@@ -237,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				0D76E5AB22A1C51F00266071 /* CoreData */,
-				0D76E59A22A1C41B00266071 /* ShowMixerViewController.swift */,
 				0D76E5AF22A1C55300266071 /* CommitmentUpdater.swift */,
 				0D76E5B122A1C55600266071 /* EventFetcher.swift */,
 				0D76E5AD22A1C55000266071 /* MiMC.swift */,

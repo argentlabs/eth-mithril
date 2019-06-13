@@ -15,8 +15,7 @@ class AddCommitmentViewController: UITableViewController {
     // MARK: - Constants
     
     private struct Constants {
-        static let defaultNetwork = "mainnet"
-        static let networkKey = "AddCommitmentViewController.Network"
+        static let mixerKey = "AddCommitmentViewController.Mixer"
     }
     
     private struct Storyboard {
@@ -38,18 +37,18 @@ class AddCommitmentViewController: UITableViewController {
     // MARK: - UpdateUI
     
     private func updateUI() {
-        networkLabel?.text = ConfigParser.shared.formattedNetworkName(for: network)
+        networkLabel?.text = ConfigParser.shared.network(for: mixerId)
     }
     
     
     // MARK: - Network
     
-    var network: String {
+    var mixerId: String {
         get {
-            return UserDefaults.standard.string(forKey: Constants.networkKey) ?? Constants.defaultNetwork
+            return UserDefaults.standard.string(forKey: Constants.mixerKey) ?? ConfigParser.shared.sortedMixerIds.first ?? ""
         }
         set {
-            if newValue != network { UserDefaults.standard.set(newValue, forKey: Constants.networkKey) }
+            if newValue != mixerId { UserDefaults.standard.set(newValue, forKey: Constants.mixerKey) }
         }
     }
     
@@ -64,7 +63,7 @@ class AddCommitmentViewController: UITableViewController {
             let destination = destinationAddressField?.text, isValidAddress(destination) {
             _ = Commitment.create(withOrigin: origin,
                                   destination: destination,
-                                  network: network,
+                                  mixerId: mixerId,
                                   in: CoreDataManager.shared.viewContext)
         }
         do { try CoreDataManager.shared.viewContext.save() }
@@ -118,24 +117,24 @@ class AddCommitmentViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let selectionVC = segue.destination as? SelectionTableViewController {
             if segue.identifier == Storyboard.selectNetworkSegue {
-                prepare(selectionVC, withSelectedNetwork: Constants.defaultNetwork)
+                prepare(selectionVC)
             }
         } else if !([Storyboard.selectNetworkUnwindSegue].contains(segue.identifier ?? "")) {
             super.prepare(for: segue, sender: sender)
         }
     }
     
-    private func prepare(_ selectionVC: SelectionTableViewController, withSelectedNetwork selectedNetwork: String?) {
+    private func prepare(_ selectionVC: SelectionTableViewController) {
         selectionVC.cellIdentifier = Storyboard.selectNetworkCellIdentifier
-        selectionVC.options = ConfigParser.shared.sortedDeploymentKeys
+        selectionVC.options = ConfigParser.shared.sortedMixerIds
         selectionVC.isOptionPopular = nil
-        selectionVC.selectedOption = network
+        selectionVC.selectedOption = ConfigParser.shared.sortedMixerIds.first
         selectionVC.oneSectionPerStartingLetter = false
         selectionVC.unwindSegueIdentifier = Storyboard.selectNetworkUnwindSegue
         selectionVC.searchBarPlaceholder = "Search Networks"
         selectionVC.descriptionForOption = { option in
-            guard let network = option as? String else { return nil }
-            return ConfigParser.shared.formattedNetworkName(for: network)
+            guard let mixerId = option as? String else { return nil }
+            return ConfigParser.shared.network(for: mixerId)
         }
     }
     
@@ -143,8 +142,8 @@ class AddCommitmentViewController: UITableViewController {
         if segue.identifier == Storyboard.selectNetworkUnwindSegue,
             let selectionVC = segue.source as? SelectionTableViewController {
             
-            if let selectedNetwork = selectionVC.selectedOption as? String {
-                network = selectedNetwork
+            if let selectedMixerId = selectionVC.selectedOption as? String {
+                mixerId = selectedMixerId
                 updateUI()
             }
         }

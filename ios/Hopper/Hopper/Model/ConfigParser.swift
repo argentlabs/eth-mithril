@@ -16,7 +16,7 @@ class ConfigParser {
     let configFilename = "config"
     let abiFilename = "Mixer"
     
-    var deployments: [String: Any] {
+    var mixers: [String: Any] {
         return (deserialized?["deployments"] as? [String: [String: Any]])?.mapValues({ cfg -> [String: Any] in
             var cfg = cfg
             if cfg["mixerAddress"] as? String == nil, let chainId = cfg["chainId"] as? Int {
@@ -26,29 +26,34 @@ class ConfigParser {
         }) ?? [:]
     }
     
-    var sortedDeploymentKeys: [String] {
-        return deployments.keys.sorted {
-            (deployments[$0] as? [String: Any])?["chainId"] as? Int ?? 0
+    var sortedMixerIds: [String] {
+        return mixers.keys.filter {
+            (mixers[$0] as? [String: Any])?["legacy"] as? Bool != true
+        }.sorted {
+            (mixers[$0] as? [String: Any])?["sortKey"] as? Int ?? 0
             <
-            (deployments[$1] as? [String: Any])?["chainId"] as? Int ?? 0
+            (mixers[$1] as? [String: Any])?["sortKey"] as? Int ?? 0
         }
     }
     
-    func formattedNetworkName(for network: String) -> String {
-        return stringParam(for: network, key: "name") ?? network
+    func network(for mixerId: String) -> String? {
+        return stringParam(for: mixerId, key: "network")
     }
-    func rpcUrl(for network: String) -> String? {
-        return stringParam(for: network, key: "rpcUrl")
+    func value(for mixerId: String) -> String? {
+        return stringParam(for: mixerId, key: "value")
     }
-    func relayerEndpoint(for network: String) -> String? {
-        return stringParam(for: network, key: "relayerEndpoint")
+    func rpcUrl(for mixerId: String) -> String? {
+        return stringParam(for: mixerId, key: "rpcUrl")
     }
-    func mixerAddress(for network: String) -> String? {
-        return stringParam(for: network, key: "mixerAddress")
+    func relayerEndpoint(for mixerId: String) -> String? {
+        return stringParam(for: mixerId, key: "relayerEndpoint")
+    }
+    func mixerAddress(for mixerId: String) -> String? {
+        return stringParam(for: mixerId, key: "mixerAddress")
     }
     
-    private func stringParam(for network: String, key: String) -> String? {
-        return (deployments[network] as? [String: Any])?[key] as? String
+    private func stringParam(for mixerId: String, key: String) -> String? {
+        return (mixers[mixerId] as? [String: Any])?[key] as? String
     }
     
      private var deserialized: [String: Any]? {

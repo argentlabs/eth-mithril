@@ -14,16 +14,27 @@ class ShowMixerViewController: UIViewController {
     // MARK: - Public API
     
     var mixerAddress: String? { didSet { updateUI() } }
+    var mixedValue: String? { didSet { updateUI() } }
     
     // MARK: - UI
     
+    struct Constants {
+        static let instructions = """
+Please send %VALUE from your origin address to the Mixer address displayed below. The transaction needs a gas limit of 1,000,000 to succeed.
+"""
+        static let defaultValue = "1 ETH"
+    }
+    
     @IBOutlet weak var qrCodeLabel: UILabel!  { didSet { updateUI() } }
     @IBOutlet weak var qrCodeImageView: UIImageView!  { didSet { updateUI() } }
+    @IBOutlet weak var instructionLabel: UILabel! { didSet { updateUI() } }
     
     private func updateUI() {
         guard let mixerAddress = mixerAddress else { return }
         qrCodeImageView?.image = generateQRCode(from: mixerAddress)
         qrCodeLabel?.text = mixerAddress
+        
+        instructionLabel?.text = Constants.instructions.replacingOccurrences(of: "%VALUE", with: mixedValue ?? Constants.defaultValue)
     }
     
     private func generateQRCode(from string: String) -> UIImage? {

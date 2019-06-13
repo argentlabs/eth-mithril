@@ -13,7 +13,7 @@ import UIKit
 class CommitmentTableViewController : FetchedResultsTableViewController {
     
     private struct Storyboard {
-        static let rowHeight: CGFloat = 100
+        static let rowHeight: CGFloat = 110
         static let commitmentCell = "Commitment Cell"
         static let showMixerAddressSegue = "Show Mixer Address"
     }
@@ -70,9 +70,14 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
     // MARK: - Navigation
     
     private var mixerAddressToDisplay: String?
+    private var mixedValueToDisplay: String?
     
     @objc func segueToGainsLossesDetails(_ notification: Notification) {
-        mixerAddressToDisplay = notification.object as? String
+        if let mixerId = notification.object as? String {
+            mixerAddressToDisplay = ConfigParser.shared.mixerAddress(for: mixerId)
+            mixedValueToDisplay = ConfigParser.shared.value(for: mixerId)
+        }
+        
         self.performSegue(withIdentifier: Storyboard.showMixerAddressSegue, sender: self)
     }
     
@@ -80,6 +85,7 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
         if segue.identifier == Storyboard.showMixerAddressSegue {
             if let showMixerVC = segue.destination as? ShowMixerViewController {
                 showMixerVC.mixerAddress = mixerAddressToDisplay
+                showMixerVC.mixedValue = mixedValueToDisplay
             }
         }
     }

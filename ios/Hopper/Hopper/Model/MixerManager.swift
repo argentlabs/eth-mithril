@@ -96,23 +96,23 @@ class MixerManager {
     }
     
     private var mixerRelayers = [String: MixerRelayer]()
-    private func mixerRelayer(for network: String) throws -> MixerRelayer  {
-        if mixerRelayers[network] == nil {
+    private func mixerRelayer(for mixerId: String) throws -> MixerRelayer  {
+        if mixerRelayers[mixerId] == nil {
             guard
-                let rpcUrl = ConfigParser.shared.rpcUrl(for: network),
-                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network),
-                let relayerEndpoint = ConfigParser.shared.relayerEndpoint(for: network),
+                let rpcUrl = ConfigParser.shared.rpcUrl(for: mixerId),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: mixerId),
+                let relayerEndpoint = ConfigParser.shared.relayerEndpoint(for: mixerId),
                 let mixerContract = MixerFactory.mixer(rpcPath: rpcUrl, mixerAddressStr: mixerAddressStr)
-            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
-            mixerRelayers[network] = MixerRelayer(rpcPath: rpcUrl, endPoint: relayerEndpoint, mixerContract: mixerContract)
+            else { throw MixerError.invalidParams("Invalid mixer config for \"\(mixerId)\"") }
+            mixerRelayers[mixerId] = MixerRelayer(rpcPath: rpcUrl, endPoint: relayerEndpoint, mixerContract: mixerContract)
         }
-        return mixerRelayers[network]!
+        return mixerRelayers[mixerId]!
     }
     
     
     // MARK: - Contract convenience methods
     
-    func commit(network: String,
+    func commit(mixerId: String,
                 fundedAddress: EthereumAddress,
                 funderAddress: EthereumAddress,
                 secret: BigUInt,
@@ -121,7 +121,7 @@ class MixerManager {
         firstly {
             getLeaf(nullifierSecret: secret, fundedAddress: fundedAddress)
         }.done { [weak self] leaf in
-            let mixerRelayer = try self?.mixerRelayer(for: network)
+            let mixerRelayer = try self?.mixerRelayer(for: mixerId)
             mixerRelayer?.commit(leaf: leaf,
                                 funderAddress: funderAddress,
                                 txWasSubmitted: txWasSubmitted,
@@ -131,7 +131,7 @@ class MixerManager {
         }
     }
     
-    func watchFundingEvent(network: String,
+    func watchFundingEvent(mixerId: String,
                            fundedAddress: EthereumAddress,
                            secret: BigUInt,
                            startBlock: UInt64 = 3_861_629,
@@ -145,9 +145,9 @@ class MixerManager {
             getLeaf(nullifierSecret: secret, fundedAddress: fundedAddress)
         }.then { leaf -> Promise<[EventParserResult]> in
             guard
-                let rpcPath = ConfigParser.shared.rpcUrl(for: network),
-                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network)
-            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
+                let rpcPath = ConfigParser.shared.rpcUrl(for: mixerId),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: mixerId)
+            else { throw MixerError.invalidParams("Invalid mixer config for \"\(mixerId)\"") }
             
             return EventFetcher.fetchEventsPromise(
                 rpcPath: rpcPath,
@@ -172,7 +172,7 @@ class MixerManager {
         }
     }
     
-    func watchAllFundingEvents(network: String,
+    func watchAllFundingEvents(mixerId: String,
                                startBlock: UInt64 = 3_861_629,
                                commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, numDeposits: Int)?, _ error: Error?) -> ()) {
         guard let abiData = MixerFactory.abiData else {
@@ -182,9 +182,9 @@ class MixerManager {
         
         firstly { () -> Promise<[EventParserResult]> in
             guard
-                let rpcPath = ConfigParser.shared.rpcUrl(for: network),
-                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network)
-            else { throw MixerError.invalidParams("Invalid network config for \"\(network)\"") }
+                let rpcPath = ConfigParser.shared.rpcUrl(for: mixerId),
+                let mixerAddressStr = ConfigParser.shared.mixerAddress(for: mixerId)
+            else { throw MixerError.invalidParams("Invalid mixer config for \"\(mixerId)\"") }
             return EventFetcher.fetchEventsPromise(
                 rpcPath: rpcPath,
                 name: "LeafAdded",
@@ -205,7 +205,7 @@ class MixerManager {
         }
     }
     
-    func withdraw(network: String,
+    func withdraw(mixerId: String,
                   fundedAddress: EthereumAddress,
                   funderAddress: EthereumAddress,
                   secret: BigUInt,
@@ -217,11 +217,11 @@ class MixerManager {
         var merklePath = [BigUInt]()
         
         guard
-            let rpcPath = ConfigParser.shared.rpcUrl(for: network),
-            let mixerAddressStr = ConfigParser.shared.mixerAddress(for: network),
-            let mixerRelayer = try? mixerRelayer(for: network)
+            let rpcPath = ConfigParser.shared.rpcUrl(for: mixerId),
+            let mixerAddressStr = ConfigParser.shared.mixerAddress(for: mixerId),
+            let mixerRelayer = try? mixerRelayer(for: mixerId)
         else {
-            txWasSubmitted?(nil, MixerError.invalidParams("Invalid network config for \"\(network)\""))
+            txWasSubmitted?(nil, MixerError.invalidParams("Invalid mixer config for \"\(mixerId)\""))
             return
         }
         

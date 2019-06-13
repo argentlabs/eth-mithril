@@ -1,18 +1,22 @@
 {
   "deployments": {
-    "mainnet": {
-      "name": "Ethereum Mainnet",
+    "mainnet-1ETH-0": {
+      "network": "Ethereum Mainnet",
       "rpcUrl": "https://mainnet.infura.io/v3/91ffab09868d430f9ce744c78d7ff427",
       "relayerEndpoint": "https://cloud-staging.argent-api.com/v1/signer/mixer",
-      "mixerAddress": null,
-      "chainId": 1
+      "mixerAddress": "0xa09E52B269AA4947a4A4eE12708b98516Dcc77F6",
+      "value": "1 ETH",
+      "chainId": 1,
+      "sortKey": 1
     },
-    "ropsten": {
-      "name": "Ropsten Testnet",
+    "ropsten-1ETH-0": {
+      "network": "Ropsten Testnet",
       "rpcUrl": "https://ropsten.infura.io/v3/9c2c162b995446099dae8923952edd44",
       "relayerEndpoint": "https://cloud-test.argent-api.com/v1/signer/mixer",
-      "mixerAddress": null,
-      "chainId": 3
+      "mixerAddress": "0x7D9e621C7F0F03C27aa02cf7534184280336beB8",
+      "value": "1 ETH",
+      "chainId": 3,
+      "sortKey": 2
     }
   }
 }

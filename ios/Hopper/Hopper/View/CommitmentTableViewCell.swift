@@ -20,6 +20,7 @@ class CommitmentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var originAddressLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var destinationAddressLabel: UILabel! { didSet { updateUI() } }
+    @IBOutlet weak var valueLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var networkLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var statusLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var actionButton: UIButton! { didSet { updateUI() } }
@@ -32,8 +33,7 @@ class CommitmentTableViewCell: UITableViewCell {
             print("Requesting commit")
             CommitmentUpdater.shared.requestCommit(for: commitment)
         } else if commitment.fundingTxBlockNumber == nil {
-            print("Show Mixer Address")
-            NotificationCenter.default.post(name: .segueToMixerAddress, object: ConfigParser.shared.mixerAddress(for: commitment.network ?? ""))
+            NotificationCenter.default.post(name: .segueToMixerAddress, object: commitment.mixerId)
         } else {
             print("Requesting withdrawal")
             CommitmentUpdater.shared.requestWithdrawal(for: commitment)
@@ -43,7 +43,8 @@ class CommitmentTableViewCell: UITableViewCell {
     private func updateUI() {
         originAddressLabel?.text = commitment?.from
         destinationAddressLabel?.text = commitment?.to
-        networkLabel?.text = ConfigParser.shared.formattedNetworkName(for: commitment?.network ?? "")
+        valueLabel?.text = ConfigParser.shared.value(for: commitment?.mixerId ?? "")
+        networkLabel?.text = ConfigParser.shared.network(for: commitment?.mixerId ?? "")
         actionButton?.isHidden = true
         statusLabel?.text = "Preparing commitment..."
         
