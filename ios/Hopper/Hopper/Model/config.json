@@ -6,7 +6,6 @@
       "relayerEndpoint": "https://cloud-staging.argent-api.com/v1/signer/mixer",
       "mixerAddress": "0xa09E52B269AA4947a4A4eE12708b98516Dcc77F6",
       "value": "1 ETH",
-      "chainId": 1,
       "sortKey": 1
     },
     "ropsten-1ETH-0": {
@@ -15,7 +14,6 @@
       "relayerEndpoint": "https://cloud-test.argent-api.com/v1/signer/mixer",
       "mixerAddress": "0x7D9e621C7F0F03C27aa02cf7534184280336beB8",
       "value": "1 ETH",
-      "chainId": 3,
       "sortKey": 2
     }
   }

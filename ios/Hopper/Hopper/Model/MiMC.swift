@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftKeccak
+import web3swift
 import BigInt
 
 extension Data {
@@ -35,7 +35,7 @@ class MiMC {
     static private func bint_keccak256(_ input: BInt) -> BInt {
         let input_hex = input.asString(radix: 16).paddingLeft(toLength: 64, withPad: "0")
         let input_data = Data(fromHexString: input_hex)!
-        let output_hex = keccak256(input_data).toHexString()
+        let output_hex = Web3Utils.keccak256(input_data)!.toHexString()
         return BInt(output_hex, radix: 16)!
     }
     

@@ -30,9 +30,9 @@ class ConfigParser {
         return mixers.keys.filter {
             (mixers[$0] as? [String: Any])?["legacy"] as? Bool != true
         }.sorted {
-            (mixers[$0] as? [String: Any])?["sortKey"] as? Int ?? 0
+            (mixers[$0] as? [String: Any])?["sortKey"] as? Int ?? 9999
             <
-            (mixers[$1] as? [String: Any])?["sortKey"] as? Int ?? 0
+            (mixers[$1] as? [String: Any])?["sortKey"] as? Int ?? 9999
         }
     }
     

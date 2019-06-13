@@ -128,7 +128,7 @@ class AddCommitmentViewController: UITableViewController {
         selectionVC.cellIdentifier = Storyboard.selectNetworkCellIdentifier
         selectionVC.options = ConfigParser.shared.sortedMixerIds
         selectionVC.isOptionPopular = nil
-        selectionVC.selectedOption = ConfigParser.shared.sortedMixerIds.first
+        selectionVC.selectedOption = mixerId
         selectionVC.oneSectionPerStartingLetter = false
         selectionVC.unwindSegueIdentifier = Storyboard.selectNetworkUnwindSegue
         selectionVC.searchBarPlaceholder = "Search Networks"
