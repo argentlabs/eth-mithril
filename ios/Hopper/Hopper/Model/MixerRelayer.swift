@@ -69,6 +69,7 @@ class MixerRelayer {
                     txWasMined?(true, blockNum)
                 }
             })
+            txWasSubmitted?(txHash, error)
         }, txWasMined: { [weak self] (success: Bool, blockNum: UInt64?) in
             if !withdrawConfirmed {
                 if !success {
