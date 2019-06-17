@@ -1,20 +1,22 @@
 {
   "deployments": {
-    "mainnet-1ETH-0": {
-      "network": "Ethereum Mainnet",
-      "rpcUrl": "https://mainnet.infura.io/v3/91ffab09868d430f9ce744c78d7ff427",
-      "relayerEndpoint": "https://cloud-staging.argent-api.com/v1/signer/mixer",
-      "mixerAddress": "0xa09E52B269AA4947a4A4eE12708b98516Dcc77F6",
-      "value": "1 ETH",
-      "sortKey": 1
-    },
     "ropsten-1ETH-0": {
       "network": "Ropsten Testnet",
       "rpcUrl": "https://ropsten.infura.io/v3/9c2c162b995446099dae8923952edd44",
       "relayerEndpoint": "https://cloud-test.argent-api.com/v1/signer/mixer",
-      "mixerAddress": "0x7D9e621C7F0F03C27aa02cf7534184280336beB8",
+      "mixerAddress": "0xD70fB90fc8550D72E0D615712C0B27Ffb9365371",
       "value": "1 ETH",
-      "sortKey": 2
+      "sortKey": 1,
+      "chainId": 3
+    },
+    "mainnet-1ETH-0": {
+      "network": "Ethereum Mainnet",
+      "rpcUrl": "https://mainnet.infura.io/v3/91ffab09868d430f9ce744c78d7ff427",
+      "relayerEndpoint": "https://cloud-staging.argent-api.com/v1/signer/mixer",
+      "mixerAddress": "0xfdc0eb098a6d27ca62bb67e0804d461cb698f9fa",
+      "value": "1 ETH",
+      "sortKey": 2,
+      "chainId": 1
     }
   }
 }

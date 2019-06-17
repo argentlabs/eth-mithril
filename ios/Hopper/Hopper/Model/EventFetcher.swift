@@ -36,6 +36,7 @@ class EventFetcher {
                             contractAddress: String,
                             startBlock: UInt64,
                             pollingPeriod: TimeInterval? = nil,
+                            shouldKeepWatching: (() -> Bool)? = nil,
                             filters: [String: EventFilterable]? = nil,
                             web3Instance: Web3? = nil,
                             completion: @escaping ([EventParserResult]?, Error?) -> ()) {
@@ -66,9 +67,9 @@ class EventFetcher {
                     return constr.paramVal.isEqualTo(event.decodedResult[constr.paramName] as AnyObject)
                 } != false
             }
-//             print("fetched from block:\(startBlock) to block:\(lastBlockNumber!), found:\(filtered.count)")
+//            print("fetched from block:\(startBlock) to block:\(lastBlockNumber!), found:\(filtered.count)")
             
-            if filtered.isEmpty, let pollPeriod = pollingPeriod {
+            if filtered.isEmpty, let pollPeriod = pollingPeriod, shouldKeepWatching?() != false {
                 after(seconds: pollPeriod).done {
                     fetchEvents(rpcPath: rpcPath,
                                 name: name,
@@ -76,6 +77,7 @@ class EventFetcher {
                                 contractAddress: contractAddress,
                                 startBlock: lastBlockNumber.advanced(by: 1),
                                 pollingPeriod: pollingPeriod,
+                                shouldKeepWatching: shouldKeepWatching,
                                 filters: filters,
                                 web3Instance: web3,
                                 completion: completion)
@@ -97,6 +99,7 @@ class EventFetcher {
                                    contractAddress: String,
                                    startBlock: UInt64,
                                    pollingPeriod: TimeInterval? = nil,
+                                   shouldKeepWatching: (() -> Bool)? = nil,
                                    filters: [String: EventFilterable]? = nil,
                                    web3Instance: Web3? = nil) -> Promise<[EventParserResult]> {
         return Promise { seal in
@@ -106,6 +109,7 @@ class EventFetcher {
                         contractAddress: contractAddress,
                         startBlock: startBlock,
                         pollingPeriod: pollingPeriod,
+                        shouldKeepWatching: shouldKeepWatching,
                         filters: filters,
                         web3Instance: web3Instance,
                         completion: seal.resolve)

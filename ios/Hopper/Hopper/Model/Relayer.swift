@@ -12,7 +12,7 @@ import Web3
 
 
 typealias TransactionSubmittedCallback = (_ txHash: EthereumData?, _ error: Error?) -> ()
-typealias TransactionMinedCallback = (_ txReceipt: EthereumTransactionReceiptObject) -> ()
+typealias TransactionMinedCallback = (_ success: Bool, _ blockNumber: UInt64?) -> ()
 
 class Relayer {
     
@@ -20,6 +20,7 @@ class Relayer {
         case relayerIsUnreachable
         case invalidRelayerParam(String)
         case transactionRevert
+        case unexpectedDataReceived(String)
     }
 
     init(rpcPath: String, endPoint: String) {
@@ -87,8 +88,13 @@ extension Relayer: TransactionWatcherDelegate {
             print("Relayer TX Reverted: \(txHash.hex())")
         }
         transactionWatcher.stop()
+
+        var blockNum: UInt64? = nil
+        if let blockStr = receipt.blockNumber.ethereumValue().string {
+            blockNum = UInt64(hexString: String(blockStr.dropFirst(2)))
+        }
         
-        txWatchers[txHash.hex()]?.callback(receipt)
+        txWatchers[txHash.hex()]?.callback(receipt.status == 1, blockNum)
         txWatchers[txHash.hex()] = nil
     }
     

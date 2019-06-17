@@ -20,6 +20,7 @@ contract Mixer
 
     event CommitmentAdded(address indexed _fundingWallet, uint256 _leaf);
     event LeafAdded(uint256 _leaf, uint256 _leafIndex);
+    event DepositWithdrawn(uint256 _nullifier);
 
     constructor(uint256[14] memory in_vk, uint256[] memory in_gammaABC)
         public
@@ -131,8 +132,9 @@ contract Mixer
         require(verifyProof(getRoot(), in_withdraw_address, in_nullifier, proof), "Proof verification failed");
 
         nullifiers[in_nullifier] = true;
+        emit DepositWithdrawn(in_nullifier);
 
-        uint gasUsed = startGas - gasleft() + 82775;
+        uint gasUsed = startGas - gasleft() + 57700;
         uint relayerRefund = gasUsed * tx.gasprice;
         if(relayerRefund > AMOUNT/20) relayerRefund = AMOUNT/20;
         in_withdraw_address.transfer(AMOUNT - relayerRefund); // leaf withdrawal

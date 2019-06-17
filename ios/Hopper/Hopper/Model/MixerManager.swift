@@ -134,7 +134,7 @@ class MixerManager {
     func watchFundingEvent(mixerId: String,
                            fundedAddress: EthereumAddress,
                            secret: BigUInt,
-                           startBlock: UInt64 = 3_861_629,
+                           startBlock: UInt64 = 5_500_000,
                            commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, leafIndex: BigUInt)?, _ error: Error?) -> ()) {
         guard let abiData = MixerFactory.abiData else {
             commitmentWasFunded(nil, MixerError.invalidParams("Invalid ABI"))
@@ -173,7 +173,8 @@ class MixerManager {
     }
     
     func watchAllFundingEvents(mixerId: String,
-                               startBlock: UInt64 = 3_861_629,
+                               startBlock: UInt64 = 5_500_000,
+                               shouldKeepWatching: (() -> Bool)? = nil,
                                commitmentWasFunded: @escaping (_ result: (blockNumber: UInt64, numDeposits: Int)?, _ error: Error?) -> ()) {
         guard let abiData = MixerFactory.abiData else {
             commitmentWasFunded(nil, MixerError.invalidParams("Invalid ABI"))
@@ -191,7 +192,8 @@ class MixerManager {
                 abiData: abiData,
                 contractAddress: mixerAddressStr,
                 startBlock: startBlock,
-                pollingPeriod: 5)
+                pollingPeriod: 5,
+                shouldKeepWatching: shouldKeepWatching)
         }.done { result in
             guard
                 let blockStr = result.last?.eventLog?.blockNumber.description,

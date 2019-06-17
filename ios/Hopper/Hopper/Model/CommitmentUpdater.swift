@@ -94,18 +94,17 @@ class CommitmentUpdater: NSObject {
                         commitment.commitTxRelayFailed = true
                     }
                 }
-        }) { [weak self] receipt in
-            self?.contextDo {
-                if let blockStr = receipt.blockNumber.ethereumValue().string,
-                    let block = UInt64(hexString: String(blockStr.dropFirst(2))) {
-                    commitment.commitTxBlockNumber = NSNumber(value: block)
+            }, txWasMined:  { [weak self] (success, blockNum) in
+                self?.contextDo {
+                    if let blockNum = blockNum {
+                        commitment.commitTxBlockNumber = NSNumber(value: blockNum)
+                    }
+                    commitment.commitTxSuccesful = success
+                    commitment.commitRequested = false
+                    if success { self?.handle(commitment) }
                 }
-                commitment.commitTxSuccesful = receipt.status == 1
-                commitment.commitRequested = false
-                if receipt.status == 1 { self?.handle(commitment) }
             }
-            
-        }
+        )
     }
     
     private func watchFundingEvent(for commitment: Commitment) {
@@ -140,7 +139,11 @@ class CommitmentUpdater: NSObject {
             let startBlock = (commitment.lastFundingTxBlockNumber ?? commitment.fundingTxBlockNumber)?.uint64Value.advanced(by: 1)
         else { return }
         
-        MixerManager.shared.watchAllFundingEvents(mixerId: mixerId, startBlock: startBlock) { [weak self] (result, error) in
+        MixerManager.shared.watchAllFundingEvents(
+            mixerId: mixerId,
+            startBlock: startBlock,
+            shouldKeepWatching: { !commitment.withdrawRequested }
+        ) { [weak self] (result, error) in
                 if let blockNum = result?.blockNumber, let numDeposits = result?.numDeposits {
                     self?.contextDo { [weak self] in
                         commitment.numSubsequentDeposits += Int64(numDeposits)
@@ -183,10 +186,10 @@ class CommitmentUpdater: NSObject {
                     }
                 }
             },
-            txWasMined: { [weak self] receipt in
+            txWasMined: { [weak self] (success, blockNum) in
                 self?.contextDo {
                     commitment.withdrawTxConfirmedAt = Date()
-                    commitment.withdrawTxSuccesful = receipt.status == 1
+                    commitment.withdrawTxSuccesful = success
                     commitment.withdrawRequested = false
                 }
             }
