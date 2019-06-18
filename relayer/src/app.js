@@ -15,7 +15,11 @@ const port = process.env.PORT || 8080;
 app.set('trust proxy', 1);
 app.use(rateLimit({
     windowMs: process.env.RATELIMIT_WINDOW || 15 * 60 * 1000,
-    max: process.env.RATELIMIT_MAX || 3
+    max: process.env.RATELIMIT_MAX || 3,
+    skip: (req) => {
+        if (req.path === '/health') return true;
+        return false;
+    }
 }));
 
 const server = jayson.server({

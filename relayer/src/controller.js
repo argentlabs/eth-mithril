@@ -16,7 +16,7 @@ class Controller {
             throw new Error(`Input paramaters validation issue: ${message}`);
         }
 
-        if (params.to !== this.contractAddress) {
+        if (params.to.toLowerCase() !== this.contractAddress.toLowerCase()) {
             throw new Error('Invalid contract address');
         }
 
