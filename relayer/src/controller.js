@@ -32,6 +32,10 @@ class Controller {
         const txResult = await this.signer.sendTransaction(tx);
         return txResult.hash;
     }
+
+    walletAddress() {
+        return this.signer.address;
+    }
 }
 
 module.exports = Controller;

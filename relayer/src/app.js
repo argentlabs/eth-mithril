@@ -35,7 +35,11 @@ const server = jayson.server({
 });
 
 app.get('/health', (req, res) => {
-    res.json({ status: 'OK' })
+    res.json({ result: 'OK' })
+});
+
+app.get('/address', (req, res) => {
+    res.json({ result: controller.walletAddress() })
 });
 
 app.use(jsonParser());
