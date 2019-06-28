@@ -88,6 +88,7 @@ Requires brew.
   ```
 - Run tests:
   ```
+  make genkeys
   make python-test
   ```
 
@@ -105,5 +106,6 @@ Requires npm.
   ```
 - Run tests:
   ```
+  make genkeys
   make solidity-test
   ```
