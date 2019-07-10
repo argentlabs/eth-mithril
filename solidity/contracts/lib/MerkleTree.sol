@@ -62,7 +62,7 @@ library MerkleTree
         internal
         returns (uint256 new_root, uint256 offset)
     {
-        require(leaf != 0);
+        require(leaf > 0, "MT: Leaf is null");
 
 
         uint256[15] memory IVs;
@@ -70,7 +70,7 @@ library MerkleTree
 
         offset = self.cur;
 
-        require(offset != MAX_LEAF_COUNT - 1);
+        require(offset < MAX_LEAF_COUNT, "MT: Tree is full");
 
         self.nodes[0][offset] = leaf;
 

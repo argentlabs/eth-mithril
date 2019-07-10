@@ -21,31 +21,23 @@ const { mixer_prove, mixer_verify } = require("./helpers/libmixer");
 
 const SKIP_SLOW_TESTS = true;
 
-contract("Mixer", function([
-  depositer1,
-  depositer2,
-  depositer3,
-  withdrawer1,
-  withdrawer2,
-  withdrawer3,
-  relayer
-]) {
+contract("Mixer", function([withdrawer1, withdrawer2, withdrawer3, relayer]) {
   beforeEach(async () => {
     this.mixer = await Mixer.new(...vk_to_flat(vk));
   });
 
-  async function deposit(_depositer = depositer1, _withdrawer = withdrawer1) {
+  async function deposit(_withdrawer = withdrawer1) {
     const nullifier_secret = toBN(crypto.randomBytes(30).toString("hex"));
     const leaf = await this.mixer.makeLeafHash(nullifier_secret, _withdrawer);
 
-    // Send commitment
-    await this.mixer.commit(leaf, _depositer, { from: relayer });
-
-    // Fund commitment
-    const receipt = await this.mixer.send(AMOUNT, { from: _depositer });
+    // Send and fund commitment
+    const receipt = await this.mixer.commit(leaf, {
+      from: relayer,
+      value: AMOUNT
+    });
     const leaf_index = receipt.logs.filter(l => l.event == "LeafAdded")[0].args
       ._leafIndex;
-    console.log(`Funding commitment cost ${receipt.receipt.gasUsed} gas`);
+    console.log(`Commitment cost: ${receipt.receipt.gasUsed} gas`);
 
     return { nullifier_secret, leaf_index };
   }
@@ -169,21 +161,20 @@ contract("Mixer", function([
     it("deposits 3 times then withdraws 3 times", async () => {
       if (SKIP_SLOW_TESTS) return;
 
-      depositers = [depositer1, depositer1, depositer3];
       withdrawers = [withdrawer1, withdrawer2, withdrawer3];
       commitments = [];
 
-      for (let i = 0; i < depositers.length; i++) {
+      for (let i = 0; i < withdrawers.length; i++) {
         const mixerBeforeD = toBN(
           await web3.eth.getBalance(this.mixer.address)
         );
         // Send the commitment and fund it
-        commitments.push(await deposit(depositers[i], withdrawers[i]));
+        commitments.push(await deposit(withdrawers[i]));
         const mixerAfterD = toBN(await web3.eth.getBalance(this.mixer.address));
         expect(mixerAfterD.sub(mixerBeforeD)).to.eq.BN(AMOUNT);
       }
 
-      for (let i = 0; i < depositers.length; i++) {
+      for (let i = 0; i < withdrawers.length; i++) {
         const { nullifier_secret, leaf_index } = commitments[i];
         // Compute and verify the proof
         const { proof_json, nullifier, merkle_root } = await computeProof(

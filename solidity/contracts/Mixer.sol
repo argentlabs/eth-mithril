@@ -14,11 +14,9 @@ contract Mixer
     uint256[] gammaABC;
 
     mapping (uint256 => bool) public nullifiers;
-    mapping (address => uint256[]) public pendingDeposits;
 
     MerkleTree.Data internal tree;
 
-    event CommitmentAdded(address indexed _fundingWallet, uint256 _leaf);
     event LeafAdded(uint256 _leaf, uint256 _leafIndex);
     event DepositWithdrawn(uint256 _nullifier);
 
@@ -38,33 +36,16 @@ contract Mixer
     }
 
     /**
-    * Save a commitment (leaf) that needs to be funded later on
+    * Insert a funded commitment to the Merkle tree
     */
-    function commit(uint256 leaf, address fundingWallet)
+    function commit(uint256 leaf)
         public
         payable
     {
         require(leaf > 0, "null leaf");
-        pendingDeposits[fundingWallet].push(leaf);
-        emit CommitmentAdded(fundingWallet, leaf);
-        if (msg.value > 0) fundCommitment();
-    }
-
-    function fundCommitment() private {
         require(msg.value == AMOUNT, "wrong value");
-        uint256[] storage leaves = pendingDeposits[msg.sender];
-        require(leaves.length > 0, "commitment must be sent first");
-        uint256 leaf = leaves[leaves.length - 1];
-        leaves.length--;
         (, uint256 leafIndex) = tree.insert(leaf);
         emit LeafAdded(leaf, leafIndex);
-    }
-
-    /*
-    * Used by the funding wallet to fund a previously saved commitment
-    */
-    function () external payable {
-        fundCommitment();
     }
 
     // should not be used in production otherwise nullifier_secret would be shared with node!
