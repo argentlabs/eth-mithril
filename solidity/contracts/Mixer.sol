@@ -17,7 +17,7 @@ contract Mixer
 
     MerkleTree.Data internal tree;
 
-    event LeafAdded(uint256 _leaf, uint256 _leafIndex);
+    event LeafAdded(uint256 indexed _leaf, uint256 _leafIndex);
     event DepositWithdrawn(uint256 _nullifier);
 
     constructor(uint256[14] memory in_vk, uint256[] memory in_gammaABC)
