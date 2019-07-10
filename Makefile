@@ -28,10 +28,10 @@ genkeys: build
 
 test: genkeys solidity-test python-test
 
-python-test:
+python-test: genkeys
 	make -C python test
 
-solidity-test:
+solidity-test: genkeys
 	make -C solidity test
 solidity-deploy-ropsten:
 	make -C solidity deploy-ropsten

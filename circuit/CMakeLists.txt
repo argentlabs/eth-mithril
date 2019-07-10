@@ -15,7 +15,12 @@ endif()
 add_subdirectory(../ethsnarks ../.build/ethsnarks EXCLUDE_FROM_ALL)
 add_subdirectory(gadgets)
 
-add_library(mixer STATIC mixer.cpp)
+if (IOS_BUILD)
+    add_library(mixer STATIC mixer.cpp)
+else()
+    add_library(mixer SHARED mixer.cpp)
+endif()
+
 target_link_libraries(mixer ethsnarks_common SHA3IUF)
 set_property(TARGET mixer PROPERTY POSITION_INDEPENDENT_CODE ON)
 
