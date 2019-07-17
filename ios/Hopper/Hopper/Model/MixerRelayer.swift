@@ -24,23 +24,6 @@ class MixerRelayer {
         self.mixerContract = mixerContract
     }
     
-    func commit(leaf: BigUInt,
-                funderAddress: EthereumAddress,
-                txWasSubmitted: TransactionSubmittedCallback? = nil,
-                txWasMined: TransactionMinedCallback? = nil) {
-        guard
-            let mixerAddr = mixerContract.address?.hex(eip55: true),
-            let method = mixerContract["commit"],
-            let data = try? ABI.encodeFunctionCall(method(leaf, funderAddress))
-        else {
-            txWasSubmitted?(nil, Relayer.RelayerError.invalidRelayerParam("Could not encode call"))
-            return
-        }
-        
-        // using 100_000 gas (0x0186A0)
-        relayer.send(to: mixerAddr, data: data, gas: "0x0186A0", txWasSubmitted: txWasSubmitted, txWasMined: txWasMined)
-    }
-    
     func withdraw(fundedAddress: EthereumAddress,
                   nullifier: BigUInt,
                   flatProof: [BigUInt],
@@ -58,17 +41,20 @@ class MixerRelayer {
         
         var withdrawConfirmed = false
         relayer.send(to: mixerAddr,
-                     data: data, gas: "0x0F4240", // using 1_000_000 gas (0x0F4240)
+                     data: data,
+                     gas: "0x0F4240", // using 1_000_000 gas (0x0F4240)
                      txWasSubmitted: { [weak self] (txHash: EthereumData?, error: Error?) in
-            self?.watchWithdrawalEvent(nullifier: nullifier,
-                                       pollingPeriod: 2,
-                                       shouldKeepWatching: { !withdrawConfirmed },
-                                       depositWasWithdrawn: { (blockNum, err) in
-                if !withdrawConfirmed, blockNum != nil {
-                    withdrawConfirmed = true
-                    txWasMined?(true, blockNum)
-                }
-            })
+                        if txHash != nil {
+                            self?.watchWithdrawalEvent(nullifier: nullifier,
+                                                       pollingPeriod: 2,
+                                                       shouldKeepWatching: { !withdrawConfirmed },
+                                                       depositWasWithdrawn: { (blockNum, err) in
+                                                        if !withdrawConfirmed, blockNum != nil {
+                                                            withdrawConfirmed = true
+                                                            txWasMined?(true, blockNum)
+                                                        }
+                            })
+                        }
             txWasSubmitted?(txHash, error)
         }, txWasMined: { [weak self] (success: Bool, blockNum: UInt64?) in
             if !withdrawConfirmed {

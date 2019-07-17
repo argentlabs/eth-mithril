@@ -26,10 +26,7 @@ class AddCommitmentViewController: UITableViewController {
 
     // MARK: - Outlets
     
-    @IBOutlet weak var originAddressField: UITextField!
     @IBOutlet weak var destinationAddressField: UITextField!
-    
-    @IBOutlet weak var originQRCodeButton: UIButton!
     @IBOutlet weak var destinationQRCodeButton: UIButton!
     
     @IBOutlet weak var networkLabel: UILabel! { didSet { updateUI() } }
@@ -59,10 +56,8 @@ class AddCommitmentViewController: UITableViewController {
     }
     
     private func addCommitment() {
-        if let origin = originAddressField?.text, isValidAddress(origin),
-            let destination = destinationAddressField?.text, isValidAddress(destination) {
-            _ = Commitment.create(withOrigin: origin,
-                                  destination: destination,
+        if let destination = destinationAddressField?.text, isValidAddress(destination) {
+            _ = Commitment.create(withDestination: destination,
                                   mixerId: mixerId,
                                   in: CoreDataManager.shared.viewContext)
         }
@@ -88,11 +83,7 @@ class AddCommitmentViewController: UITableViewController {
                 self?.dismiss(animated: true)
                 if let address = result?.value {
                     let components = address.components(separatedBy: ":")
-                    if sender == self?.originQRCodeButton {
-                        self?.originAddressField?.text = components.last
-                    } else {
-                        self?.destinationAddressField?.text = components.last
-                    }
+                    self?.destinationAddressField?.text = components.last
                 }
             }
             

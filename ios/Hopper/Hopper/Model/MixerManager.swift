@@ -27,6 +27,14 @@ class MixerManager {
 
     // MARK: - Helper functions to compute call parameters
     
+    private func computeLeaf(_ nullifierSecret: BigUInt, _ fundedAddress: EthereumAddress) -> BigUInt? {
+        let nullifierSecretData = nullifierSecret.solidityData
+        let fundedAddressData = fundedAddress.ethereumValue().ethereumQuantity!.quantity.solidityData
+        let digest = (nullifierSecretData+fundedAddressData).sha256.hex
+        let digestAfterClearingFirst4Bits = "0" + digest.dropFirst()
+        return BigUInt(hexString: digestAfterClearingFirst4Bits)
+    }
+    
     func getLeaf(nullifierSecret: BigUInt,
                  fundedAddress: EthereumAddress,
                  computeLocally: Bool = true,
@@ -34,11 +42,7 @@ class MixerManager {
                  mixerAddressStr: String? = nil) -> Promise<BigUInt> {
         if(computeLocally) {
             // compute leaf locally
-            let nullifierSecretData = nullifierSecret.solidityData
-            let fundedAddressData = fundedAddress.ethereumValue().ethereumQuantity!.quantity.solidityData
-            let digest = (nullifierSecretData+fundedAddressData).sha256.hex
-            let digestAfterClearingFirst4Bits = "0" + digest.dropFirst()
-            let leaf = BigUInt(hexString: digestAfterClearingFirst4Bits)
+            let leaf = computeLeaf(nullifierSecret, fundedAddress)
             return Promise { $0.resolve(leaf, nil) }
         }
         
@@ -109,27 +113,21 @@ class MixerManager {
         return mixerRelayers[mixerId]!
     }
     
+    // MARK: - Methods used by Views
+    
+    func getCommitData(for mixerId: String, nullifierSecret: BigUInt, fundedAddress: EthereumAddress) -> String? {
+        guard
+            let rpcUrl = ConfigParser.shared.rpcUrl(for: mixerId),
+            let mixerAddressStr = ConfigParser.shared.mixerAddress(for: mixerId),
+            let mixerContract = MixerFactory.mixer(rpcPath: rpcUrl, mixerAddressStr: mixerAddressStr),
+            let method = mixerContract["commit"],
+            let leaf = computeLeaf(nullifierSecret, fundedAddress),
+            let data = try? ABI.encodeFunctionCall(method(leaf))
+        else { return nil }
+        return data
+    }
     
     // MARK: - Contract convenience methods
-    
-    func commit(mixerId: String,
-                fundedAddress: EthereumAddress,
-                funderAddress: EthereumAddress,
-                secret: BigUInt,
-                txWasSubmitted: TransactionSubmittedCallback? = nil,
-                txWasMined: TransactionMinedCallback? = nil) {
-        firstly {
-            getLeaf(nullifierSecret: secret, fundedAddress: fundedAddress)
-        }.done { [weak self] leaf in
-            let mixerRelayer = try self?.mixerRelayer(for: mixerId)
-            mixerRelayer?.commit(leaf: leaf,
-                                funderAddress: funderAddress,
-                                txWasSubmitted: txWasSubmitted,
-                                txWasMined: txWasMined)
-        }.catch { error in
-            txWasSubmitted?(nil, MixerError.contractCallFailed("getLeaf() failed: \(error.localizedDescription)"))
-        }
-    }
     
     func watchFundingEvent(mixerId: String,
                            fundedAddress: EthereumAddress,
@@ -209,7 +207,6 @@ class MixerManager {
     
     func withdraw(mixerId: String,
                   fundedAddress: EthereumAddress,
-                  funderAddress: EthereumAddress,
                   secret: BigUInt,
                   leafIndex: BigUInt,
                   proofWasComputed: (() -> ())? = nil,

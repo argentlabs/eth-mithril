@@ -71,11 +71,15 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
     
     private var mixerAddressToDisplay: String?
     private var mixedValueToDisplay: String?
+    private var commitDataToDisplay: String?
     
     @objc func segueToGainsLossesDetails(_ notification: Notification) {
-        if let mixerId = notification.object as? String {
+        if let obj = notification.object as? [String: String],
+            let mixerId = obj["mixerId"],
+            let commitData = obj["commitData"] {
             mixerAddressToDisplay = ConfigParser.shared.mixerAddress(for: mixerId)
             mixedValueToDisplay = ConfigParser.shared.value(for: mixerId)
+            commitDataToDisplay = commitData
         }
         
         self.performSegue(withIdentifier: Storyboard.showMixerAddressSegue, sender: self)
@@ -86,6 +90,7 @@ class CommitmentTableViewController : FetchedResultsTableViewController {
             if let showMixerVC = segue.destination as? ShowMixerViewController {
                 showMixerVC.mixerAddress = mixerAddressToDisplay
                 showMixerVC.mixedValue = mixedValueToDisplay
+                showMixerVC.commitData = commitDataToDisplay
             }
         }
     }

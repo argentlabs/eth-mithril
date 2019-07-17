@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Commitment" representedClassName=".Commitment" syncable="YES" codeGenerationType="category">
-        <attribute name="commitRequested" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="commitTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="commitTxHash" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="commitTxRelayFailed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="commitTxSuccesful" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="from" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fundingTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="lastFundingTxBlockNumber" optional="YES" attributeType="Integer 64" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="leafIndex" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +18,6 @@
         <attribute name="withdrawTxSuccesful" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Commitment" positionX="-63" positionY="-18" width="128" height="360"/>
+        <element name="Commitment" positionX="-63" positionY="-18" width="128" height="270"/>
     </elements>
 </model>

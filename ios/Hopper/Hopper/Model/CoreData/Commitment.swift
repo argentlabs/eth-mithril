@@ -12,18 +12,15 @@ import BigInt
 
 class Commitment: NSManagedObject {
     
-    static func create(withOrigin from: String,
-                       destination to: String,
+    static func create(withDestination to: String,
                        mixerId: String,
                        in context: NSManagedObjectContext) -> Commitment {
         
         let result = Commitment(context: context)
         result.secret = generateSecret()
-        result.from = from
         result.to = to
         result.mixerId = mixerId
         result.createdAt = Date()
-        result.commitRequested = true
         return result
     }
     
@@ -31,12 +28,17 @@ class Commitment: NSManagedObject {
         let max = BigUInt(hexString: "20644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001")!
         return BigUInt.randomInteger(lessThan: max).description
     }
-    
+        
     override var description: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MMM HH:mm:ss"
         guard let createdAt = createdAt else { return "CommitmentWithInvalidCreatedAt" }
-        return "Commitment created at \(formatter.string(from: createdAt))"
+        
+        var formattedConfDate = "nil"
+        if let confDate = withdrawTxConfirmedAt {
+            formattedConfDate = formatter.string(from: confDate)
+        }
+        return "Comm-\(formatter.string(from: createdAt))--W[R:\(withdrawRequested),M:\(formattedConfDate),H:\(withdrawTxHash ?? "nil"),RF:\(withdrawTxRelayFailed),S:\(withdrawTxSuccesful),P:\(proofComputed),D:\(numSubsequentDeposits)]"
     }
     
 }

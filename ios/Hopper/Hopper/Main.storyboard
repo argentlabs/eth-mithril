@@ -27,30 +27,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="G8c-1t-0Si">
-                                            <rect key="frame" x="20" y="9" width="335" height="91.666666666666671"/>
+                                            <rect key="frame" x="20" y="18.333333333333329" width="335" height="73"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="c85-9Y-E0a">
-                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="15.666666666666666"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UM3-B2-TAh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="35.666666666666664" height="15.666666666666666"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="35.5" id="1y1-91-CPE"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="0xfbf679e31a382a4b3a3e5caef51ca13da53050cc" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbZ-dF-AeF">
-                                                            <rect key="frame" x="50.666666666666657" y="0.0" width="284.33333333333337" height="15.666666666666666"/>
-                                                            <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="11"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="IkO-ow-ICn">
-                                                    <rect key="frame" x="0.0" y="18.666666666666668" width="335" height="15.666666666666668"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="15.666666666666666"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNQ-y9-fgN">
                                                             <rect key="frame" x="0.0" y="0.0" width="16.666666666666668" height="15.666666666666666"/>
@@ -70,7 +50,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jzb-m9-USE">
-                                                    <rect key="frame" x="0.0" y="37.333333333333336" width="335" height="15.666666666666664"/>
+                                                    <rect key="frame" x="0.0" y="18.666666666666668" width="335" height="15.666666666666668"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MzV-9d-2P0">
                                                             <rect key="frame" x="0.0" y="0.0" width="35" height="15.666666666666666"/>
@@ -90,7 +70,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="aIH-9W-JKk">
-                                                    <rect key="frame" x="0.0" y="56" width="335" height="15.666666666666671"/>
+                                                    <rect key="frame" x="0.0" y="37.333333333333329" width="335" height="15.666666666666664"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NO3-QU-SL7">
                                                             <rect key="frame" x="0.0" y="0.0" width="23" height="15.666666666666666"/>
@@ -110,7 +90,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="P9E-bX-zZI">
-                                                    <rect key="frame" x="0.0" y="74.666666666666671" width="335" height="17"/>
+                                                    <rect key="frame" x="0.0" y="56" width="335" height="17"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="256" horizontalCompressionResistancePriority="756" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ocS-tn-JG1">
                                                             <rect key="frame" x="0.0" y="0.0" width="259" height="17"/>
@@ -159,7 +139,6 @@
                                     <outlet property="actionButton" destination="QWG-wH-CSB" id="uI1-5y-s9A"/>
                                     <outlet property="destinationAddressLabel" destination="SCD-zo-m8P" id="J12-Fj-NTY"/>
                                     <outlet property="networkLabel" destination="Np0-a0-yKq" id="W60-Rc-moC"/>
-                                    <outlet property="originAddressLabel" destination="GbZ-dF-AeF" id="Yh4-3n-K4q"/>
                                     <outlet property="statusLabel" destination="z2Z-6Q-hcU" id="xuR-LR-vI4"/>
                                     <outlet property="valueLabel" destination="EZk-1w-QGl" id="vnx-64-T8E"/>
                                 </connections>
@@ -236,46 +215,8 @@
                         <sections>
                             <tableViewSection id="Bsq-PG-vTX">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="gmX-eR-W2T">
-                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gmX-eR-W2T" id="zWJ-KE-daR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1A-G8-6fk">
-                                                    <rect key="frame" x="23" y="11" width="336" height="22"/>
-                                                    <subviews>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Origin Address (0x...)" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="yiX-eH-LaM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="314" height="22"/>
-                                                            <nil key="textColor"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                                                        </textField>
-                                                        <button opaque="NO" alpha="0.5" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vo-PX-8Ui">
-                                                            <rect key="frame" x="314" y="0.0" width="22" height="22"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="0vo-PX-8Ui" secondAttribute="height" multiplier="1:1" id="CPN-gg-Igy"/>
-                                                            </constraints>
-                                                            <state key="normal" image="QRCodeIcon"/>
-                                                            <connections>
-                                                                <action selector="scanQRCode:" destination="B1K-8w-bp2" eventType="touchUpInside" id="sUN-dj-Fk4"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="o1A-G8-6fk" secondAttribute="trailing" id="3mc-i4-usp"/>
-                                                <constraint firstAttribute="topMargin" secondItem="o1A-G8-6fk" secondAttribute="top" id="9hW-v3-kev"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="o1A-G8-6fk" secondAttribute="bottom" id="F5h-MJ-C9d"/>
-                                                <constraint firstItem="o1A-G8-6fk" firstAttribute="leading" secondItem="zWJ-KE-daR" secondAttribute="leadingMargin" constant="7" id="kjj-8L-rER"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="44" id="Iqy-8M-D1I">
-                                        <rect key="frame" x="0.0" y="79" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iqy-8M-D1I" id="G8t-zS-yJk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
@@ -317,7 +258,7 @@
                             <tableViewSection id="YKs-l5-MKG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="zbr-BS-qt2" detailTextLabel="qOr-6B-KMZ" style="IBUITableViewCellStyleValue1" id="sEV-UT-h00">
-                                        <rect key="frame" x="0.0" y="159" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="115" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sEV-UT-h00" id="1Sf-EE-jly">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.666666666666664"/>
@@ -367,8 +308,6 @@
                         <outlet property="destinationAddressField" destination="368-rF-4Nm" id="0v5-yC-hcx"/>
                         <outlet property="destinationQRCodeButton" destination="X8s-il-Iva" id="pub-Cr-n4z"/>
                         <outlet property="networkLabel" destination="qOr-6B-KMZ" id="kfN-yk-2VO"/>
-                        <outlet property="originAddressField" destination="yiX-eH-LaM" id="E24-xs-ZKN"/>
-                        <outlet property="originQRCodeButton" destination="0vo-PX-8Ui" id="B3e-SL-FbX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uU7-bI-Eh2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -408,47 +347,96 @@
                                     <action selector="close:" destination="pO5-NH-xoH" eventType="touchUpInside" id="xkY-w5-WEV"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9gg-lC-AbO">
-                                <rect key="frame" x="40" y="263.66666666666669" width="295" height="295.00000000000006"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="9gg-lC-AbO" secondAttribute="height" multiplier="1:1" id="87Q-Fc-SaT"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                                         " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="K2b-6m-iDP">
-                                <rect key="frame" x="40" y="578.66666666666663" width="295" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-FS-rDL">
-                                <rect key="frame" x="40" y="192.66666666666666" width="295" height="50.333333333333343"/>
-                                <string key="text">Please send 1 ETH from your origin address to the Mixer address displayed below. The transaction needs a gas limit of 1,000,000 to succeed.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="M0P-ld-LIg">
+                                <rect key="frame" x="30" y="74" width="315" height="282"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="bCb-FS-rDL">
+                                        <rect key="frame" x="0.0" y="0.0" width="315" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="OP7-0z-xtd"/>
+                                        </constraints>
+                                        <string key="text">Please send 1 ETH to the Mixer address displayed below. Using the Nifty browser plugin, you should set the gas limit to 1,000,000 and the 'data' field as below.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="EJ6-p7-WSb">
+                                        <rect key="frame" x="0.0" y="107" width="315" height="53"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="141" translatesAutoresizingMaskIntoConstraints="NO" id="Swc-tq-vsF">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mixer Address" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsi-vh-lrR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="117.66666666666667" height="30"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="88Z-vQ-DCs">
+                                                        <rect key="frame" x="258.66666666666669" y="0.0" width="56.333333333333314" height="30"/>
+                                                        <state key="normal" title="Copy"/>
+                                                        <connections>
+                                                            <action selector="copyAddress:" destination="pO5-NH-xoH" eventType="touchUpInside" id="ek6-EK-bLw"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x710129558E8ffF5caB9c0c9c43b99d79Ed864B99" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2b-6m-iDP">
+                                                <rect key="frame" x="0.0" y="36" width="315" height="17"/>
+                                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="15"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-Bv-IQB">
+                                        <rect key="frame" x="0.0" y="197" width="315" height="85"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="77" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-Q1-vVk">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="30"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Data" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiQ-7b-kG2">
+                                                        <rect key="frame" x="0.0" y="0.0" width="139" height="30"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfd-xM-zuD">
+                                                        <rect key="frame" x="216" y="0.0" width="99" height="30"/>
+                                                        <state key="normal" title="Copy"/>
+                                                        <connections>
+                                                            <action selector="copyData:" destination="pO5-NH-xoH" eventType="touchUpInside" id="7zS-FX-JN2"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x0d64b071000aa1ad195bbf94a98d73c880ae48ea14638a780e3aed6fc8a8485896456eef" textAlignment="center" lineBreakMode="middleTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="URG-lC-xBt">
+                                                <rect key="frame" x="0.0" y="34" width="315" height="51"/>
+                                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="15"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="M0P-ld-LIg" firstAttribute="top" secondItem="RUj-WY-xnB" secondAttribute="top" constant="30" id="33I-YS-RFm"/>
+                            <constraint firstItem="M0P-ld-LIg" firstAttribute="trailing" secondItem="RUj-WY-xnB" secondAttribute="trailing" constant="-30" id="6D7-2k-1zS"/>
                             <constraint firstItem="UNw-et-UOD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RUj-WY-xnB" secondAttribute="leading" symbolic="YES" id="Jir-8T-Nz2"/>
-                            <constraint firstItem="bCb-FS-rDL" firstAttribute="leading" secondItem="9gg-lC-AbO" secondAttribute="leading" id="UGX-XX-S79"/>
                             <constraint firstItem="UNw-et-UOD" firstAttribute="top" secondItem="RUj-WY-xnB" secondAttribute="top" id="UIj-7r-Ywl"/>
-                            <constraint firstItem="9gg-lC-AbO" firstAttribute="centerY" secondItem="RUj-WY-xnB" secondAttribute="centerY" id="V8Y-cT-ShG"/>
-                            <constraint firstItem="9gg-lC-AbO" firstAttribute="top" secondItem="bCb-FS-rDL" secondAttribute="bottom" constant="20.666666666666686" id="YjW-Yb-NjV"/>
-                            <constraint firstItem="9gg-lC-AbO" firstAttribute="leading" secondItem="RUj-WY-xnB" secondAttribute="leading" constant="40" id="ddd-k4-Kmn"/>
-                            <constraint firstItem="K2b-6m-iDP" firstAttribute="leading" secondItem="9gg-lC-AbO" secondAttribute="leading" id="fSy-du-MuL"/>
-                            <constraint firstItem="9gg-lC-AbO" firstAttribute="centerX" secondItem="RUj-WY-xnB" secondAttribute="centerX" id="haW-ME-kC2"/>
-                            <constraint firstItem="K2b-6m-iDP" firstAttribute="trailing" secondItem="9gg-lC-AbO" secondAttribute="trailing" id="oze-VY-kMa"/>
-                            <constraint firstItem="bCb-FS-rDL" firstAttribute="trailing" secondItem="9gg-lC-AbO" secondAttribute="trailing" id="rxe-C1-0HV"/>
-                            <constraint firstItem="K2b-6m-iDP" firstAttribute="top" secondItem="9gg-lC-AbO" secondAttribute="bottom" constant="20" id="y8z-eW-eH7"/>
+                            <constraint firstItem="M0P-ld-LIg" firstAttribute="leading" secondItem="RUj-WY-xnB" secondAttribute="leading" constant="30" id="a2G-1o-7m7"/>
+                            <constraint firstItem="RUj-WY-xnB" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="M0P-ld-LIg" secondAttribute="bottom" constant="30" id="tFJ-wF-ILB"/>
                             <constraint firstItem="RUj-WY-xnB" firstAttribute="trailing" secondItem="UNw-et-UOD" secondAttribute="trailing" constant="16" id="ygd-gJ-Sc2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RUj-WY-xnB"/>
                     </view>
                     <connections>
                         <outlet property="instructionLabel" destination="bCb-FS-rDL" id="WDL-Z1-0D3"/>
-                        <outlet property="qrCodeImageView" destination="9gg-lC-AbO" id="FTG-90-MIV"/>
-                        <outlet property="qrCodeLabel" destination="K2b-6m-iDP" id="fpA-7v-797"/>
+                        <outlet property="mixerAddressLabel" destination="K2b-6m-iDP" id="fpA-7v-797"/>
+                        <outlet property="transactionData" destination="URG-lC-xBt" id="hrI-Cc-Fa9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxG-TI-ubb" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -18,7 +18,6 @@ class CommitmentTableViewCell: UITableViewCell {
     var commitment: Commitment? { didSet { updateUI() } }
     var onFundButtonTapped: ((String) -> ())?
     
-    @IBOutlet weak var originAddressLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var destinationAddressLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var valueLabel: UILabel! { didSet { updateUI() } }
     @IBOutlet weak var networkLabel: UILabel! { didSet { updateUI() } }
@@ -28,39 +27,27 @@ class CommitmentTableViewCell: UITableViewCell {
     
     @IBAction func actionButtonTapped(_ sender: UIButton) {
         guard let commitment = commitment else { return }
-        if commitment.commitTxRelayFailed
-            || (commitment.commitTxBlockNumber != nil && !commitment.commitTxSuccesful) {
-            print("Requesting commit")
-            CommitmentUpdater.shared.requestCommit(for: commitment)
-        } else if commitment.fundingTxBlockNumber == nil {
-            NotificationCenter.default.post(name: .segueToMixerAddress, object: commitment.mixerId)
+        if commitment.fundingTxBlockNumber == nil {
+            let commitData = CommitmentUpdater.shared.getCommitData(for: commitment)
+            NotificationCenter.default.post(name: .segueToMixerAddress, object: [
+                "mixerId": commitment.mixerId, "commitData": commitData
+            ])
         } else {
             print("Requesting withdrawal")
+            actionButton.isHidden = true // temporarily hide the withdraw button to avoid double taps
             CommitmentUpdater.shared.requestWithdrawal(for: commitment)
         }
     }
     
     private func updateUI() {
-        originAddressLabel?.text = commitment?.from
         destinationAddressLabel?.text = commitment?.to
         valueLabel?.text = ConfigParser.shared.value(for: commitment?.mixerId ?? "")
         networkLabel?.text = ConfigParser.shared.network(for: commitment?.mixerId ?? "")
         actionButton?.isHidden = true
         statusLabel?.text = "Preparing commitment..."
+        if commitment != nil { print(commitment!)}
         
-        if commitment?.commitRequested == true, commitment?.commitTxHash == nil {
-            statusLabel?.text = "Sending commitment to relayer..."
-        } else if commitment?.commitTxRelayFailed == true, commitment?.commitTxHash == nil {
-            statusLabel?.text = "Commitment Relaying Error"
-            actionButton?.isHidden = false
-            actionButton?.setTitle("Retry", for: .normal)
-        } else if let commitTxHash = commitment?.commitTxHash, commitment?.commitTxBlockNumber == nil {
-            statusLabel?.text = "Confirming commit... (tx=\(commitTxHash.dropLast(58)))"
-        } else if commitment?.commitTxBlockNumber != nil, commitment?.commitTxSuccesful != true {
-            statusLabel?.text = "Commit tx reverted. Did relayer send enough gas?"
-            actionButton?.isHidden = false
-            actionButton?.setTitle("Retry", for: .normal)
-        } else if commitment?.fundingTxBlockNumber == nil {
+        if commitment?.fundingTxBlockNumber == nil {
             statusLabel?.text = "Waiting for deposit..."
             actionButton?.isHidden = false
             actionButton?.setTitle("Fund", for: .normal)

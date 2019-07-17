@@ -18,6 +18,19 @@ class CommitmentUpdater: NSObject {
         super.init()
     }
     
+    func getCommitData(for commitment: Commitment) -> String? {
+        guard
+            let mixerId = commitment.mixerId,
+            let to = commitment.to,
+            let toAddress = EthereumAddress(hexString: to),
+            let secretStr = commitment.secret,
+            let secret = BigUInt(secretStr)
+        else { return nil }
+        return MixerManager.shared.getCommitData(for: mixerId,
+                                                 nullifierSecret: secret,
+                                                 fundedAddress: toAddress)
+    }
+    
     func start() {
         // fetch request
         let request: NSFetchRequest<Commitment> = Commitment.fetchRequest()
@@ -25,7 +38,7 @@ class CommitmentUpdater: NSObject {
         fetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
             managedObjectContext: CoreDataManager.shared.viewContext,
-            sectionNameKeyPath: nil,//"state",
+            sectionNameKeyPath: nil,
             cacheName: nil)
         fetchedResultsController?.delegate = self
         do { try fetchedResultsController?.performFetch() }
@@ -43,24 +56,10 @@ class CommitmentUpdater: NSObject {
             commitment.proofComputed = false
             self?.handle(commitment)
         }
-        
-    }
-    
-    func requestCommit(for commitment: Commitment) {
-        contextDo { [weak self] in
-            commitment.commitRequested = true
-            commitment.commitTxHash = nil
-            commitment.commitTxBlockNumber = nil
-            commitment.commitTxRelayFailed = false
-            self?.handle(commitment)
-        }
-        
     }
     
     private func handle(_ commitment: Commitment) {
-        if commitment.commitTxBlockNumber == nil, commitment.commitRequested {
-            commit(commitment)
-        } else if commitment.fundingTxBlockNumber == nil {
+        if commitment.fundingTxBlockNumber == nil {
             watchFundingEvent(for: commitment)
         } else if commitment.withdrawTxConfirmedAt == nil, !commitment.withdrawRequested {
             watchAllFundingEvents(afterFundingOf: commitment)
@@ -69,59 +68,19 @@ class CommitmentUpdater: NSObject {
         }
     }
     
-    private func commit(_ commitment: Commitment) {
-        guard
-            let mixerId = commitment.mixerId,
-            let from = commitment.from,
-            let to = commitment.to,
-            let fromAddress = EthereumAddress(hexString: from),
-            let toAddress = EthereumAddress(hexString: to),
-            let secretStr = commitment.secret,
-            let secret = BigUInt(secretStr)
-        else { return }
-        
-        MixerManager.shared.commit(
-            mixerId: mixerId,
-            fundedAddress: toAddress,
-            funderAddress: fromAddress,
-            secret: secret,
-            txWasSubmitted: { [weak self] (txHash, error) in
-                self?.contextDo {
-                    if let txHash = txHash {
-                        commitment.commitTxHash = txHash.hex()
-                    } else {
-                        commitment.commitRequested = false
-                        commitment.commitTxRelayFailed = true
-                    }
-                }
-            }, txWasMined:  { [weak self] (success, blockNum) in
-                self?.contextDo {
-                    if let blockNum = blockNum {
-                        commitment.commitTxBlockNumber = NSNumber(value: blockNum)
-                    }
-                    commitment.commitTxSuccesful = success
-                    commitment.commitRequested = false
-                    if success { self?.handle(commitment) }
-                }
-            }
-        )
-    }
-    
     private func watchFundingEvent(for commitment: Commitment) {
         guard
             let mixerId = commitment.mixerId,
             let to = commitment.to,
             let toAddress = EthereumAddress(hexString: to),
             let secretStr = commitment.secret,
-            let secret = BigUInt(secretStr),
-            let commitmentBlock = commitment.commitTxBlockNumber?.uint64Value
+            let secret = BigUInt(secretStr)
         else { return }
         
         MixerManager.shared.watchFundingEvent(
             mixerId: mixerId,
             fundedAddress: toAddress,
-            secret: secret,
-            startBlock: commitmentBlock) { [weak self] (result, error) in
+            secret: secret) { [weak self] (result, error) in
                 if let blockNum = result?.blockNumber, let leafIndex = result?.leafIndex {
                     self?.contextDo { [weak self] in
                         commitment.fundingTxBlockNumber = NSNumber(value: blockNum)
@@ -157,9 +116,7 @@ class CommitmentUpdater: NSObject {
     private func withdraw(_ commitment: Commitment) {
         guard
             let mixerId = commitment.mixerId,
-            let from = commitment.from,
             let to = commitment.to,
-            let fromAddress = EthereumAddress(hexString: from),
             let toAddress = EthereumAddress(hexString: to),
             let secretStr = commitment.secret,
             let secret = BigUInt(secretStr),
@@ -170,7 +127,6 @@ class CommitmentUpdater: NSObject {
         MixerManager.shared.withdraw(
             mixerId: mixerId,
             fundedAddress: toAddress,
-            funderAddress: fromAddress,
             secret: secret,
             leafIndex: leafIndex,
             proofWasComputed: { [weak self] in

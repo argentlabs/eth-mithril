@@ -15,59 +15,47 @@ class ShowMixerViewController: UIViewController {
     
     var mixerAddress: String? { didSet { updateUI() } }
     var mixedValue: String? { didSet { updateUI() } }
+    var commitData: String? { didSet { updateUI() } }
     
     // MARK: - UI
     
     struct Constants {
         static let instructions = """
-Please send %VALUE from your origin address to the Mixer address displayed below. The transaction needs a gas limit of 1,000,000 to succeed.
+Please send %VALUE to the Mixer address displayed below. Using the Nifty browser plugin, you should set the gas limit to 1,000,000 and the 'data' field as below.
 """
         static let defaultValue = "1 ETH"
     }
     
-    @IBOutlet weak var qrCodeLabel: UILabel!  { didSet { updateUI() } }
-    @IBOutlet weak var qrCodeImageView: UIImageView!  { didSet { updateUI() } }
+    @IBOutlet weak var mixerAddressLabel: UILabel!  { didSet { updateUI() } }
     @IBOutlet weak var instructionLabel: UILabel! { didSet { updateUI() } }
+    @IBOutlet weak var transactionData: UILabel! { didSet { updateUI() } }
+    
+    @IBAction func copyData(_ sender: UIButton) {
+        copy(commitData, label: "Transaction Data")
+    }
+    @IBAction func copyAddress(_ sender: UIButton) {
+        copy(mixerAddress, label: "Mixer Address")
+    }
     
     private func updateUI() {
         guard let mixerAddress = mixerAddress else { return }
-        qrCodeImageView?.image = generateQRCode(from: mixerAddress)
-        qrCodeLabel?.text = mixerAddress
-        
-        instructionLabel?.text = Constants.instructions.replacingOccurrences(of: "%VALUE", with: mixedValue ?? Constants.defaultValue)
+        mixerAddressLabel?.text = mixerAddress
+        transactionData?.text = (commitData ?? "0x")//.components(withLength: 25).joined(separator: " ")
+        instructionLabel?.text = Constants.instructions
+            .replacingOccurrences(of: "%VALUE", with: mixedValue ?? Constants.defaultValue)
     }
     
-    private func generateQRCode(from string: String) -> UIImage? {
-        let data = string.data(using: String.Encoding.ascii)
-        
-        if let filter = CIFilter(name: "CIQRCodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-            
-            if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output)
-            }
-        }
-        
-        return nil
-    }
-    
-    private func copyAddress() {
-        UIPasteboard.general.string = mixerAddress
+    private func copy(_ source: String?, label: String) {
+        UIPasteboard.general.string = source
         
         // Show Alert
         let alert: UIAlertController = UIAlertController(
-            title: "Address Copied",
-            message: "The Mixer address has been copied to your clipboard.",
+            title: "\(label) Copied",
+            message: "The \(label) has been copied to your clipboard.",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(alert, animated: true)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        copyAddress()
     }
     
     // MARK: - Navigation
@@ -77,3 +65,13 @@ Please send %VALUE from your origin address to the Mixer address displayed below
     }
 }
 
+
+extension String {
+    func components(withLength length: Int) -> [String] {
+        return stride(from: 0, to: self.count, by: length).map {
+            let start = self.index(self.startIndex, offsetBy: $0)
+            let end = self.index(start, offsetBy: length, limitedBy: self.endIndex) ?? self.endIndex
+            return String(self[start..<end])
+        }
+    }
+}
