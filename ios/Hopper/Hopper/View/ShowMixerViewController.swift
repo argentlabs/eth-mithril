@@ -21,7 +21,7 @@ class ShowMixerViewController: UIViewController {
     
     struct Constants {
         static let instructions = """
-Please send %VALUE to the Mixer address displayed below. Using the Nifty browser plugin, you should set the gas limit to 1,000,000 and the 'data' field as below.
+Please send %VALUE to the Mixer address displayed below, using the Nifty browser plugin. Set the gas limit to 1,000,000 and the 'data' field to the value shown below.
 """
         static let defaultValue = "1 ETH"
     }
