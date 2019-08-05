@@ -3,9 +3,9 @@ import unittest
 from ethsnarks.mimc import mimc_hash
 from ethsnarks.field import FQ
 from ethsnarks.utils import native_lib_path
-from ethsnarks.mimc_merkletree import MerkleTree
-from mixer import Mixer
+from ethsnarks.merkletree import MerkleTree
 
+from mixer import Mixer
 from hashlib import sha256
 
 NATIVE_LIB_PATH = native_lib_path('../.build/libmixer')
