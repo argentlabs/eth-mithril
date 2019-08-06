@@ -33,7 +33,7 @@ namespace ethsnarks
 class mod_mixer : public GadgetT
 {
 public:
-    typedef MiMC_hash_gadget HashT;
+    typedef MiMC_e7_hash_gadget HashT;
     // typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
     typedef Sha256EthFields Sha256HashT; // SHA256 - for commitment
     // typedef LongsightL12p5_MP_gadget Sha256HashT; // MiMC - for commitment
