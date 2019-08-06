@@ -1,8 +1,0 @@
-matrix:
-  include:
-    - os: linux
-      language: cpp
-    - os: osx
-      language: cpp
-script:
-  - mkdir -p build && cd build && cmake .. && make && make test

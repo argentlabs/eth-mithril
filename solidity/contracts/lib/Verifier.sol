@@ -2,45 +2,18 @@
 
 pragma solidity ^0.5.0;
 
-import "./Pairing.sol";
-
 library Verifier
 {
-    using Pairing for Pairing.G1Point;
-    using Pairing for Pairing.G2Point;
-
     function scalarField ()
         internal pure returns (uint256)
     {
         return 21888242871839275222246405745257275088548364400416034343698204186575808495617;
     }
 
-    struct VerifyingKey
-    {
-        Pairing.G1Point alpha;
-        Pairing.G2Point beta;
-        Pairing.G2Point gamma;
-        Pairing.G2Point delta;
-        Pairing.G1Point[] gammaABC;
-    }
-
-    struct Proof
-    {
-        Pairing.G1Point A;
-        Pairing.G2Point B;
-        Pairing.G1Point C;
-    }
-
-    struct ProofWithInput
-    {
-        Proof proof;
-        uint256[] input;
-    }
-
 
     function negateY( uint256 Y )
-        internal 
-        pure 
+        internal
+        pure
         returns (uint256)
     {
         uint q = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
@@ -93,12 +66,13 @@ library Verifier
         assert ok == FQ12.one()
     */
     function verify (uint256[14] memory in_vk, uint256[] memory vk_gammaABC, uint256[8] memory in_proof, uint256[] memory proof_inputs)
-        internal 
-        view 
+        internal
+        view
         returns (bool)
     {
-        require( ((vk_gammaABC.length / 2) - 1) == proof_inputs.length );
-        
+        uint256 snark_scalar_field = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
+        require(((vk_gammaABC.length / 2) - 1) == proof_inputs.length);
+
         // Compute the linear combination vk_x
         uint256[3] memory mul_input;
         uint256[4] memory add_input;
@@ -111,6 +85,7 @@ library Verifier
 
         // Performs a sum of gammaABC[0] + sum[ gammaABC[i+1]^proof_inputs[i] ]
         for (uint i = 0; i < proof_inputs.length; i++) {
+            require(proof_inputs[i] < snark_scalar_field);
             mul_input[0] = vk_gammaABC[m++];
             mul_input[1] = vk_gammaABC[m++];
             mul_input[2] = proof_inputs[i];
@@ -120,14 +95,14 @@ library Verifier
                 success := staticcall(sub(gas, 2000), 7, mul_input, 0x80, add(add_input, 0x40), 0x60)
             }
             require(success);
-            
+
             assembly {
                 // ECADD
                 success := staticcall(sub(gas, 2000), 6, add_input, 0xc0, add_input, 0x60)
             }
             require(success);
         }
-        
+
         uint[24] memory input = [
             // (proof.A, proof.B)
             in_proof[0], in_proof[1],                           // proof.A   (G1)
@@ -152,35 +127,5 @@ library Verifier
         }
         require(success);
         return out[0] != 0;
-    }
-
-
-    function verify(VerifyingKey memory vk, ProofWithInput memory pwi)
-        internal 
-        view 
-        returns (bool)
-    {
-        return verify(vk, pwi.proof, pwi.input);
-    }
-
-
-    function verify(VerifyingKey memory vk, Proof memory proof, uint256[] memory input)
-        internal 
-        view 
-        returns (bool)
-    {
-        require(input.length + 1 == vk.gammaABC.length);
-
-        // Compute the linear combination vk_x
-        Pairing.G1Point memory vk_x = vk.gammaABC[0];
-        for (uint i = 0; i < input.length; i++)
-            vk_x = Pairing.pointAdd(vk_x, Pairing.pointMul(vk.gammaABC[i + 1], input[i]));
-
-        // Verify proof
-        return Pairing.pairingProd4(
-            proof.A, proof.B,
-            vk_x.negate(), vk.gamma,
-            proof.C.negate(), vk.delta,
-            vk.alpha.negate(), vk.beta);
     }
 }

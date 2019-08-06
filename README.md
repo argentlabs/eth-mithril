@@ -84,7 +84,7 @@ Requires brew.
 
 - Install dependencies:
   ```
-  pip3 install py_ecc==1.4.2 bitstring pysha3 coverage
+  pip3 install py_ecc==1.4.2 bitstring pysha3 coverage pyblake2
   ```
 - Run tests:
   ```

@@ -1,15 +1,15 @@
 {
   "contractName": "MerkleTree",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MerkleTree.sol\":\"MerkleTree\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MerkleTree.sol\":{\"keccak256\":\"0x0c6d4729988f2c4942ed79ad435c5c9da000d84cacc09a3feb58adb7ebd19dfc\",\"urls\":[\"bzzr://851c8df5a5570877d6f8a1c50d9d34025444d98dd5e6524e58cdb5076634ad0e\"]},\"/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MiMC.sol\":{\"keccak256\":\"0x9c960cf7cf1612fd15d88d57f3b2d962dee17b926c61cf184633df843a994208\",\"urls\":[\"bzzr://27fd49ce0e7ccf37c175a5911e3eeda5cfc748c805f193b1eb72c126b96cd019\"]}},\"version\":1}",
-  "bytecode": "0x604c6023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820c50bd88c8acff600d78087bb07ceb268f4fe8ffcf35a088ecb95a6ee838aa9fc0029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820c50bd88c8acff600d78087bb07ceb268f4fe8ffcf35a088ecb95a6ee838aa9fc0029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.8+commit.23d335f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MerkleTree.sol\":\"MerkleTree\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MerkleTree.sol\":{\"keccak256\":\"0x0c6d4729988f2c4942ed79ad435c5c9da000d84cacc09a3feb58adb7ebd19dfc\",\"urls\":[\"bzzr://851c8df5a5570877d6f8a1c50d9d34025444d98dd5e6524e58cdb5076634ad0e\"]},\"/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MiMC.sol\":{\"keccak256\":\"0x9c960cf7cf1612fd15d88d57f3b2d962dee17b926c61cf184633df843a994208\",\"urls\":[\"bzzr://27fd49ce0e7ccf37c175a5911e3eeda5cfc748c805f193b1eb72c126b96cd019\"]}},\"version\":1}",
+  "bytecode": "0x604c6023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058202ca1bd4b09cebe8db3ec83283ae42456a96e412c350abb28a9a025d80067c5d60029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a723058202ca1bd4b09cebe8db3ec83283ae42456a96e412c350abb28a9a025d80067c5d60029",
   "sourceMap": "47:5804:2:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
   "deployedSourceMap": "47:5804:2:-;;;;;;;;",
   "source": "pragma solidity ^0.5.0;\n\nimport \"./MiMC.sol\";\n\nlibrary MerkleTree\n{\n    // ceil(log2(1<<15))\n    uint constant internal TREE_DEPTH = 15;\n\n\n    // 1<<15 leaves\n    uint constant internal MAX_LEAF_COUNT = 32768;\n\n\n    struct Data\n    {\n        uint cur;\n        uint256[32768][16] nodes; // first column = leaves, second column = leaves' parents, etc\n    }\n\n    function treeDepth() internal pure returns (uint256) {\n        return TREE_DEPTH;\n    }\n\n\n    function fillLevelIVs (uint256[15] memory IVs)\n        internal\n        pure\n    {\n        IVs[0] = 149674538925118052205057075966660054952481571156186698930522557832224430770;\n        IVs[1] = 9670701465464311903249220692483401938888498641874948577387207195814981706974;\n        IVs[2] = 18318710344500308168304415114839554107298291987930233567781901093928276468271;\n        IVs[3] = 6597209388525824933845812104623007130464197923269180086306970975123437805179;\n        IVs[4] = 21720956803147356712695575768577036859892220417043839172295094119877855004262;\n        IVs[5] = 10330261616520855230513677034606076056972336573153777401182178891807369896722;\n        IVs[6] = 17466547730316258748333298168566143799241073466140136663575045164199607937939;\n        IVs[7] = 18881017304615283094648494495339883533502299318365959655029893746755475886610;\n        IVs[8] = 21580915712563378725413940003372103925756594604076607277692074507345076595494;\n        IVs[9] = 12316305934357579015754723412431647910012873427291630993042374701002287130550;\n        IVs[10] = 18905410889238873726515380969411495891004493295170115920825550288019118582494;\n        IVs[11] = 12819107342879320352602391015489840916114959026915005817918724958237245903353;\n        IVs[12] = 8245796392944118634696709403074300923517437202166861682117022548371601758802;\n        IVs[13] = 16953062784314687781686527153155644849196472783922227794465158787843281909585;\n        IVs[14] = 19346880451250915556764413197424554385509847473349107460608536657852472800734;\n    }\n\n\n    function hashImpl (uint256 left, uint256 right, uint256 IV)\n        internal\n        pure\n        returns (uint256)\n    {\n        uint256[] memory x = new uint256[](2);\n        x[0] = left;\n        x[1] = right;\n\n        return MiMC.Hash(x, IV);\n    }\n\n\n    function insert(Data storage self, uint256 leaf)\n        internal\n        returns (uint256 new_root, uint256 offset)\n    {\n        require(leaf > 0, \"MT: Leaf is null\");\n\n\n        uint256[15] memory IVs;\n        fillLevelIVs(IVs);\n\n        offset = self.cur;\n\n        require(offset < MAX_LEAF_COUNT, \"MT: Tree is full\");\n\n        self.nodes[0][offset] = leaf;\n\n        new_root = updateTree(self, IVs);\n\n        self.cur = offset + 1;\n    }\n\n\n    /**\n    * Returns calculated merkle root\n    */\n    function verifyPath(uint256 leaf, uint256[15] memory in_path, bool[15] memory address_bits)\n        internal \n        pure \n        returns (uint256 merkleRoot)\n    {\n        uint256[15] memory IVs;\n        fillLevelIVs(IVs);\n\n        merkleRoot = leaf;\n\n        for (uint depth = 0; depth < TREE_DEPTH; depth++) {\n            if (address_bits[depth]) {\n                merkleRoot = hashImpl(in_path[depth], merkleRoot, IVs[depth]);\n            } else {\n                merkleRoot = hashImpl(merkleRoot, in_path[depth], IVs[depth]);\n            }\n        }\n    }\n\n\n    function verifyPath(Data storage self, uint256 leaf, uint256[15] memory in_path, bool[15] memory address_bits)\n        internal \n        view \n        returns (bool)\n    {\n        return verifyPath(leaf, in_path, address_bits) == getRoot(self);\n    }\n\n\n    function getLeaf(Data storage self, uint depth, uint offset)\n        internal\n        view\n        returns (uint256)\n    {\n        return getUniqueLeaf(depth, offset, self.nodes[depth][offset]);\n    }\n\n\n    function getMerkleProof(Data storage self, uint index)\n        internal\n        view\n        returns (uint256[15] memory proof_path)\n    {\n        for (uint depth = 0; depth < TREE_DEPTH; depth++)\n        {\n            if (index % 2 == 0) {\n                proof_path[depth] = getLeaf(self, depth, index + 1);\n            } else {\n                proof_path[depth] = getLeaf(self, depth, index - 1);\n            }\n            index = uint(index / 2);\n        }\n    }\n\n\n    function getUniqueLeaf(uint256 depth, uint256 offset, uint256 leaf)\n        internal pure returns (uint256)\n    {\n        if (leaf == 0x0)\n        {\n            leaf = uint256(\n                sha256(\n                    abi.encodePacked(\n                        uint16(depth),\n                        uint240(offset)))) % MiMC.getScalarField();\n        }\n\n        return leaf;\n    }\n\n\n    function updateTree(Data storage self, uint256[15] memory IVs)\n        internal returns(uint256 root)\n    {\n        uint currentIndex = self.cur;\n        uint256 leaf1;\n        uint256 leaf2;\n\n        for (uint depth = 0; depth < TREE_DEPTH; depth++)\n        {\n\n            if (currentIndex%2 == 0)\n            {\n                leaf1 = self.nodes[depth][currentIndex];\n\n                leaf2 = getUniqueLeaf(depth, currentIndex + 1, self.nodes[depth][currentIndex + 1]);\n            } else\n            {\n                leaf1 = getUniqueLeaf(depth, currentIndex - 1, self.nodes[depth][currentIndex - 1]);\n\n                leaf2 = self.nodes[depth][currentIndex];\n            }\n\n            uint nextIndex = uint(currentIndex/2);\n\n            self.nodes[depth+1][nextIndex] = hashImpl(leaf1, leaf2, IVs[depth]);\n\n            currentIndex = nextIndex;\n        }\n\n        return self.nodes[TREE_DEPTH][0];\n    }\n\n\n    function getRoot (Data storage self)\n        internal\n        view\n        returns (uint256)\n    {\n        return self.nodes[TREE_DEPTH][0];\n    }\n\n    function getNextLeafIndex (Data storage self)\n        internal\n        view\n        returns (uint256)\n    {\n        return self.cur;\n    }\n}",
-  "sourcePath": "/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MerkleTree.sol",
+  "sourcePath": "/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MerkleTree.sol",
   "ast": {
-    "absolutePath": "/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MerkleTree.sol",
+    "absolutePath": "/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MerkleTree.sol",
     "exportedSymbols": {
       "MerkleTree": [
         1035
@@ -30,7 +30,7 @@
         "src": "0:23:2"
       },
       {
-        "absolutePath": "/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MiMC.sol",
+        "absolutePath": "/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MiMC.sol",
         "file": "./MiMC.sol",
         "id": 423,
         "nodeType": "ImportDirective",
@@ -8158,7 +8158,7 @@
     "src": "0:5851:2"
   },
   "legacyAST": {
-    "absolutePath": "/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MerkleTree.sol",
+    "absolutePath": "/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MerkleTree.sol",
     "exportedSymbols": {
       "MerkleTree": [
         1035
@@ -8179,7 +8179,7 @@
         "src": "0:23:2"
       },
       {
-        "absolutePath": "/Users/ovdbigge/argent/hopper3/solidity/contracts/lib/MiMC.sol",
+        "absolutePath": "/Users/ovdbigge/argent/hopper5/solidity/contracts/lib/MiMC.sol",
         "file": "./MiMC.sol",
         "id": 423,
         "nodeType": "ImportDirective",
@@ -16312,7 +16312,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-17T17:37:33.462Z",
+  "updatedAt": "2019-07-29T08:06:04.565Z",
   "devdoc": {
     "methods": {}
   },

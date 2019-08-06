@@ -9,7 +9,6 @@
 #include "utils.hpp"
 
 // handmade gadgets
-#include "gadgets/sha256_ethereum.hpp"
 #include "gadgets/sha256_eth_fields.hpp"
 
 // ethsnarks gadgets
@@ -36,7 +35,7 @@ class mod_mixer : public GadgetT
 public:
     typedef MiMC_hash_gadget HashT;
     // typedef LongsightL12p5_MP_gadget HashT;      // MiMC - for merkle tree and nullifier
-    typedef Sha256EthFields<FieldT> Sha256HashT; // SHA256 - for commitment
+    typedef Sha256EthFields Sha256HashT; // SHA256 - for commitment
     // typedef LongsightL12p5_MP_gadget Sha256HashT; // MiMC - for commitment
     const size_t tree_depth = MIXER_TREE_DEPTH;
 
@@ -89,7 +88,7 @@ public:
                                                 // logic gadgets
                                                 nullifier_hash(in_pb, nullifier_hash_IV, {nullifier_secret_var, nullifier_secret_var}, FMT(annotation_prefix, ".spend_hash")),
                                                 // leaf_hash(in_pb, leaf_hash_IV, {nullifier_secret_var, wallet_address_var}, FMT(annotation_prefix, ".leaf_hash")),
-                                                leaf_hash(in_pb, nullifier_secret_var, wallet_address_var),
+                                                leaf_hash(in_pb, nullifier_secret_var, wallet_address_var, FMT(annotation_prefix, ".leaf_hash")),
                                                 m_authenticator(in_pb, tree_depth, address_bits, m_IVs, leaf_hash.result(), root_var, path_var, FMT(annotation_prefix, ".authenticator"))
     {
         in_pb.set_input_sizes(3);

@@ -12,8 +12,8 @@
     "ropsten-1ETH-1": {
       "network": "Ropsten Testnet",
       "rpcUrl": "https://ropsten.infura.io/v3/9c2c162b995446099dae8923952edd44",
-      "relayerEndpoint": "https://ropsten.hoppereth.org",
-      "mixerAddress": "0x323A61DdAAE5c3f1019A9f68B231e2F737C5E505",
+      "relayerEndpoint": "https://cloud-test.argent-api.com/v1/signer/mixer",
+      "mixerAddress": "0x8A0d3FFA65b79c3460a799a30A3E91Cf80F71E34",
       "value": "1 ETH",
       "sortKey": 1,
       "chainId": 3
@@ -31,7 +31,7 @@
       "network": "Ethereum Mainnet",
       "rpcUrl": "https://mainnet.infura.io/v3/91ffab09868d430f9ce744c78d7ff427",
       "relayerEndpoint": "https://cloud-staging.argent-api.com/v1/signer/mixer",
-      "mixerAddress": "0x898C0c0Bf4fD550D72576fca178cA19F6BbBBe39",
+      "mixerAddress": "0x7B9434Eae84d9C1F5a6cA90a437E1583618a0A27",
       "value": "1 ETH",
       "sortKey": 2,
       "chainId": 1
