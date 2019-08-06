@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-import "./MiMC.sol";
+import "./MiMC_hash.sol";
 
 library MerkleTree
 {
@@ -54,7 +54,7 @@ library MerkleTree
         x[0] = left;
         x[1] = right;
 
-        return MiMC.Hash(x, IV);
+        return MiMC_hash.MiMCpe7_mp(x, IV);
     }
 
 
@@ -147,7 +147,7 @@ library MerkleTree
                 sha256(
                     abi.encodePacked(
                         uint16(depth),
-                        uint240(offset)))) % MiMC.getScalarField();
+                        uint240(offset)))) % MiMC_hash.getScalarField();
         }
 
         return leaf;

@@ -2,7 +2,7 @@ pragma solidity ^0.5.0;
 
 import "./lib/Verifier.sol";
 import "./lib/MerkleTree.sol";
-import "./lib/MiMC.sol";
+import "./lib/MiMC_hash.sol";
 
 contract Mixer
 {
@@ -69,7 +69,7 @@ contract Mixer
         uint256[] memory vals = new uint256[](2);
         vals[0] = nullifier_secret;
         vals[1] = nullifier_secret;
-        return MiMC.Hash(vals, 0);
+        return MiMC_hash.MiMCpe7_mp(vals, 0);
     }
 
     function getMerklePath(uint256 leafIndex)
