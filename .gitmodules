@@ -1,3 +1,6 @@
 [submodule "ethsnarks"]
 	path = ethsnarks
 	url = https://github.com/HarryR/ethsnarks.git
+[submodule "wasm/emsdk"]
+	path = wasm/emsdk
+	url = https://github.com/emscripten-core/emsdk.git
