@@ -7,6 +7,8 @@
   "author": "olivier@argent.xyz",
   "license": "ISC",
   "devDependencies": {
+    "truffle": "^5.0.29",
+    "ganache-cli": "^6.5.0",
     "bn-chai": "^1.0.1",
     "chai": "^4.2.0",
     "dotenv": "^8.0.0",

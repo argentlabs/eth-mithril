@@ -1,0 +1,13 @@
+diff --git a/libff/common/profiling.cpp b/libff/common/profiling.cpp
+index f2a1985..665fa07 100755
+--- a/libff/common/profiling.cpp
++++ b/libff/common/profiling.cpp
+@@ -38,7 +38,7 @@ long long get_nsec_time()
+ /* Return total CPU time consumsed by all threads of the process, in nanoseconds. */
+ long long get_nsec_cpu_time()
+ {
+-#if _MSC_VER
++#if defined(_MSC_VER) || defined(__EMSCRIPTEN__)
+ 	return 0;
+ #else
+     ::timespec ts;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hopper WASM example</title>
+		<script src="mixer_js.js" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var test_data = {"root": "0x25effa7ae6b15ce579b7e2c6b24169f7fd31571bafc8b5c00818220f0670057b", "wallet_address": "0x8e44d1193c827e2ef42224fb572b96b2c2c58c1b7eed91150fe6033817aa9c9", "nullifier": "0x29d5855566f660a056b57ef478b5905f5b4325688cc69fa084df8b40a76031cb", "nullifier_secret": "0xc767c65bf941db51ebe8e97b5aa9d0919019467b9b66adc778069a8430b3641", "address": 2, "path": ["0x17833f95bea2c44d5b98864eacb67c4aa45f5750cc26c034d2ce118aefc7f942", "0x55f7d551a50a60ab16daae0f849952762198b72f6b46e8b351728d2edaf1b1b", "0xaaf4c1f8c818c739b1ba6b1b2c09b4b90717da5038042be8ed43ac0ce3f371a", "0x222ef2884a14feeba44793cfb211970a3d116cbe65cf2694054ec69f4015d39c", "0x8554ef32b4a851765d3162c5e54eb97b01fcdd3c9e9592d7a3eafdaa123403e", "0x1e2bf81e1ace26df94fe8d049a25b0612e35a1fcae2f75dea45c3a94ef6cb669", "0x231b07146f4ee75bdd947481b16162a65a5b4baf8c85dde4470dc3c4c4a5b118", "0x15b5181133732369771c10c835330bf72bafc36f5220c396f55645275b733349", "0x1183b7a0d985f0d1ed7bc1eddf175b113b1d4938e48d8d74a5a81d6dadb213a7", "0x62abb9b25e1d325c5befa5b6aff18b688fdd4ef7ae1b46fcb3d7f991134ec16", "0x2395ed4209212a5ba691b12e87710080d26b189df3b77db84acb5bd34f29f06", "0x1a76492f398d15e4176dbed49010d6383c05e181fea2490ad5bb3b4e1350435d", "0xbd0d1e5853bc1f219596ab7fb759fba1c957ec3d1cfb0411ca0f23e2679df42", "0x1f3573ad2b248e5a71fe725d3a61511219c5945a8ad8207079c68aa0168f2b8b", "0x2144a90e5da8b039e17a97a5262f0eb3868554d5daee6b92654e85b4f61c6cf4"]};
+
+			Module['preRun'] = function () {
+				FS.createPreloadedFile("/", "mixer.pk.raw", "mixer.pk.raw", true, false);
+			};
+
+			Module['onRuntimeInitialized'] = function () {
+				alert('Starting Prove');
+			    var begin_prove = new Date().getTime() / 1000;
+				var mixer_prove_json = Module.cwrap('mixer_prove_json', 'string', ['string', 'string']);
+				var result = mixer_prove_json('/mixer.pk.raw', JSON.stringify(test_data));
+				var end_prove = new Date().getTime() / 1000;
+				alert(end_prove - begin_prove);
+				console.log(result);
+			};
+		</script>
+	</body>
+</html>

@@ -13,6 +13,8 @@ extern "C"
 
     const extern size_t MIXER_TREE_DEPTH;
 
+    char *mixer_prove_json( const char *pk_file, const char *in_json );
+
     char *mixer_prove(
         const char *pk_file,
         const char *in_root,

@@ -26,7 +26,10 @@ genkeys: build
 	mkdir -p $(KEYPATH)
 	$(BUILDPATH)/mixer_cli genkeys $(KEYPATH)/mixer.pk.raw $(KEYPATH)/mixer.vk.json
 
-test: genkeys solidity-test python-test
+test: genkeys selftest solidity-test python-test
+
+selftest:
+	$(BUILDPATH)/mixer_selftest $(KEYPATH)/test.pk.raw $(KEYPATH)/test.vk.json
 
 python-test: genkeys
 	make -C python test
